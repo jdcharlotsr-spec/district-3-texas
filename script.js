@@ -1,239 +1,128 @@
+document.documentElement.classList.add('js-enabled');
 /*
-  DISTRICT 3 WEBSITE — EDITABLE SETTINGS
-  To enable direct inquiries, provide ONE of:
-  1. contactEmail: 'verified-address@example.org' (opens the visitor's email application), or
-  2. formEndpoint: 'https://formspree.io/f/...' (sends form data via hosted service).
-  Do not publish an address until District 3 authorizes it.
+ DISTRICT THREE | EDITABLE WEBSITE SETTINGS
+ Configure authorized contact information only after District Three approval.
+ For automatic inquiries, set formEndpoint to a verified Formspree endpoint.
+ For email-assisted sending, set contactEmail to a verified district address.
 */
 const SITE_CONFIG = {
   contactEmail: '',
   formEndpoint: ''
 };
 
-/* Church listings. Add ONLY verified District 3 churches in this format:
-  { name: 'Church Name', pastor: 'Pastor Full Name', city: 'Houston',
-    address: 'Full address, TX', website: 'https://example.org' },
-  Address and website may be blank strings. No placeholder churches are published.
+/*
+ UPCOMING EVENTS: add approved events below, and the site automatically creates
+ actual event cards instead of the "dates to be announced" previews.
+ Format:
+ { title:'Spring District Fellowship', category:'Fellowship',
+   date:'2027-03-12', time:'7:00 PM', venue:'Confirmed venue, Houston, TX',
+   description:'Short event overview', link:'https://example.org/registration',
+   image:'assets/your-event-photo.webp' }
+ Dates must be approved before publishing. Keep [] until then.
+ */
+const UPCOMING_EVENTS = [];
+
+/* Verified affiliated church listings only. Example:
+ {name:'Church Name',pastor:'Pastor Name',city:'Houston',address:'Street address, Houston, TX',website:'https://example.com'}
 */
 const CHURCHES = [];
 
-/* Replace these biography texts with approved leadership biographies when ready. */
 const LEADERS = {
   braziel: {
-    name: 'District Elder Louise Braziel',
-    role: 'Director, District 3',
-    paragraphs: [
-      'District Elder Louise Braziel serves as Director of District 3 within the Texas State Council of the Pentecostal Churches of the Apostolic Faith International, Inc.',
-      'An expanded official biography, including ministry history and leadership experience, may be added here when provided by the District 3 office.'
+    name:'District Elder Louise Braziel', role:'Director, District Three', image:'assets/louise-braziel.webp',
+    bio:[
+      'District Elder Louise Braziel serves as Director of District Three within the Texas State Council of the Pentecostal Churches of the Apostolic Faith International, Inc.',
+      'An expanded official biography, including her ministry background and leadership experience, may be added when approved by the district office.'
     ]
   },
   gates: {
-    name: 'Bishop Lambert W. Gates, Sr.',
-    role: 'Diocesan & Presiding Bishop',
-    paragraphs: [
-      'Bishop Lambert W. Gates, Sr. serves as Presiding Bishop of the Pentecostal Churches of the Apostolic Faith International, Inc. and Senior Pastor of Kingdom Apostolic Ministries.',
-      'He provides episcopal leadership for the Texas State Council. For his national profile and current leadership resources, visit pcafintl.org.'
+    name:'Bishop Lambert W. Gates, Sr.',role:'Diocesan & Presiding Bishop',image:'assets/lambert-gates.webp',
+    bio:[
+      'Bishop Lambert W. Gates, Sr. serves as Presiding Bishop of the Pentecostal Churches of the Apostolic Faith International, Inc. and provides episcopal leadership for the Texas State Council.',
+      'Additional approved biographical information and national leadership resources may be added here. For official organizational resources, visit pcafintl.org.'
     ]
   }
 };
 
-const qs = selector => document.querySelector(selector);
-const qsa = selector => Array.from(document.querySelectorAll(selector));
-const escapeHTML = text => String(text ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let toastTimer;
-function toast(message) {
-  const el = qs('#toast');
-  el.textContent = message;
-  el.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('show'), 3500);
-}
-function openDialog(dialog) {
-  if (!dialog) return;
-  if (typeof dialog.showModal === 'function') dialog.showModal();
-  else dialog.setAttribute('open', '');
-  document.body.classList.add('dialog-open');
-}
-function closeDialog(dialog) {
-  if (!dialog) return;
-  if (typeof dialog.close === 'function') dialog.close();
-  else dialog.removeAttribute('open');
-  if (!qsa('dialog[open]').length) document.body.classList.remove('dialog-open');
-}
+const HERO_SLIDES = [
+  { kicker:'ONE FAITH. ONE FELLOWSHIP.', title:'Stronger <em>together.</em><br>Further in <em>faith.</em>', description:'A welcoming fellowship for Apostolic pastors and churches, committed to biblical truth, spiritual excellence, and Kingdom advancement.', button:'Explore Pastoral Fellowship', href:'#connect' },
+  { kicker:'A PLACE FOR PASTORS TO CONNECT', title:'Your calling.<br><em>Our community.</em>', description:'Find meaningful connection, shared encouragement, and the strength that comes through fellowship with other laborers in the Gospel.', button:'Meet Our Leadership', href:'#leadership' },
+  { kicker:'ROOTED IN THE APOSTOLIC FAITH', title:'United in spirit.<br><em>Built for purpose.</em>', description:'Strengthening local churches, supporting dedicated ministers, and advancing the Kingdom of God across Texas.', button:'Discover Our Mission', href:'#mission' }
+];
 
-// Scroll effects and responsive navigation.
-const navToggle = qs('#navToggle');
-const navMenu = qs('#navMenu');
-function setMenu(open) {
-  navMenu.classList.toggle('open', open);
-  navToggle.classList.toggle('is-open', open);
-  navToggle.setAttribute('aria-expanded', String(open));
-  navToggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+const $ = (s,root=document)=>root.querySelector(s);
+const $$ = (s,root=document)=>Array.from(root.querySelectorAll(s));
+const escapeHTML = (s)=>String(s??'').replace(/[&<>"']/g,(c)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+let toastTimeout;
+function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>el.classList.remove('show'),3200)}
+function openDialog(d){if(!d)return;if(typeof d.showModal==='function')d.showModal();else d.setAttribute('open','');}
+function closeDialog(d){if(!d)return;if(typeof d.close==='function')d.close();else d.removeAttribute('open');}
+
+/* A compact sticky scrolling header, reading progress, and active section */
+const header=$('#siteHeader'),progress=$('#scrollProgress'),topButton=$('#backToTop'),menuToggle=$('#menuToggle'),menu=$('#mainNav');
+function setMenu(open){menu.classList.toggle('open',open);menuToggle.classList.toggle('open',open);menuToggle.setAttribute('aria-expanded',String(open));menuToggle.setAttribute('aria-label',open?'Close navigation':'Open navigation')}
+menuToggle.addEventListener('click',()=>setMenu(!menu.classList.contains('open')));
+$$('#mainNav a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+document.addEventListener('click',event=>{if(menu.classList.contains('open')&&!event.target.closest('.nav-inner'))setMenu(false)});
+document.addEventListener('keydown',event=>{if(event.key==='Escape')setMenu(false)});
+$('#currentYear').textContent=new Date().getFullYear();
+topButton.addEventListener('click',()=>window.scrollTo({top:0,behavior:reducedMotion.matches?'auto':'smooth'}));
+
+/* Parallax transform (avoids mobile background-attachment:fixed issues) */
+const parallaxElements=$$('[data-parallax]');let scrollFrame=false;
+function applyScroll(){const y=window.scrollY||0;const height=Math.max(document.documentElement.scrollHeight-innerHeight,1);progress.style.width=`${Math.min(100,y/height*100)}%`;header.classList.toggle('scrolled',y>45);topButton.classList.toggle('visible',y>600);
+  if(!reducedMotion.matches&&window.innerWidth>700){
+    parallaxElements.forEach(el=>{const container=el.parentElement;const r=container.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;const speed=Number(el.dataset.parallax)||.1;const relative=(r.top+r.height/2-innerHeight/2);el.style.transform=`translate3d(0,${(-relative*speed).toFixed(1)}px,0)`})
+  }else{parallaxElements.forEach(el=>el.style.transform='none')}
+  scrollFrame=false;
 }
-navToggle.addEventListener('click', () => setMenu(!navMenu.classList.contains('open')));
-qsa('.main-nav a').forEach(a => a.addEventListener('click', () => setMenu(false)));
-document.addEventListener('click', event => {
-  if (navMenu.classList.contains('open') && !event.target.closest('.nav-wrap')) setMenu(false);
-});
-const backToTop = qs('#backToTop');
-function updateScroll() {
-  const max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
-  qs('#scrollProgress').style.width = `${Math.min(100, scrollY / max * 100)}%`;
-  qs('#siteHeader').classList.toggle('scrolled', scrollY > 30);
-  backToTop.classList.toggle('visible', scrollY > 550);
-}
-window.addEventListener('scroll', updateScroll, { passive: true });
-window.addEventListener('resize', updateScroll);
-updateScroll();
-backToTop.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
-qs('#currentYear').textContent = String(new Date().getFullYear());
-if ('IntersectionObserver' in window) {
-  const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {entry.target.classList.add('visible');revealObserver.unobserve(entry.target);}
-    });
-  }, {threshold: .08, rootMargin: '0px 0px -25px 0px'});
-  qsa('.reveal').forEach(el => revealObserver.observe(el));
-  const navLinks = qsa('.main-nav a[href^="#"]');
-  const sectionObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
-    });
-  }, {rootMargin: '-22% 0px -65% 0px'});
-  qsa('main section[id]').forEach(section => sectionObserver.observe(section));
-} else qsa('.reveal').forEach(el => el.classList.add('visible'));
+function requestScroll(){if(!scrollFrame){scrollFrame=true;requestAnimationFrame(applyScroll)}}
+addEventListener('scroll',requestScroll,{passive:true});addEventListener('resize',requestScroll,{passive:true});applyScroll();
 
-// Leadership portraits: only display if the file really exists.
-qsa('img[data-fallback]').forEach(img => {
-  img.addEventListener('load', () => {
-    if (img.naturalWidth > 0) {img.classList.add('loaded'); qs(`#${img.dataset.fallback}`).style.display = 'none';}
-  });
-  img.addEventListener('error', () => img.style.display = 'none');
-  if (img.complete && img.naturalWidth > 0) {
-    img.classList.add('loaded');
-    qs(`#${img.dataset.fallback}`).style.display = 'none';
-  }
-});
+if('IntersectionObserver'in window){
+  const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');observer.unobserve(e.target)}}),{threshold:.08,rootMargin:'0px 0px -25px 0px'});
+  $$('.reveal').forEach(el=>observer.observe(el));
+  const links=$$('.main-nav a[href^="#"]');
+  const activeObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('is-current',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-22% 0px -65% 0px'});
+  $$('main section[id]').forEach(s=>activeObserver.observe(s));
+}else{$$('.reveal').forEach(el=>el.classList.add('is-visible'))}
 
-// Mission infographic lightbox, leadership biography modals.
-qs('#openPoster').addEventListener('click', () => openDialog(qs('#posterDialog')));
-qsa('[data-bio]').forEach(button => button.addEventListener('click', () => {
-  const person = LEADERS[button.dataset.bio];
-  if (!person) return;
-  qs('#bioTitle').textContent = person.name;
-  qs('#bioRole').textContent = person.role;
-  qs('#bioText').innerHTML = person.paragraphs.map(paragraph => `<p>${escapeHTML(paragraph)}</p>`).join('');
-  openDialog(qs('#bioDialog'));
-}));
-qsa('[data-close]').forEach(button => button.addEventListener('click', () => closeDialog(qs(`#${button.dataset.close}`))));
-qsa('dialog').forEach(dialog => {
-  dialog.addEventListener('click', event => {if (event.target === dialog) closeDialog(dialog);});
-  dialog.addEventListener('close', () => { if (!qsa('dialog[open]').length) document.body.classList.remove('dialog-open'); });
-});
+/* Scroll-friendly, accessible rotating header content */
+let slideIndex=0,slidePaused=false,slideInterval;
+const slideCopy=$('#heroSlideCopy');
+function showSlide(index){slideIndex=(index+HERO_SLIDES.length)%HERO_SLIDES.length;const s=HERO_SLIDES[slideIndex];slideCopy.classList.add('changing');setTimeout(()=>{$('#slideKicker').textContent=s.kicker;$('#slideTitle').innerHTML=s.title;$('#slideDescription').textContent=s.description;$('#slideButton').firstChild.textContent=s.button+' ';$('#slideButton').href=s.href;$('#slideCounter').textContent=`${String(slideIndex+1).padStart(2,'0')} / ${String(HERO_SLIDES.length).padStart(2,'0')}`;$$('.hero-dot').forEach((dot,i)=>{dot.classList.toggle('is-active',i===slideIndex);dot.setAttribute('aria-pressed',String(i===slideIndex))});slideCopy.classList.remove('changing')},150)}
+function startSlides(){clearInterval(slideInterval);if(!slidePaused&&!reducedMotion.matches)slideInterval=setInterval(()=>showSlide(slideIndex+1),7500)}
+$('#heroPrev').addEventListener('click',()=>{showSlide(slideIndex-1);startSlides()});$('#heroNext').addEventListener('click',()=>{showSlide(slideIndex+1);startSlides()});$$('.hero-dot').forEach(dot=>dot.addEventListener('click',()=>{showSlide(Number(dot.dataset.slide));startSlides()}));
+$('#slidePause').addEventListener('click',()=>{slidePaused=!slidePaused;$('#slidePause').textContent=slidePaused?'▶':'Ⅱ';$('#slidePause').setAttribute('aria-label',slidePaused?'Resume rotating messages':'Pause rotating messages');startSlides()});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)clearInterval(slideInterval);else startSlides()});startSlides();
 
-// Searchable church directory (will populate as verified churches are added to CHURCHES).
-const churchSearch = qs('#churchSearch');
-const cityFilter = qs('#cityFilter');
-const directoryResults = qs('#directoryResults');
-function renderDirectory() {
-  const query = churchSearch.value.trim().toLowerCase();
-  const city = cityFilter.value;
-  const entries = CHURCHES.filter(church => {
-    const matchingText = [church.name, church.pastor, church.city, church.address].join(' ').toLowerCase().includes(query);
-    return matchingText && (city === 'all' || church.city === city);
-  }).sort((a,b) => a.name.localeCompare(b.name));
-  if (!CHURCHES.length) {
-    directoryResults.innerHTML = `<div class="directory-empty"><div class="empty-symbol" aria-hidden="true"><span>✝</span></div><div><h3>Our church directory is taking shape.</h3><p>Verified congregations and their pastoral leadership will be featured here as listings are approved by District 3. Are you a pastor interested in connecting with the fellowship? We would love to hear from you.</p><a href="#connect">Introduce your ministry →</a></div></div>`;
-    return;
-  }
-  if (!entries.length) {
-    directoryResults.innerHTML = '<div class="directory-empty"><div class="empty-symbol" aria-hidden="true"><span>⌕</span></div><div><h3>No matching churches found.</h3><p>Try a different church name, pastor, or Texas city.</p></div></div>';
-    return;
-  }
-  directoryResults.innerHTML = `<p class="directory-count">Showing ${entries.length} of ${CHURCHES.length} ${CHURCHES.length === 1 ? 'church' : 'churches'}</p><div class="directory-grid">${entries.map(church => {
-    const safeURL = /^https?:\/\//i.test(church.website || '') ? escapeHTML(church.website) : '';
-    return `<article class="church-card"><div class="church-emblem" aria-hidden="true">✝</div><h3>${escapeHTML(church.name)}</h3><p class="church-pastor">${escapeHTML(church.pastor || 'Pastoral leadership to be announced')}</p><p class="church-place">${escapeHTML(church.address || church.city)}</p>${safeURL ? `<a href="${safeURL}" target="_blank" rel="noopener noreferrer">Visit Church Website ↗</a>` : ''}</article>`;
-  }).join('')}</div>`;
-}
-const cities = [...new Set(CHURCHES.map(church => church.city).filter(Boolean))].sort();
-cities.forEach(city => { const option = document.createElement('option'); option.value = city; option.textContent = city; cityFilter.append(option); });
-churchSearch.addEventListener('input', renderDirectory);
-cityFilter.addEventListener('change', renderDirectory);
-renderDirectory();
+/* Upcoming events: empty state is deliberately clear to avoid fabricated dates. */
+function renderEvents(){const now=new Date();now.setHours(0,0,0,0);const items=UPCOMING_EVENTS.filter(ev=>!ev.date||new Date(ev.date+'T23:59:59')>=now).sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+  if(!items.length){$('#eventDisclosure').textContent='Dates and venues are not yet published. These are program areas, not confirmed event announcements.';$('#eventsContainer').innerHTML=`
+    <article class="event-card visual-worship"><div class="event-card-content"><span class="event-date-corner">DATES TO BE ANNOUNCED</span><span class="event-type">Worship &amp; fellowship</span><h3>Gathering in the Faith</h3><p>Watch for district worship and fellowship announcements.</p><span class="event-arrow" aria-hidden="true">↗</span></div></article>
+    <article class="event-card visual-leadership"><div class="event-card-content"><span class="event-date-corner">DATES TO BE ANNOUNCED</span><span class="event-type">Leadership development</span><h3>Growing Our Leaders</h3><p>Updates about equipping and ministry development will appear here.</p><span class="event-arrow" aria-hidden="true">↗</span></div></article>
+    <article class="event-card visual-council"><div class="event-card-content"><span class="event-date-corner">DATES TO BE ANNOUNCED</span><span class="event-type">Council connection</span><h3>United in Purpose</h3><p>Official council and district announcements will be added as confirmed.</p><span class="event-arrow" aria-hidden="true">↗</span></div></article>`;return}
+  $('#eventDisclosure').textContent='Please confirm schedule details with the organizer before traveling.';
+  $('#eventsContainer').innerHTML=items.map(ev=>{let date='DATE TBA';if(ev.date){const d=new Date(ev.date+'T12:00:00');date=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}).toUpperCase()}const img=ev.image&&/^assets\/[\w.-]+\.(?:png|webp|jpe?g)$/i.test(ev.image)?`style="--event-image:url('${escapeHTML(ev.image)}')"`:'';const venue=ev.venue?escapeHTML(ev.venue):'Venue to be announced';const time=ev.time?' · '+escapeHTML(ev.time):'';const link=ev.link&&/^https?:\/\//.test(ev.link)?`<a class="event-card-link" href="${escapeHTML(ev.link)}" target="_blank" rel="noopener noreferrer" aria-label="Learn more about ${escapeHTML(ev.title)}">Event Details ↗</a>`:'';return `<article class="event-card ${img?'custom-event':'visual-worship'}" ${img}><div class="event-card-content"><span class="event-date-corner">${date}</span><span class="event-type">${escapeHTML(ev.category||'District event')}</span><h3>${escapeHTML(ev.title)}</h3><p>${venue}${time}</p><p>${escapeHTML(ev.description||'')}</p>${link}</div></article>`}).join('')}
+renderEvents();
 
-// Pastoral inquiry: no claim of transmission without a configured delivery method.
-const form = qs('#inquiryForm');
-let inquiryBody = '';
-form.addEventListener('submit', async event => {
-  event.preventDefault();
-  if (!form.reportValidity()) return;
-  const fd = new FormData(form);
-  const get = key => String(fd.get(key) || '').trim();
-  const subject = `District 3 Pastoral Inquiry — ${get('fullName')}`;
-  inquiryBody = [
-    'To: District Elder Louise Braziel, Director — District 3',
-    'Texas State Council · Pentecostal Churches of the Apostolic Faith International, Inc.',
-    '',
-    'Praise the Lord,',
-    '',
-    'I would like to express my interest in learning more about fellowship with District 3.',
-    '',
-    `Name: ${get('fullName')}`,
-    `Email: ${get('email')}`,
-    `Church / Ministry: ${get('church') || 'Not provided'}`,
-    `City / Location: ${get('city')}`,
-    `Phone: ${get('phone') || 'Not provided'}`,
-    `Ministry Situation: ${get('ministryStage')}`,
-    '',
-    'Additional Message:',
-    get('message') || 'I would welcome an opportunity to learn more about your fellowship.',
-    '',
-    'I understand this inquiry is not automatic church affiliation or credential approval.',
-    '',
-    'Thank you for your consideration.'
-  ].join('\n');
-  if (SITE_CONFIG.formEndpoint.trim()) {
-    const button = form.querySelector('[type=submit]');
-    button.disabled = true; button.textContent = 'Sending Inquiry…';
-    try {
-      const response = await fetch(SITE_CONFIG.formEndpoint, {method: 'POST', body: fd, headers: {'Accept': 'application/json'}});
-      if (response.ok) {
-        toast('Your inquiry was submitted successfully.');
-        form.reset();
-        button.innerHTML = 'Prepare My Inquiry <span aria-hidden="true">↗</span>';
-        button.disabled = false;
-        return;
-      }
-      toast('Direct delivery failed. Your inquiry is available to copy.');
-    } catch {toast('Unable to send online. Your inquiry is available to copy.');}
-    finally {button.innerHTML = 'Prepare My Inquiry <span aria-hidden="true">↗</span>'; button.disabled = false;}
-  }
-  qs('#inquiryText').value = `Subject: ${subject}\n\n${inquiryBody}`;
-  const hasEmail = !!SITE_CONFIG.contactEmail.trim();
-  qs('#emailInquiry').hidden = !hasEmail;
-  if (hasEmail) {
-    qs('#emailInquiry').href = `mailto:${encodeURIComponent(SITE_CONFIG.contactEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(inquiryBody)}`;
-    qs('#inquiryInstructions').textContent = 'Your inquiry has been prepared but has not been sent. Select “Email District 3” to open your email application, or copy/download a copy.';
-  } else {
-    qs('#inquiryInstructions').textContent = 'Your inquiry has been prepared but has not been sent. Copy or download it to share with district leadership once contact information is available.';
-  }
-  openDialog(qs('#inquiryDialog'));
-});
-qs('#copyInquiry').addEventListener('click', async () => {
-  const text = qs('#inquiryText').value;
-  try {
-    if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(text);
-    else {qs('#inquiryText').select();document.execCommand('copy');}
-    toast('Your inquiry was copied.');
-  } catch {qs('#inquiryText').select();toast('Select the text and copy it using your device.');}
-});
-qs('#downloadInquiry').addEventListener('click', () => {
-  const text = qs('#inquiryText').value;
-  const url = URL.createObjectURL(new Blob([text], {type: 'text/plain;charset=utf-8'}));
-  const anchor = document.createElement('a');
-  anchor.href = url; anchor.download = 'district-3-pastoral-inquiry.txt';
-  document.body.append(anchor);anchor.click();anchor.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 2000);
-  toast('Inquiry downloaded.');
-});
+/* Directory updates with approved listings only. */
+const churchSearch=$('#churchSearch');
+function renderChurches(){const query=churchSearch.value.trim().toLowerCase();const visible=CHURCHES.filter(ch=>[ch.name,ch.pastor,ch.city,ch.address].join(' ').toLowerCase().includes(query));const target=$('#churchResults');if(!CHURCHES.length){target.innerHTML=`<div class="church-empty"><img class="church-empty-seal" src="assets/district-three-crest.webp" alt="District Three crest"><div><h3>The directory is taking shape.</h3><p>Verified district churches and pastors will be featured here after their listings are approved. Interested in fellowship? We welcome an introduction from your ministry.</p><a href="#connect" class="text-arrow">Introduce your church ↗</a></div></div>`;return}if(!visible.length){target.innerHTML='<div class="church-empty"><div><h3>No churches match your search.</h3><p>Try another church name, pastor, or city.</p></div></div>';return}target.innerHTML=`<div class="church-grid">${visible.map(ch=>`<article class="church-card"><h3>${escapeHTML(ch.name)}</h3><p>${escapeHTML(ch.pastor||'Pastoral leadership to be confirmed')}</p><p>${escapeHTML(ch.address||ch.city||'')}</p>${ch.website&&/^https?:\/\//.test(ch.website)?`<a href="${escapeHTML(ch.website)}" target="_blank" rel="noopener noreferrer">Visit Church ↗</a>`:''}</article>`).join('')}</div>`}
+churchSearch.addEventListener('input',renderChurches);renderChurches();
+
+/* Leadership profiles and mission graphic */
+$$('[data-leader]').forEach(button=>button.addEventListener('click',()=>{const person=LEADERS[button.dataset.leader];if(!person)return;$('#leaderDialogImage').src=person.image;$('#leaderDialogImage').alt='Portrait of '+person.name;$('#leaderDialogRole').textContent=person.role;$('#leaderDialogTitle').textContent=person.name;$('#leaderDialogText').innerHTML=person.bio.map(p=>`<p>${escapeHTML(p)}</p>`).join('');openDialog($('#leaderDialog'))}));
+$('#openMission').addEventListener('click',()=>openDialog($('#missionDialog')));
+$$('[data-close]').forEach(button=>button.addEventListener('click',()=>closeDialog(document.getElementById(button.dataset.close))));
+$$('dialog').forEach(dialog=>dialog.addEventListener('click',e=>{if(e.target===dialog)closeDialog(dialog)}));
+
+/* A useful form even before a district inbox is authorized. */
+const form=$('#inquiryForm');
+form.addEventListener('submit',async e=>{e.preventDefault();if(!form.reportValidity())return;const data=new FormData(form);const v=k=>String(data.get(k)||'').trim();const subject=`District Three Pastoral Inquiry — ${v('fullName')}`;const body=[
+  'District Three · Texas State Council · PCAFI','Attention: District Elder Louise Braziel, Director','','Praise the Lord,','','I would like to learn more about fellowship with District Three.','',`Name: ${v('fullName')}`,`Email: ${v('email')}`,`Church / Ministry: ${v('church')||'Not provided'}`,`City / Location: ${v('city')}`,`Inquiry: ${v('interest')}`,'','About My Ministry:',v('message')||'I would welcome a conversation about fellowship and partnership.','','I understand this inquiry is not an application approval or automatic affiliation.'].join('\n');
+  if(SITE_CONFIG.formEndpoint){const button=$('.form-submit',form);button.disabled=true;button.textContent='Sending…';try{const response=await fetch(SITE_CONFIG.formEndpoint,{method:'POST',body:data,headers:{Accept:'application/json'}});if(response.ok){toast('Your inquiry was submitted successfully.');form.reset();return}toast('Unable to send. Your inquiry will be prepared to copy.')}catch{toast('Online delivery unavailable. Your inquiry will be prepared to copy.')}finally{button.disabled=false;button.innerHTML='Prepare My Inquiry <span aria-hidden="true">↗</span>'}}
+  $('#preparedInquiry').value='Subject: '+subject+'\n\n'+body;const hasEmail=Boolean(SITE_CONFIG.contactEmail);$('#emailInquiry').hidden=!hasEmail;if(hasEmail){$('#emailInquiry').href='mailto:'+encodeURIComponent(SITE_CONFIG.contactEmail)+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);$('#inquiryDialogInstructions').textContent='Your message has not yet been sent. Select “Email District” to open your email application, or copy/download it.'}else{$('#inquiryDialogInstructions').textContent='Your message has been prepared but not sent. Copy or download it to share with approved district leadership.'}openDialog($('#inquiryDialog'))});
+$('#copyInquiry').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#preparedInquiry').value);toast('Inquiry copied to clipboard.')}catch{$('#preparedInquiry').focus();$('#preparedInquiry').select();try{document.execCommand('copy');toast('Inquiry selected and copied.')}catch{toast('Select and copy the message using your device.')}}});
+$('#downloadInquiry').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([$('#preparedInquiry').value],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='district-three-pastoral-inquiry.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);toast('Inquiry downloaded.')});

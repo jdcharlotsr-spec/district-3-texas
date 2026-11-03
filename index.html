@@ -3,199 +3,89 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#250b40">
-  <meta name="description" content="District 3 of the Texas State Council, Pentecostal Churches of the Apostolic Faith International. Explore our fellowship, meet our leadership, and begin a conversation about your ministry.">
-  <meta property="og:title" content="District 3 | Texas State Council | PCAFI">
-  <meta property="og:description" content="Rooted in the Apostolic faith. United for Kingdom advancement. A place for pastors and churches to belong, connect, and grow.">
+  <meta name="theme-color" content="#21072f">
+  <meta name="description" content="District Three of the Texas State Council, Pentecostal Churches of the Apostolic Faith International, Inc. Explore fellowship, our leadership, affiliated churches, and district events.">
+  <meta property="og:title" content="District Three | Texas State Council · PCAFI">
+  <meta property="og:description" content="Rooted in the Apostolic faith. Strengthened by fellowship. Advancing God's Kingdom together.">
   <meta property="og:type" content="website">
-  <title>District 3 | Texas State Council · PCAFI</title>
-  <link rel="icon" type="image/png" href="assets/district-3-seal.png">
+  <link rel="icon" href="assets/district-three-crest.webp" type="image/webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
+  <title>District Three | Texas State Council · PCAFI</title>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to main content</a>
-  <div id="scrollProgress" class="scroll-progress" aria-hidden="true"></div>
-
-  <div class="topline">
-    <div class="container topline-inner">
-      <span><span class="topline-dot"></span> Texas State Council · District Three</span>
-      <a href="https://www.pcafintl.org/" target="_blank" rel="noopener noreferrer">Visit the National PCAFI Website <span aria-hidden="true">↗</span></a>
-    </div>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+<div class="announcement"><div class="site-width announcement-inner"><span><i class="tiny-star" aria-hidden="true">✦</i> THE TEXAS STATE COUNCIL · DISTRICT THREE</span><a href="https://www.pcafintl.org/" target="_blank" rel="noopener noreferrer">NATIONAL PCAFI WEBSITE <span aria-hidden="true">↗</span></a></div></div>
+<header class="site-header" id="siteHeader">
+  <div class="site-width nav-inner">
+    <a href="#home" class="brand" aria-label="District Three, return to homepage">
+      <span class="brand-seal"><img src="assets/district-three-crest.webp" alt="District Three Texas State Council PCAFI crest" width="65" height="65"></span>
+      <span class="brand-words"><small>TEXAS STATE COUNCIL <b>·</b> PCAFI</small><strong>DISTRICT <em>THREE</em></strong></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-controls="mainNav" aria-expanded="false" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+      <a href="#about">Our District</a><a href="#mission">Our Purpose</a><a href="#leadership">Leadership</a><a href="#events">Events</a><a href="#churches">Churches</a>
+      <a href="#connect" class="nav-join">Pastoral Fellowship <span aria-hidden="true">↗</span></a>
+    </nav>
   </div>
-
-  <header class="site-header" id="siteHeader">
-    <div class="container nav-wrap">
-      <a class="brand" href="#home" aria-label="District 3, back to top">
-        <img src="assets/district-3-seal.png" alt="Pentecostal Churches of the Apostolic Faith International seal" width="60" height="60">
-        <span class="brand-wordmark"><strong>DISTRICT <em>3</em></strong><small>TEXAS STATE COUNCIL · PCAFI</small></span>
-      </a>
-      <button class="nav-toggle" id="navToggle" type="button" aria-controls="navMenu" aria-expanded="false" aria-label="Open navigation">
-        <span></span><span></span><span></span>
-      </button>
-      <nav class="main-nav" id="navMenu" aria-label="Main navigation">
-        <a href="#about">About</a>
-        <a href="#mission">Mission &amp; Vision</a>
-        <a href="#leadership">Leadership</a>
-        <a href="#churches">Our Churches</a>
-        <a href="#questions">Questions</a>
-        <a class="nav-cta" href="#connect">Connect With Us <span aria-hidden="true">↗</span></a>
-      </nav>
+</header>
+<main id="main">
+  <section class="hero" id="home" aria-label="District Three welcome">
+    <div class="hero-backdrop" data-parallax="0.12" aria-hidden="true"></div>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="site-width hero-content">
+      <div class="hero-intro"><span class="line"></span> THE PENTECOSTAL CHURCHES OF THE APOSTOLIC FAITH INTERNATIONAL, INC.</div>
+      <div class="hero-carousel" aria-live="off">
+        <div class="slide-copy" id="heroSlideCopy">
+          <p class="hero-kicker" id="slideKicker">ONE FAITH. ONE FELLOWSHIP.</p>
+          <h1 id="slideTitle">Stronger <em>together.</em><br>Further in <em>faith.</em></h1>
+          <p class="hero-description" id="slideDescription">A welcoming fellowship for Apostolic pastors and churches, committed to biblical truth, spiritual excellence, and Kingdom advancement.</p>
+        </div>
+        <div class="hero-actions"><a class="button button-gold" id="slideButton" href="#connect">Explore Pastoral Fellowship <span aria-hidden="true">↗</span></a><a class="button button-glass" href="#about">Discover District Three <span aria-hidden="true">→</span></a></div>
+      </div>
+      <div class="hero-controls"><div class="hero-dots" role="group" aria-label="Choose a featured message"><button class="hero-dot is-active" data-slide="0" type="button" aria-label="Featured message 1" aria-pressed="true"></button><button class="hero-dot" data-slide="1" type="button" aria-label="Featured message 2" aria-pressed="false"></button><button class="hero-dot" data-slide="2" type="button" aria-label="Featured message 3" aria-pressed="false"></button></div><span class="slide-counter" id="slideCounter">01 / 03</span><button class="round-arrow" id="heroPrev" type="button" aria-label="Previous featured message">←</button><button class="round-arrow" id="heroNext" type="button" aria-label="Next featured message">→</button><button class="slide-pause" id="slidePause" type="button" aria-label="Pause rotating messages">Ⅱ</button></div>
     </div>
-  </header>
+    <div class="hero-corner-crest"><img src="assets/district-three-crest.webp" alt="Texas State Council District Three official crest" width="180" height="180"></div>
+    <div class="hero-photo-note">Illustrative worship image</div>
+    <a class="hero-scroll-label" href="#events"><span>SCROLL TO EXPLORE</span><span aria-hidden="true">↓</span></a>
+  </section>
 
-  <main id="main">
-    <section class="hero" id="home" aria-labelledby="heroTitle">
-      <div class="hero-lines" aria-hidden="true"></div>
-      <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <div class="eyebrow light"><span class="eyebrow-line"></span> A Fellowship of Apostolic Churches</div>
-          <h1 id="heroTitle">Your calling<br>deserves <span>community.</span></h1>
-          <p class="hero-lead">You are called to shepherd. You were never meant to walk alone.</p>
-          <p class="hero-intro">For pastors seeking biblical fellowship, spiritual accountability, and a shared commitment to Kingdom advancement, there is a place to connect in District 3.</p>
-          <div class="hero-actions">
-            <a class="btn btn-gold" href="#connect">Explore Fellowship <span aria-hidden="true">↗</span></a>
-            <a class="text-link light-link" href="#about">Discover who we are <span aria-hidden="true">→</span></a>
-          </div>
-          <div class="hero-verse"><span class="verse-mark">“</span><span>That they all may be one.<small>— John 17:21</small></span></div>
-        </div>
-        <div class="hero-art reveal delay-1" aria-label="District 3 fellowship emblem">
-          <div class="hero-art-inner">
-            <div class="art-arc art-arc-one"></div><div class="art-arc art-arc-two"></div>
-            <span class="art-sun" aria-hidden="true">✦</span>
-            <div class="art-topline">PENTECOSTAL CHURCHES OF THE APOSTOLIC FAITH INTERNATIONAL</div>
-            <div class="art-three">03</div>
-            <div class="art-rule"><span>✦</span></div>
-            <div class="art-district">DISTRICT THREE</div>
-            <div class="art-location">TEXAS STATE COUNCIL</div>
-            <div class="art-footnote">Faith. Fellowship. Kingdom Purpose.</div>
-          </div>
-          <div class="hero-corner-tag"><span class="tag-sparkle">✦</span><span>Rooted in the Faith<br><strong>Growing Together</strong></span></div>
-        </div>
-      </div>
-      <div class="hero-bottom container"><span>ONE FAITH</span><i></i><span>ONE FELLOWSHIP</span><i></i><span>ONE KINGDOM PURPOSE</span><span class="hero-scroll">SCROLL TO EXPLORE <b aria-hidden="true">↓</b></span></div>
-    </section>
+  <section class="events-section section" id="events" aria-labelledby="eventsHeading">
+    <div class="site-width">
+      <div class="section-top events-top"><div><p class="eyebrow gold"><span class="line"></span> WHAT'S HAPPENING</p><h2 id="eventsHeading">Upcoming <em>Events.</em></h2><p class="section-lead">Worship. Fellowship. Equipping. Stay connected with the life of District Three.</p></div><span class="calendar-tag"><span aria-hidden="true">▦</span> DISTRICT CALENDAR</span></div>
+      <div id="eventsContainer" class="events-grid" aria-live="polite"></div>
+      <div class="events-foot"><p id="eventDisclosure">Official event dates and locations will be posted here once confirmed by district leadership.</p><a href="#connect" class="text-arrow">Ask about upcoming gatherings <span aria-hidden="true">↗</span></a></div>
+    </div>
+  </section>
 
-    <section class="section welcome" id="about" aria-labelledby="aboutTitle">
-      <div class="container welcome-grid">
-        <div class="section-side reveal">
-          <div class="eyebrow"><span class="eyebrow-line"></span> Welcome to District 3</div>
-          <h2 id="aboutTitle">There is strength<br>in <em>fellowship.</em></h2>
-          <div class="side-flourish" aria-hidden="true">✧</div>
-        </div>
-        <div class="welcome-body reveal delay-1">
-          <p class="statement">A thriving ministry needs more than a place to preach. It needs people to pray with, wisdom to draw from, and fellow laborers who believe in the same Gospel.</p>
-          <p>District 3 of the Texas State Council is part of the <strong>Pentecostal Churches of the Apostolic Faith International, Inc. (PCAFI)</strong>. Our mission calls us to strengthen local churches, equip leadership, and cultivate unity across the body of Christ.</p>
-          <p>Whether you pastor an established congregation, are planting a new work, or simply desire to learn about our fellowship, we invite you to begin a conversation with district leadership.</p>
-          <a class="text-link dark-link" href="#connect">Start the conversation <span aria-hidden="true">→</span></a>
-        </div>
-      </div>
-      <div class="container value-grid" aria-label="Our fellowship values">
-        <article class="value-card reveal"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 6v36M10 17h28M16 10l-7 7 7 7M32 10l7 7-7 7"/></svg></div><span class="value-num">01 /</span><h3>Apostolic Foundation</h3><p>Biblical doctrine, holiness, and an unwavering commitment to the teachings of the Apostolic faith.</p></article>
-        <article class="value-card reveal delay-1"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M10 29c5-8 10-8 15 0 5-8 10-8 15 0M8 36c7-8 13-8 20 0 4-5 8-6 12-2M24 8v13M18 14h12"/></svg></div><span class="value-num">02 /</span><h3>Genuine Fellowship</h3><p>Meaningful relationships, shared prayer, and mutual encouragement for pastors and congregations.</p></article>
-        <article class="value-card reveal delay-2"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M12 35V13l12-5 12 5v22l-12 5-12-5zM24 8v32M12 13l12 5 12-5M17 26l4 3 9-9"/></svg></div><span class="value-num">03 /</span><h3>Leadership Development</h3><p>Commitment to equipping, educating, and encouraging effective leaders and ministers.</p></article>
-        <article class="value-card reveal delay-3"><div class="value-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 5c2 9 13 12 13 23a13 13 0 1 1-26 0c0-8 6-14 8-17 1 8 6 10 5 16 6-3 6-12 0-22zM24 23c3 5 7 7 7 12a7 7 0 0 1-14 0c0-4 4-8 7-12z"/></svg></div><span class="value-num">04 /</span><h3>Spiritual Excellence</h3><p>Spirit-empowered worship, purposeful ministry, and collaborative Kingdom advancement.</p></article>
-      </div>
-    </section>
+  <div class="moving-ribbon" aria-hidden="true"><div class="ribbon-track"><span>APOSTOLIC FOUNDATION</span><i>✦</i><span>AUTHENTIC FELLOWSHIP</span><i>✦</i><span>KINGDOM ADVANCEMENT</span><i>✦</i><span>SPIRITUAL EXCELLENCE</span><i>✦</i><span>APOSTOLIC FOUNDATION</span><i>✦</i><span>AUTHENTIC FELLOWSHIP</span><i>✦</i><span>KINGDOM ADVANCEMENT</span><i>✦</i><span>SPIRITUAL EXCELLENCE</span><i>✦</i></div></div>
 
-    <section class="identity-band" aria-label="Our heritage">
-      <div class="container identity-inner">
-        <div class="identity-star" aria-hidden="true">✥</div>
-        <p>United by the Apostolic faith.<br><em>Committed to the work of Jesus Christ.</em></p>
-        <div class="identity-mini"><span>THE PCAFI HERITAGE</span><strong>Established in 1957</strong><a href="https://www.pcafintl.org/copy-of-history" target="_blank" rel="noopener noreferrer">Explore the national history ↗</a></div>
-      </div>
-    </section>
+  <section class="section about-section" id="about" aria-labelledby="aboutHeading">
+    <div class="site-width about-grid">
+      <div class="about-images reveal"><div class="about-photo"><img src="assets/worship-close.webp" alt="Illustrative photograph of people praising during worship"></div><div class="about-photo-small"><img src="assets/district-three-crest.webp" alt="District Three crest"></div><div class="about-photo-caption">ROOTED IN THE FAITH <span>✦</span> UNITED IN PURPOSE</div></div>
+      <div class="about-copy reveal"><p class="eyebrow"><span class="line"></span> WELCOME TO DISTRICT THREE</p><h2 id="aboutHeading">A fellowship where <em>your calling</em> has community.</h2><p class="lead-strong">Pastoring takes vision. It also takes connection.</p><p>District Three is part of the Texas State Council of the Pentecostal Churches of the Apostolic Faith International, Inc. We are committed to strengthening churches, cultivating relationships among pastors, and advancing the Gospel of Jesus Christ.</p><p>Whether you lead an established congregation or are planting a new work, there is room for a conversation about fellowship, accountability, and shared purpose.</p><div class="about-actions"><a href="#connect" class="button button-purple">Connect with our district <span aria-hidden="true">↗</span></a><a href="#mission" class="text-arrow">Our mission <span aria-hidden="true">→</span></a></div></div>
+    </div>
+  </section>
 
-    <section class="section mission-section" id="mission" aria-labelledby="missionTitle">
-      <div class="container">
-        <div class="section-heading center reveal">
-          <div class="eyebrow center-eyebrow"><span class="eyebrow-line"></span> Our Shared Purpose <span class="eyebrow-line"></span></div>
-          <h2 id="missionTitle">Grounded in truth.<br><em>Growing in purpose.</em></h2>
-          <p>Our mission, vision, and commitments shape the fellowship we are building together.</p>
-        </div>
-        <div class="mission-layout">
-          <article class="mission-primary reveal">
-            <span class="card-kicker">OUR MISSION</span>
-            <h3>Build the Kingdom.<br><em>Strengthen the people.</em></h3>
-            <p>To serve as a unified fellowship of Apostolic churches, firmly rooted in biblical truth, committed to holiness, empowered by the Holy Ghost, and dedicated to advancing God's Kingdom throughout Texas.</p>
-            <details class="mission-details"><summary>Read the full mission statement <span aria-hidden="true">+</span></summary><div class="mission-full"><p>We are committed to winning souls to Jesus Christ, equipping believers for spiritual growth and effective ministry, developing strong leadership, strengthening local churches, and cultivating an atmosphere where worship, praise, and spiritual excellence are demonstrated without limitation.</p><p>Through prayer, fellowship, biblical education, leadership development, and collaborative ministry, we endeavor to support the continued growth and advancement of the Texas State Council while strengthening and developing District 3 as a place of spiritual unity, accountability, and Kingdom purpose.</p><p>In alignment with the vision and leadership of our Presiding Bishop, Bishop Lambert W. Gates, Sr., we are committed to working together in faith, purpose, and excellence to fulfill the mandate of the Gospel, build stronger churches, develop effective leaders, and impact our communities for the glory of God.</p></div></details>
-            <div class="mission-quote">“Unity, service, and spiritual excellence.”</div>
-          </article>
-          <div class="mission-right reveal delay-1">
-            <article class="vision-card"><span class="card-kicker">OUR VISION</span><h3>One fellowship.<br>Stronger churches.</h3><p>To establish a strong, unified, and spiritually thriving Apostolic fellowship that advances the Kingdom of God through sound biblical teaching, empowered leadership, strengthened churches, intentional discipleship, and unwavering commitment to the Apostolic faith.</p><p>We envision District 3 as a model of unity, spiritual maturity, collaboration, and Kingdom advancement, contributing to the continued growth and success of the Texas State Council of the PCAFI.</p></article>
-            <button class="poster-button" type="button" id="openPoster"><span class="poster-icon" aria-hidden="true">↗</span><span><strong>Read Our Official Statement</strong><small>View the full District 3 mission and vision graphic</small></span><span aria-hidden="true">→</span></button>
-          </div>
-        </div>
-        <div class="commitments-head reveal"><div><div class="eyebrow"><span class="eyebrow-line"></span> What We Hold Dear</div><h3>Our Core Commitments</h3></div><p>Seven shared priorities guide the spirit of our fellowship.</p></div>
-        <div class="commitments-grid" id="commitmentGrid">
-          <article class="commitment reveal"><span>01</span><div><h4>Kingdom Advancement</h4><p>Winning souls and expanding the influence of the Gospel.</p></div></article>
-          <article class="commitment reveal delay-1"><span>02</span><div><h4>Apostolic Foundation</h4><p>Upholding biblical doctrine, holiness, and Apostolic teaching.</p></div></article>
-          <article class="commitment reveal delay-2"><span>03</span><div><h4>Spiritual Empowerment</h4><p>Promoting the operation and empowerment of the Holy Ghost.</p></div></article>
-          <article class="commitment reveal"><span>04</span><div><h4>Leadership Development</h4><p>Equipping, educating, and developing ministers and leaders.</p></div></article>
-          <article class="commitment reveal delay-1"><span>05</span><div><h4>Unity &amp; Fellowship</h4><p>Building relationships that strengthen churches and foster growth.</p></div></article>
-          <article class="commitment reveal delay-2"><span>06</span><div><h4>Worship &amp; Excellence</h4><p>Maintaining genuine praise, worship, and excellence in ministry.</p></div></article>
-          <article class="commitment reveal"><span>07</span><div><h4>Vision &amp; Alignment</h4><p>Supporting the leadership, direction, and vision of the Presiding Bishop and Texas State Council.</p></div></article>
-        </div>
-      </div>
-    </section>
+  <section class="parallax-statement" id="mission" aria-labelledby="missionHeading"><div class="parallax-backdrop" data-parallax="0.10" aria-hidden="true"></div><div class="parallax-overlay" aria-hidden="true"></div><div class="site-width parallax-inner reveal"><p class="eyebrow gold centered"><span class="line"></span> OUR SHARED MISSION <span class="line"></span></p><h2 id="missionHeading">Build the Kingdom.<br><em>Strengthen the Fellowship.</em></h2><p>Rooted in biblical truth. Empowered by the Holy Ghost. United in service, holiness, and spiritual excellence.</p><button class="button button-gold" type="button" id="openMission">Read Our Mission &amp; Vision <span aria-hidden="true">↗</span></button></div></section>
 
-    <section class="section leadership-section" id="leadership" aria-labelledby="leadershipTitle">
-      <div class="container">
-        <div class="section-heading leadership-heading reveal"><div><div class="eyebrow"><span class="eyebrow-line"></span> Servant Leadership</div><h2 id="leadershipTitle">Leading with vision.<br><em>Serving with purpose.</em></h2></div><p>Meet the ecclesiastical leadership serving District 3 and the broader fellowship.</p></div>
-        <div class="leadership-grid">
-          <article class="leader-card reveal">
-            <div class="portrait portrait-braziel"><img src="assets/louise-braziel.jpg" alt="Portrait of District Elder Louise Braziel" loading="lazy" data-fallback="portraitFallbackBraziel"><div class="portrait-fallback" id="portraitFallbackBraziel"><span>LB</span><small>Official portrait<br>to be added</small></div><div class="portrait-corner">DISTRICT 3</div></div>
-            <div class="leader-info"><span class="leader-eyebrow">DISTRICT LEADERSHIP</span><h3>District Elder<br>Louise Braziel</h3><p class="leader-role">Director, District 3</p><p class="leader-desc">Leading District 3's local fellowship and its commitment to spiritual unity, service, and the growth of Apostolic churches.</p><button class="leader-link" type="button" data-bio="braziel">Leadership Profile <span aria-hidden="true">↗</span></button></div>
-          </article>
-          <article class="leader-card reveal delay-1">
-            <div class="portrait portrait-gates"><img src="assets/lambert-gates.jpg" alt="Portrait of Bishop Lambert W. Gates, Sr." loading="lazy" data-fallback="portraitFallbackGates"><div class="portrait-fallback" id="portraitFallbackGates"><span>LG</span><small>Official portrait<br>to be added</small></div><div class="portrait-corner">PCAFI</div></div>
-            <div class="leader-info"><span class="leader-eyebrow">DIOCESAN &amp; NATIONAL LEADERSHIP</span><h3>Bishop Lambert W.<br>Gates, Sr.</h3><p class="leader-role">Diocesan &amp; Presiding Bishop</p><p class="leader-desc">Presiding Bishop of the PCAFI and Senior Pastor of Kingdom Apostolic Ministries, providing national vision and leadership.</p><button class="leader-link" type="button" data-bio="gates">Leadership Profile <span aria-hidden="true">↗</span></button></div>
-          </article>
-        </div>
-        <p class="leadership-note">Portrait spaces are ready for approved photographs. Additional biographies and district leadership profiles may be added as supplied.</p>
-      </div>
-    </section>
+  <section class="section commitments"><div class="site-width"><div class="section-top"><div><p class="eyebrow"><span class="line"></span> WHAT WE STAND FOR</p><h2>One faith. <em>Shared purpose.</em></h2></div><p class="section-lead right-lead">The commitments that guide our fellowship and support our congregations.</p></div><div class="commitment-grid"><article class="commitment reveal"><span class="commitment-index">01</span><div class="commitment-icon">✝</div><h3>Apostolic Foundation</h3><p>Holding fast to Scripture, biblical doctrine, and the teachings of the Apostolic faith.</p></article><article class="commitment reveal"><span class="commitment-index">02</span><div class="commitment-icon">✧</div><h3>Unity &amp; Fellowship</h3><p>Building lasting pastoral relationships through prayer, encouragement, and mutual support.</p></article><article class="commitment reveal"><span class="commitment-index">03</span><div class="commitment-icon">✦</div><h3>Spiritual Empowerment</h3><p>Encouraging sincere worship and Spirit-led ministry within our local churches.</p></article><article class="commitment reveal"><span class="commitment-index">04</span><div class="commitment-icon">⌁</div><h3>Leadership Development</h3><p>Equipping leaders and strengthening churches for effective Kingdom service.</p></article></div></div></section>
 
-    <section class="section churches-section" id="churches" aria-labelledby="churchesTitle">
-      <div class="container">
-        <div class="churches-top reveal"><div><div class="eyebrow"><span class="eyebrow-line"></span> Our Local Fellowship</div><h2 id="churchesTitle">Churches of <em>District 3.</em></h2><p>Explore congregations serving their communities through the Apostolic faith and shared fellowship.</p></div><a class="btn btn-outline" href="#connect">Inquire About Joining <span aria-hidden="true">↗</span></a></div>
-        <div class="directory-controls" id="directoryControls"><label class="search-field"><span class="sr-only">Search church directory</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="churchSearch" type="search" placeholder="Search by church, pastor, or city..." autocomplete="off"></label><label class="filter-field"><span class="sr-only">Filter by city</span><select id="cityFilter"><option value="all">All Texas cities</option></select></label></div>
-        <div id="directoryResults" class="directory-results" aria-live="polite"></div>
-      </div>
-    </section>
+  <section class="section leaders-section" id="leadership" aria-labelledby="leadershipHeading"><div class="site-width"><div class="section-top leaders-heading"><div><p class="eyebrow gold"><span class="line"></span> SERVING WITH PURPOSE</p><h2 id="leadershipHeading">Meet Our <em>Leadership.</em></h2><p class="section-lead">Faithful leadership. Shared vision. A continued commitment to the church.</p></div><div class="leader-side-note">DISTRICT THREE <span>✦</span> TEXAS STATE COUNCIL</div></div><div class="leaders-grid"><article class="leader-card reveal"><div class="leader-photo"><img src="assets/louise-braziel.webp" alt="District Elder Louise Braziel"><div class="leader-photo-number">01</div></div><div class="leader-card-body"><p class="leader-role">DISTRICT DIRECTOR</p><h3>District Elder<br><em>Louise Braziel</em></h3><p>Serving as Director of District Three, fostering fellowship, church development, and Kingdom connection.</p><button class="leader-link" type="button" data-leader="braziel">View Leadership Profile <span aria-hidden="true">↗</span></button></div></article><article class="leader-card reveal"><div class="leader-photo gates-photo"><img src="assets/lambert-gates.webp" alt="Bishop Lambert W. Gates, Sr."><div class="leader-photo-number">02</div></div><div class="leader-card-body"><p class="leader-role">DIOCESAN &amp; PRESIDING BISHOP</p><h3>Bishop Lambert<br><em>W. Gates, Sr.</em></h3><p>Providing episcopal leadership and spiritual direction for the Texas State Council and the national fellowship.</p><button class="leader-link" type="button" data-leader="gates">View Leadership Profile <span aria-hidden="true">↗</span></button></div></article></div></div></section>
 
-    <section class="journey-section" id="pastors" aria-labelledby="journeyTitle">
-      <div class="container journey-grid">
-        <div class="journey-intro reveal"><div class="eyebrow light"><span class="eyebrow-line"></span> A Word to Pastors</div><h2 id="journeyTitle">You are not called<br>to labor <em>in isolation.</em></h2><p>If you are prayerfully exploring organizational fellowship, we would welcome the opportunity to hear about the ministry God has entrusted to you.</p><a class="btn btn-gold" href="#connect">Let's Connect <span aria-hidden="true">↗</span></a></div>
-        <div class="journey-steps"><article class="journey-step reveal"><span>01</span><div><h3>Introduce Your Ministry</h3><p>Tell us who you are, where you serve, and what you are seeking in a fellowship.</p></div></article><article class="journey-step reveal delay-1"><span>02</span><div><h3>Connect With Leadership</h3><p>Begin a thoughtful conversation about our Apostolic convictions, mission, and relationships.</p></div></article><article class="journey-step reveal delay-2"><span>03</span><div><h3>Explore Your Next Step</h3><p>District leadership can explain applicable affiliation expectations, ministerial processes, and next steps.</p></div></article></div>
-      </div>
-    </section>
+  <section class="churches-section section" id="churches" aria-labelledby="churchesHeading"><div class="site-width"><div class="section-top"><div><p class="eyebrow"><span class="line"></span> WORSHIP ACROSS TEXAS</p><h2 id="churchesHeading">Our <em>Churches.</em></h2><p class="section-lead">A growing directory of local churches and their pastoral leadership.</p></div><div class="directory-search"><label class="sr-only" for="churchSearch">Search church directory</label><span aria-hidden="true">⌕</span><input type="search" id="churchSearch" placeholder="Search churches, pastors, cities…" autocomplete="off"></div></div><div id="churchResults" class="church-results" aria-live="polite"></div></div></section>
 
-    <section class="section faq-section" id="questions" aria-labelledby="faqTitle"><div class="container faq-layout"><div class="faq-intro reveal"><div class="eyebrow"><span class="eyebrow-line"></span> Common Questions</div><h2 id="faqTitle">A conversation<br>is the <em>first step.</em></h2><p>Here are some starting points as you prayerfully consider fellowship with District 3.</p></div><div class="faq-list reveal delay-1">
-      <details><summary>What kind of ministry can inquire about fellowship?<span aria-hidden="true">+</span></summary><p>Pastors, church planters, and ministers who are exploring Apostolic-Pentecostal fellowship are welcome to make an inquiry. District leadership can clarify any applicable eligibility requirements.</p></details>
-      <details><summary>What is the affiliation process?<span aria-hidden="true">+</span></summary><p>Begin by introducing your ministry through the inquiry form. This is an expression of interest, not an application approval. District leadership will discuss current organizational requirements and any formal next steps.</p></details>
-      <details><summary>Will my church retain its identity?<span aria-hidden="true">+</span></summary><p>Questions about church governance, affiliation, and ministerial credentials deserve a direct answer from authorized leadership. We encourage pastors to discuss all expectations before making any commitment.</p></details>
-      <details><summary>What does District 3 emphasize?<span aria-hidden="true">+</span></summary><p>Our mission highlights sound Apostolic teaching, holiness, prayer, genuine fellowship, spiritual empowerment, leadership development, and strengthening local churches.</p></details>
-      <details><summary>How can I learn more about the national PCAFI?<span aria-hidden="true">+</span></summary><p>You can visit the <a href="https://www.pcafintl.org/" target="_blank" rel="noopener noreferrer">official PCAFI website</a> for its history, leadership, ministries, and current organizational resources.</p></details>
-    </div></div></section>
-
-    <section class="section contact-section" id="connect" aria-labelledby="contactTitle">
-      <div class="container contact-grid">
-        <div class="contact-copy reveal"><div class="eyebrow light"><span class="eyebrow-line"></span> Let's Begin</div><h2 id="contactTitle">Your ministry.<br>Our fellowship.<br><em>One conversation.</em></h2><p>We would be honored to learn about your work and what you are seeking in an Apostolic-Pentecostal fellowship.</p><div class="contact-encouragement"><span class="contact-cross" aria-hidden="true">✝</span><span>Rooted in the Word.<br>Empowered by the Holy Ghost.<br>Committed to one another.</span></div></div>
-        <div class="form-card reveal delay-1"><div class="form-intro"><span class="form-eyebrow">DISTRICT 3 · PASTORAL INQUIRY</span><h3>Tell us about your ministry.</h3><p>Share a few details to prepare your introduction to district leadership.</p></div><form id="inquiryForm"><div class="form-row"><label>Full Name <span>*</span><input type="text" name="fullName" placeholder="Your first and last name" autocomplete="name" required maxlength="120"></label><label>Email Address <span>*</span><input type="email" name="email" placeholder="you@example.com" autocomplete="email" required maxlength="160"></label></div><div class="form-row"><label>Church / Ministry Name<input type="text" name="church" placeholder="Church or ministry name" maxlength="160"></label><label>City / Location <span>*</span><input type="text" name="city" placeholder="City, Texas" required maxlength="120"></label></div><div class="form-row"><label>Phone Number<input type="tel" name="phone" placeholder="(000) 000-0000" autocomplete="tel" maxlength="40"></label><label>About Your Ministry <span>*</span><select name="ministryStage" required><option value="" selected disabled>Select your ministry situation</option><option>Pastor of an established church</option><option>Church planter / new work</option><option>Minister exploring fellowship</option><option>Other ministry leader</option></select></label></div><label class="message-label">How can we help you connect?<textarea name="message" rows="4" placeholder="Tell us a little about your ministry and what led you to consider District 3..." maxlength="1800"></textarea></label><label class="consent-check"><input type="checkbox" name="acknowledge" required><span>I understand this is an inquiry, not automatic church affiliation or credential approval.</span></label><button class="btn btn-form" type="submit">Prepare My Inquiry <span aria-hidden="true">↗</span></button><p class="form-note" id="formStatus">The website prepares a copy of your inquiry. Direct delivery can be enabled when the District 3 contact email or form service is provided.</p></form></div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer"><div class="container footer-top"><div class="footer-brand"><div class="footer-brand-row"><img src="assets/district-3-seal.png" width="58" height="58" alt="PCAFI seal"><span><strong>DISTRICT 3</strong><small>TEXAS STATE COUNCIL</small></span></div><p>Pentecostal Churches of the Apostolic Faith International, Inc.</p><p class="footer-motto">Faith. Fellowship. Kingdom Purpose.</p></div><div class="footer-links"><div><span>EXPLORE</span><a href="#about">Our Fellowship</a><a href="#mission">Mission &amp; Vision</a><a href="#leadership">Leadership</a><a href="#churches">Churches</a></div><div><span>CONNECT</span><a href="#connect">Pastoral Inquiry</a><a href="#questions">Frequently Asked Questions</a><a href="https://www.pcafintl.org/" target="_blank" rel="noopener noreferrer">National PCAFI ↗</a></div></div></div><div class="container footer-bottom"><span>© <span id="currentYear">2026</span> District 3, Texas State Council · PCAFI. All rights reserved.</span><span>In service to the Lord Jesus Christ.</span></div></footer>
-
-  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">↑</button>
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
-  <dialog id="posterDialog" class="site-dialog poster-dialog" aria-labelledby="posterTitle"><div class="dialog-head"><h2 id="posterTitle">District 3 · Mission, Vision &amp; Commitments</h2><button type="button" class="dialog-close" data-close="posterDialog" aria-label="Close image">×</button></div><div class="poster-dialog-content"><img src="assets/district-3-mission.png" alt="Official District 3 mission, vision and core commitments infographic"></div></dialog>
-
-  <dialog id="bioDialog" class="site-dialog bio-dialog" aria-labelledby="bioTitle"><div class="dialog-head"><span class="dialog-kicker">LEADERSHIP PROFILE</span><button type="button" class="dialog-close" data-close="bioDialog" aria-label="Close biography">×</button></div><div class="bio-dialog-content"><p id="bioRole" class="bio-dialog-role"></p><h2 id="bioTitle"></h2><div id="bioText"></div></div></dialog>
-
-  <dialog id="inquiryDialog" class="site-dialog inquiry-dialog" aria-labelledby="inquiryTitle"><div class="dialog-head"><span class="dialog-kicker">YOUR PASTORAL INQUIRY</span><button type="button" class="dialog-close" data-close="inquiryDialog" aria-label="Close inquiry">×</button></div><div class="inquiry-dialog-content"><h2 id="inquiryTitle">Your introduction is ready.</h2><p id="inquiryInstructions">Copy or download this message to share with district leadership. Your information has not been sent automatically.</p><textarea id="inquiryText" rows="11" readonly aria-label="Prepared pastoral inquiry"></textarea><div class="dialog-actions"><button id="copyInquiry" type="button" class="btn btn-gold">Copy Inquiry</button><button id="downloadInquiry" type="button" class="btn btn-outline-purple">Download .txt</button><a id="emailInquiry" class="btn btn-outline-purple" href="#" hidden>Email District 3 ↗</a></div></div></dialog>
+  <section class="join-section" id="connect" aria-labelledby="connectHeading"><div class="join-visual"><img src="assets/worship-moment.webp" alt="Illustrative worship gathering"><div class="join-visual-overlay"></div><div class="join-statement">YOUR MINISTRY.<br><em>OUR FELLOWSHIP.</em></div></div><div class="join-body"><p class="eyebrow gold"><span class="line"></span> AN INVITATION TO PASTORS</p><h2 id="connectHeading">You don't have to <em>lead alone.</em></h2><p>If you are looking for Apostolic-Pentecostal fellowship, trusted relationships, and a shared commitment to Kingdom work, we invite you to introduce yourself to District Three.</p><form id="inquiryForm" class="inquiry-form"><div class="input-row"><div class="field"><label for="fullName">Your name <span>*</span></label><input id="fullName" name="fullName" required autocomplete="name" placeholder="Full name"></div><div class="field"><label for="email">Email address <span>*</span></label><input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com"></div></div><div class="input-row"><div class="field"><label for="church">Church / Ministry</label><input id="church" name="church" placeholder="Church or ministry name"></div><div class="field"><label for="city">City / Location <span>*</span></label><input id="city" name="city" required placeholder="City, Texas"></div></div><div class="field"><label for="interest">How can we connect?</label><select id="interest" name="interest"><option>Interested in District Fellowship</option><option>Seeking a Church Organization</option><option>Church Planting / New Work</option><option>General District Inquiry</option></select></div><div class="field"><label for="message">A little about your ministry</label><textarea id="message" name="message" rows="3" placeholder="Tell us a little about yourself and your congregation…"></textarea></div><button class="button button-gold form-submit" type="submit">Prepare My Inquiry <span aria-hidden="true">↗</span></button><p class="form-note" id="formNote">This form prepares a message to share with district leadership; it does not automatically send until a verified destination is configured.</p></form></div></section>
+</main>
+<footer class="site-footer"><div class="site-width"><div class="footer-main"><div class="footer-brand"><img src="assets/district-three-crest.webp" alt="District Three crest" width="88" height="88"><div><small>PENTECOSTAL CHURCHES OF THE APOSTOLIC FAITH INTERNATIONAL, INC.</small><strong>DISTRICT THREE</strong><span>Texas State Council · PCAFI</span></div></div><div class="footer-links"><a href="#about">About Us</a><a href="#mission">Mission</a><a href="#leadership">Leadership</a><a href="#events">Events</a><a href="#churches">Churches</a><a href="#connect">Pastoral Inquiry</a></div></div><div class="footer-bottom"><span>© <span id="currentYear">2026</span> District Three · Texas State Council</span><span>UNITED IN FAITH <b>✦</b> ADVANCING THE KINGDOM</span><a href="https://www.pcafintl.org/" target="_blank" rel="noopener noreferrer">National PCAFI ↗</a></div></div></footer>
+<button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">↑</button>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<dialog id="leaderDialog" class="dialog" aria-labelledby="leaderDialogTitle"><button class="dialog-close" data-close="leaderDialog" type="button" aria-label="Close leadership profile">×</button><div class="leader-dialog-layout"><img id="leaderDialogImage" src="assets/louise-braziel.webp" alt=""><div><p class="eyebrow">LEADERSHIP PROFILE</p><p id="leaderDialogRole" class="modal-role"></p><h2 id="leaderDialogTitle"></h2><div id="leaderDialogText"></div></div></div></dialog>
+<dialog id="missionDialog" class="dialog mission-dialog" aria-labelledby="missionDialogTitle"><button class="dialog-close" data-close="missionDialog" type="button" aria-label="Close mission statement">×</button><h2 id="missionDialogTitle">District Three · Mission &amp; Vision</h2><img src="assets/mission-statement.webp" alt="District Three mission, vision and core commitments infographic"></dialog>
+<dialog id="inquiryDialog" class="dialog inquiry-dialog" aria-labelledby="inquiryDialogTitle"><button class="dialog-close" data-close="inquiryDialog" type="button" aria-label="Close prepared inquiry">×</button><p class="eyebrow">PASTORAL FELLOWSHIP</p><h2 id="inquiryDialogTitle">Your introduction is ready.</h2><p id="inquiryDialogInstructions">Your message has not been sent. Copy or download it to share with approved district leadership.</p><textarea id="preparedInquiry" readonly rows="11" aria-label="Prepared pastoral inquiry"></textarea><div class="modal-actions"><button type="button" class="button button-purple" id="copyInquiry">Copy Message</button><button type="button" class="button button-outline" id="downloadInquiry">Download Text</button><a href="#" id="emailInquiry" class="button button-outline" hidden>Email District ↗</a></div></dialog>
 </body>
 </html>
