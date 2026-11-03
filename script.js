@@ -20,17 +20,19 @@ const SITE_CONFIG = {
    image:'assets/your-event-photo.webp' }
  Dates must be approved before publishing. Keep [] until then.
  */
-const UPCOMING_EVENTS = [
-  {
-    title:'Upcoming District 3 Fellowship',
-    category:'District fellowship',
-    date:'2026-11-07',
-    time:'November 7, 2026',
-    venue:'Location to be announced',
-    description:'Breakfast - 9 AM · Breakout Sessions - 10 AM · Worship Service - 12 Noon · Dinner Fellowship following service.',
-    image:'assets/worship-moment.webp'
-  }
-];
+const UPCOMING_EVENTS = [{
+  title:'Upcoming District 3 Fellowship',
+  category:'District fellowship',
+  date:'2026-11-07',
+  venue:'Location to be announced',
+  description:'A day of fellowship, equipping, worship, and connection with the District Three family.',
+  schedule:[
+    {time:'9:00 AM',name:'Breakfast'},
+    {time:'10:00 AM',name:'Breakout Sessions'},
+    {time:'12:00 Noon',name:'Worship Service'},
+    {time:'Following Service',name:'Dinner Fellowship'}
+  ]
+}];
 
 /* Verified affiliated church listings only. Example:
  {name:'Church Name',pastor:'Pastor Name',city:'Houston',address:'Street address, Houston, TX',website:'https://example.com'}
@@ -108,20 +110,41 @@ $('#slidePause').addEventListener('click',()=>{slidePaused=!slidePaused;$('#slid
 document.addEventListener('visibilitychange',()=>{if(document.hidden)clearInterval(slideInterval);else startSlides()});startSlides();
 
 /* Upcoming events: empty state is deliberately clear to avoid fabricated dates. */
-function renderEvents(){const now=new Date();now.setHours(0,0,0,0);const items=UPCOMING_EVENTS.filter(ev=>!ev.date||new Date(ev.date+'T23:59:59')>=now).sort((a,b)=>(a.date||'').localeCompare(b.date||''));
-  if(!items.length){$('#eventDisclosure').textContent='Dates and venues are not yet published. These are program areas, not confirmed event announcements.';$('#eventsContainer').innerHTML=`
-    <article class="event-card visual-worship"><div class="event-card-content"><span class="event-date-corner">DATES TO BE ANNOUNCED</span><span class="event-type">Worship &amp; fellowship</span><h3>Gathering in the Faith</h3><p>Watch for district worship and fellowship announcements.</p><span class="event-arrow" aria-hidden="true">↗</span></div></article>
-    <article class="event-card visual-leadership"><div class="event-card-content"><span class="event-date-corner">DATES TO BE ANNOUNCED</span><span class="event-type">Leadership development</span><h3>Growing Our Leaders</h3><p>Updates about equipping and ministry development will appear here.</p><span class="event-arrow" aria-hidden="true">↗</span></div></article>
-    <article class="event-card visual-council"><div class="event-card-content"><span class="event-date-corner">DATES TO BE ANNOUNCED</span><span class="event-type">Council connection</span><h3>United in Purpose</h3><p>Official council and district announcements will be added as confirmed.</p><span class="event-arrow" aria-hidden="true">↗</span></div></article>`;return}
-  $('#eventDisclosure').textContent='Upcoming schedule shown below. Additional details, including location, will be announced as authorized.';
-  $('#eventsContainer').classList.toggle('single-event', items.length===1);
-  $('#eventsContainer').innerHTML=items.map(ev=>{let date='DATE TBA';if(ev.date){const d=new Date(ev.date+'T12:00:00');date=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}).toUpperCase()}const img=ev.image&&/^assets\/[\w.-]+\.(?:png|webp|jpe?g)$/i.test(ev.image)?`style="--event-image:url('${escapeHTML(ev.image)}')"`:'';const venue=ev.venue?escapeHTML(ev.venue):'Venue to be announced';const time=ev.time?' · '+escapeHTML(ev.time):'';const link=ev.link&&/^https?:\/\//.test(ev.link)?`<a class="event-card-link" href="${escapeHTML(ev.link)}" target="_blank" rel="noopener noreferrer" aria-label="Learn more about ${escapeHTML(ev.title)}">Event Details ↗</a>`:'';return `<article class="event-card ${img?'custom-event':'visual-worship'}" ${img}><div class="event-card-content"><span class="event-date-corner">${date}</span><span class="event-type">${escapeHTML(ev.category||'District event')}</span><h3>${escapeHTML(ev.title)}</h3><p>${venue}${time}</p><p>${escapeHTML(ev.description||'')}</p>${link}</div></article>`}).join('')}
+function renderEvents(){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const items=UPCOMING_EVENTS.filter(ev=>!ev.date||new Date(ev.date+'T23:59:59')>=today).sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+  const list=$('#eventsContainer');
+  list.classList.toggle('single-event',items.length===1);
+  if(!items.length){
+    $('#eventDisclosure').textContent='Check back for forthcoming District Three gatherings and announcements.';
+    list.innerHTML=`<article class="event-card visual-worship"><div class="event-card-content"><span class="event-date-corner">DATES TO BE ANNOUNCED</span><span class="event-type">District fellowship</span><h3>Stay connected with District Three</h3><p>Future district gatherings will be announced here.</p></div></article>`;
+    return;
+  }
+  $('#eventDisclosure').textContent='The fellowship location has not yet been supplied. Contact district leadership for additional details.';
+  list.innerHTML=items.map(ev=>{
+    const stamp=ev.date?new Date(ev.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}):'Date to be announced';
+    const schedule=Array.isArray(ev.schedule)?`<div class="event-schedule" aria-label="Event schedule">${ev.schedule.map(slot=>`<span><b>${escapeHTML(slot.time)}</b>${escapeHTML(slot.name)}</span>`).join('')}</div>`:'';
+    const venue=ev.venue?escapeHTML(ev.venue):'Venue to be announced';
+    const link=ev.link&&/^https?:\/\//.test(ev.link)?`<a class="event-card-link" href="${escapeHTML(ev.link)}" target="_blank" rel="noopener noreferrer">Event Details ↗</a>`:'';
+    return `<article class="event-card visual-worship featured-event"><div class="event-card-content"><span class="event-date-corner">${escapeHTML(stamp)}</span><span class="event-type">${escapeHTML(ev.category||'District event')}</span><h3>${escapeHTML(ev.title)}</h3><p>${escapeHTML(ev.description||'')}</p>${schedule}<p class="event-venue">${venue}</p>${link}</div></article>`;
+  }).join('');
+}
 renderEvents();
 
 /* Directory updates with approved listings only. */
 const churchSearch=$('#churchSearch');
 function renderChurches(){const query=churchSearch.value.trim().toLowerCase();const visible=CHURCHES.filter(ch=>[ch.name,ch.pastor,ch.city,ch.address].join(' ').toLowerCase().includes(query));const target=$('#churchResults');if(!CHURCHES.length){target.innerHTML=`<div class="church-empty"><img class="church-empty-seal" src="assets/district-three-crest.webp" alt="District Three crest"><div><h3>The directory is taking shape.</h3><p>Verified district churches and pastors will be featured here after their listings are approved. Interested in fellowship? We welcome an introduction from your ministry.</p><a href="#connect" class="text-arrow">Introduce your church ↗</a></div></div>`;return}if(!visible.length){target.innerHTML='<div class="church-empty"><div><h3>No churches match your search.</h3><p>Try another church name, pastor, or city.</p></div></div>';return}target.innerHTML=`<div class="church-grid">${visible.map(ch=>`<article class="church-card"><h3>${escapeHTML(ch.name)}</h3><p>${escapeHTML(ch.pastor||'Pastoral leadership to be confirmed')}</p><p>${escapeHTML(ch.address||ch.city||'')}</p>${ch.website&&/^https?:\/\//.test(ch.website)?`<a href="${escapeHTML(ch.website)}" target="_blank" rel="noopener noreferrer">Visit Church ↗</a>`:''}</article>`).join('')}</div>`}
 churchSearch.addEventListener('input',renderChurches);renderChurches();
+
+/* Gallery photographs open in an accessible lightbox. */
+$$('[data-gallery]').forEach(tile=>tile.addEventListener('click',()=>{
+  const dialog=$('#galleryDialog');
+  const image=$('#galleryDialogImage');
+  image.src=tile.dataset.gallery;
+  image.alt=tile.querySelector('img')?.alt||'District Three illustrative photography';
+  $('#galleryDialogCaption').textContent=tile.dataset.caption||'District moments';
+  openDialog(dialog);
+}));
 
 /* Leadership profiles and mission graphic */
 $$('[data-leader]').forEach(button=>button.addEventListener('click',()=>{const person=LEADERS[button.dataset.leader];if(!person)return;$('#leaderDialogImage').src=person.image;$('#leaderDialogImage').alt='Portrait of '+person.name;$('#leaderDialogRole').textContent=person.role;$('#leaderDialogTitle').textContent=person.name;$('#leaderDialogText').innerHTML=person.bio.map(p=>`<p>${escapeHTML(p)}</p>`).join('');openDialog($('#leaderDialog'))}));
