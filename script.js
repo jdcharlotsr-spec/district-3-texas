@@ -22,7 +22,6 @@ const LEADERS = {
   braziel: {
     name: 'District Elder Louise Braziel',
     role: 'Director, District 3',
-    portrait: 'assets/louise-braziel.png',
     paragraphs: [
       'District Elder Louise Braziel serves as Director of District 3 within the Texas State Council of the Pentecostal Churches of the Apostolic Faith International, Inc.',
       'An expanded official biography, including ministry history and leadership experience, may be added here when provided by the District 3 office.'
@@ -31,7 +30,6 @@ const LEADERS = {
   gates: {
     name: 'Bishop Lambert W. Gates, Sr.',
     role: 'Diocesan & Presiding Bishop',
-    portrait: 'assets/lambert-gates.png',
     paragraphs: [
       'Bishop Lambert W. Gates, Sr. serves as Presiding Bishop of the Pentecostal Churches of the Apostolic Faith International, Inc. and Senior Pastor of Kingdom Apostolic Ministries.',
       'He provides episcopal leadership for the Texas State Council. For his national profile and current leadership resources, visit pcafintl.org.'
@@ -125,10 +123,6 @@ qsa('[data-bio]').forEach(button => button.addEventListener('click', () => {
   if (!person) return;
   qs('#bioTitle').textContent = person.name;
   qs('#bioRole').textContent = person.role;
-  const portrait = qs('#bioPortrait');
-  portrait.src = person.portrait;
-  portrait.alt = `Portrait of ${person.name}`;
-  portrait.classList.toggle('is-gates', button.dataset.bio === 'gates');
   qs('#bioText').innerHTML = person.paragraphs.map(paragraph => `<p>${escapeHTML(paragraph)}</p>`).join('');
   openDialog(qs('#bioDialog'));
 }));
