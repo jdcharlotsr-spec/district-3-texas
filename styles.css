@@ -109,3 +109,36 @@
 @media(prefers-reduced-motion:reduce){.hero-corner-crest,.announcement-pulse{animation:none!important}}
 
 .moment-leader{background:linear-gradient(125deg,#322044,#6a4765)}.moment-leader img{object-position:center 22%;opacity:.90}.moment-leader:last-child img{object-fit:contain;object-position:center 30%;padding:6px 20px 0}.moment-leader::after{background:linear-gradient(0deg,rgba(23,5,32,.97),rgba(28,5,38,.18) 68%)}
+
+/* ───── Streamlined edition: bold essentials, no duplicated landing sections ───── */
+.leaders-section{padding-top:84px;padding-bottom:96px}
+.events-section{padding-top:82px;padding-bottom:94px}
+.events-grid.single-event{grid-template-columns:minmax(0,1fr);max-width:none}
+.events-grid.single-event .event-card{min-height:420px}
+.events-grid.single-event .event-card-content{min-height:420px;padding:94px 46px 36px}
+.events-grid.single-event .featured-event{border:1px solid rgba(229,185,100,.48);box-shadow:0 22px 55px rgba(34,7,48,.15)}
+.events-grid.single-event .featured-event::before{background-position:74% 38%}
+.events-grid.single-event .featured-event::after{background:linear-gradient(90deg,rgba(28,5,39,.98) 0%,rgba(37,8,50,.92) 45%,rgba(36,9,50,.22) 100%)}
+.events-grid.single-event .event-schedule{max-width:870px;gap:10px}
+.events-grid.single-event .event-schedule span{flex:1 1 174px;background:rgba(255,255,255,.13);border-color:rgba(238,198,123,.32)}
+.events-grid.single-event .event-venue{margin-top:7px}
+.events-section .section-top{margin-bottom:32px}
+.leaders-section .leader-card{box-shadow:0 19px 44px rgba(9,1,15,.14)}
+@media(max-width:800px){
+ .leaders-section{padding-top:65px;padding-bottom:72px}
+ .events-section{padding-top:65px;padding-bottom:72px}
+ .events-grid.single-event .event-card-content{min-height:440px;padding:89px 28px 29px}
+ .events-grid.single-event .featured-event::after{background:linear-gradient(90deg,rgba(28,5,39,.97),rgba(36,9,50,.68))}
+}
+@media(max-width:570px){
+ .leaders-section{padding-top:56px;padding-bottom:66px}
+ .events-section{padding-top:55px;padding-bottom:60px}
+ .events-grid.single-event .event-card-content{min-height:485px;padding:88px 22px 25px}
+ .events-grid.single-event .featured-event h3{font-size:30px}
+ .events-grid.single-event .event-schedule span{flex-basis:calc(50% - 10px);min-width:0;padding:11px 9px;font-size:11px}
+ .events-grid.single-event .event-date-corner{top:20px;left:20px;font-size:10px}
+}
+/* Keep content visible throughout scroll; animate position, never hide essential content. */
+.js-enabled .reveal{opacity:1;transform:translateY(8px)}
+.js-enabled .reveal.is-visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.js-enabled .reveal{transform:none}}

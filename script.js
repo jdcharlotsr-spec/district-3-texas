@@ -136,16 +136,6 @@ const churchSearch=$('#churchSearch');
 function renderChurches(){const query=churchSearch.value.trim().toLowerCase();const visible=CHURCHES.filter(ch=>[ch.name,ch.pastor,ch.city,ch.address].join(' ').toLowerCase().includes(query));const target=$('#churchResults');if(!CHURCHES.length){target.innerHTML=`<div class="church-empty"><img class="church-empty-seal" src="assets/district-three-crest.webp" alt="District Three crest"><div><h3>The directory is taking shape.</h3><p>Verified district churches and pastors will be featured here after their listings are approved. Interested in fellowship? We welcome an introduction from your ministry.</p><a href="#connect" class="text-arrow">Introduce your church ↗</a></div></div>`;return}if(!visible.length){target.innerHTML='<div class="church-empty"><div><h3>No churches match your search.</h3><p>Try another church name, pastor, or city.</p></div></div>';return}target.innerHTML=`<div class="church-grid">${visible.map(ch=>`<article class="church-card"><h3>${escapeHTML(ch.name)}</h3><p>${escapeHTML(ch.pastor||'Pastoral leadership to be confirmed')}</p><p>${escapeHTML(ch.address||ch.city||'')}</p>${ch.website&&/^https?:\/\//.test(ch.website)?`<a href="${escapeHTML(ch.website)}" target="_blank" rel="noopener noreferrer">Visit Church ↗</a>`:''}</article>`).join('')}</div>`}
 churchSearch.addEventListener('input',renderChurches);renderChurches();
 
-/* Gallery photographs open in an accessible lightbox. */
-$$('[data-gallery]').forEach(tile=>tile.addEventListener('click',()=>{
-  const dialog=$('#galleryDialog');
-  const image=$('#galleryDialogImage');
-  image.src=tile.dataset.gallery;
-  image.alt=tile.querySelector('img')?.alt||'District Three illustrative photography';
-  $('#galleryDialogCaption').textContent=tile.dataset.caption||'District moments';
-  openDialog(dialog);
-}));
-
 /* Leadership profiles and mission graphic */
 $$('[data-leader]').forEach(button=>button.addEventListener('click',()=>{const person=LEADERS[button.dataset.leader];if(!person)return;$('#leaderDialogImage').src=person.image;$('#leaderDialogImage').alt='Portrait of '+person.name;$('#leaderDialogRole').textContent=person.role;$('#leaderDialogTitle').textContent=person.name;$('#leaderDialogText').innerHTML=person.bio.map(p=>`<p>${escapeHTML(p)}</p>`).join('');openDialog($('#leaderDialog'))}));
 $('#openMission').addEventListener('click',()=>openDialog($('#missionDialog')));
