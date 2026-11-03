@@ -309,3 +309,30 @@ body { background: #fcf9f6; }
   .bio-dialog-picture { max-width:230px; aspect-ratio:5/4; }
   .bio-dialog-picture img.is-gates { transform:scale(1); }
 }
+
+
+/* District Three approved seal — logo integration (2026) */
+.brand img {width:61px;height:61px;object-fit:contain;border-radius:50%;filter:drop-shadow(0 2px 4px rgba(40,12,63,.13));}
+.footer-brand-row img {width:66px;height:66px;object-fit:contain;border-radius:50%;filter:drop-shadow(0 3px 7px rgba(0,0,0,.12));}
+.hero-art.seal-feature {aspect-ratio:1 / 1;max-width:526px;padding:15px;isolation:isolate;}
+.hero-art.seal-feature::before {inset:0;border-radius:48px;border-color:rgba(235,190,103,.30);transform:rotate(5deg);}
+.hero-art-inner.seal-feature-inner {
+  position:relative;
+  width:100%;height:100%;
+  padding:clamp(18px,3vw,39px);
+  border-radius:44px;
+  border:1px solid rgba(242,205,134,.68);
+  background: radial-gradient(circle at 50% 44%, rgba(233,196,133,.24) 0, rgba(88,40,109,.35) 48%, rgba(32,10,52,.80) 79%), linear-gradient(145deg,#522169,#210a38);
+  box-shadow:0 22px 70px rgba(10,1,23,.32), inset 0 0 40px rgba(223,184,89,.10);
+  display:grid;place-items:center;
+  overflow:hidden;
+}
+.hero-art-inner.seal-feature-inner::before,
+.hero-art-inner.seal-feature-inner::after {display:none;}
+.seal-halo {position:absolute;width:88%;aspect-ratio:1;border:1px solid rgba(238,206,145,.28);border-radius:50%;box-shadow:0 0 65px rgba(202,153,63,.19);pointer-events:none;}
+.hero-seal {position:relative;z-index:2;display:block;width:100%;max-width:440px;max-height:100%;height:auto;aspect-ratio:1;object-fit:contain;filter:drop-shadow(0 18px 15px rgba(9,0,20,.22));animation:seal-hover 9s ease-in-out infinite;}
+@keyframes seal-hover {0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.hero-art.seal-feature .hero-corner-tag {z-index:4;right:-11px;bottom:13px;}
+@media(max-width:900px){.hero-art.seal-feature{max-width:445px;margin-inline:auto}.hero-art-inner.seal-feature-inner{border-radius:35px}.hero-art.seal-feature::before{border-radius:40px}}
+@media(max-width:640px){.brand img{width:45px;height:45px}.hero-art.seal-feature{width:min(96%,420px);padding:7px}.hero-art-inner.seal-feature-inner{padding:22px;border-radius:29px}.hero-art.seal-feature::before{border-radius:34px}.hero-art.seal-feature .hero-corner-tag{right:-7px;bottom:9px;padding:10px 13px}.footer-brand-row img{width:55px;height:55px}}
+@media(prefers-reduced-motion:reduce){.hero-seal{animation:none}}
