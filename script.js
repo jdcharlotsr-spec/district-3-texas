@@ -21,16 +21,21 @@ const SITE_CONFIG = {
  Dates must be approved before publishing. Keep [] until then.
  */
 const UPCOMING_EVENTS = [{
-  title:'Upcoming District 3 Fellowship',
-  category:'District fellowship',
+  title:'District 3 Fellowship',
+  category:'Worship · Fellowship · Leadership',
   date:'2026-11-07',
-  venue:'Location to be announced',
-  description:'A day of fellowship, equipping, worship, and connection with the District Three family.',
+  venue:'Greater New Genisis Christian Center',
+  address:'110 Hanna St., San Antonio, TX 78210',
+  host:'District Elder Louise Braziel',
+  hostRole:'Host Pastor & Director',
+  speaker:'Elder Ladarian McGee',
+  speakerChurch:'Praise City Church · Longview, TX',
+  description:'A day of Apostolic fellowship, equipping and worship.',
   schedule:[
     {time:'9:00 AM',name:'Breakfast'},
     {time:'10:00 AM',name:'Breakout Sessions'},
     {time:'12:00 Noon',name:'Worship Service'},
-    {time:'Following Service',name:'Dinner Fellowship'}
+    {time:'After Service',name:'Dinner Fellowship'}
   ]
 }];
 
@@ -120,13 +125,16 @@ function renderEvents(){
     list.innerHTML=`<article class="event-card visual-worship"><div class="event-card-content"><span class="event-date-corner">DATES TO BE ANNOUNCED</span><span class="event-type">District fellowship</span><h3>Stay connected with District Three</h3><p>Future district gatherings will be announced here.</p></div></article>`;
     return;
   }
-  $('#eventDisclosure').textContent='The fellowship location has not yet been supplied. Contact district leadership for additional details.';
+  $('#eventDisclosure').textContent='District 3 Fellowship · Saturday, November 7, 2026 · Greater New Genisis Christian Center, San Antonio, TX.';
   list.innerHTML=items.map(ev=>{
     const stamp=ev.date?new Date(ev.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}):'Date to be announced';
     const schedule=Array.isArray(ev.schedule)?`<div class="event-schedule" aria-label="Event schedule">${ev.schedule.map(slot=>`<span><b>${escapeHTML(slot.time)}</b>${escapeHTML(slot.name)}</span>`).join('')}</div>`:'';
     const venue=ev.venue?escapeHTML(ev.venue):'Venue to be announced';
+    const location=ev.address?`<span class="event-address">${escapeHTML(ev.address)}</span>`:'';
+    const host=ev.host?`<div class="event-person"><span class="event-person-label">HOST PASTOR & DIRECTOR</span><strong>${escapeHTML(ev.host)}</strong>${ev.hostRole&&ev.hostRole!=='Host Pastor & Director'?`<small>${escapeHTML(ev.hostRole)}</small>`:''}</div>`:'';
+    const speaker=ev.speaker?`<div class="event-person"><span class="event-person-label">GUEST SPEAKER</span><strong>${escapeHTML(ev.speaker)}</strong>${ev.speakerChurch?`<small>${escapeHTML(ev.speakerChurch)}</small>`:''}</div>`:'';
     const link=ev.link&&/^https?:\/\//.test(ev.link)?`<a class="event-card-link" href="${escapeHTML(ev.link)}" target="_blank" rel="noopener noreferrer">Event Details ↗</a>`:'';
-    return `<article class="event-card visual-worship featured-event"><div class="event-card-content"><span class="event-date-corner">${escapeHTML(stamp)}</span><span class="event-type">${escapeHTML(ev.category||'District event')}</span><h3>${escapeHTML(ev.title)}</h3><p>${escapeHTML(ev.description||'')}</p>${schedule}<p class="event-venue">${venue}</p>${link}</div></article>`;
+    return `<article class="event-card visual-worship featured-event"><div class="event-card-content"><span class="event-date-corner">${escapeHTML(stamp)}</span><span class="event-type">${escapeHTML(ev.category||'District event')}</span><h3>${escapeHTML(ev.title)}</h3><p class="event-intro">${escapeHTML(ev.description||'')}</p><div class="event-details-layout"><div class="event-schedule-holder"><p class="event-group-heading">ORDER OF THE DAY</p>${schedule}</div><div class="event-location-block"><p class="event-group-heading">LOCATION & LEADERSHIP</p><strong class="event-venue">${venue}</strong>${location}<div class="event-people">${host}${speaker}</div></div></div>${link}</div><figure class="event-image-panel"><img src="assets/worship-moment.webp" alt="Illustrative worship gathering" loading="lazy"></figure></article>`;
   }).join('');
 }
 renderEvents();
