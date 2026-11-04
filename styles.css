@@ -553,3 +553,53 @@ body { font-size: var(--reading-size); }
 #leaderDialog #leaderDialogText > .leader-bio-quote { border-left:3px solid #d9a94c; padding:10px 0 10px 16px; margin:12px 0 21px; color:#582860; font:italic 19px/1.55 'Playfair Display',Georgia,serif; }
 #leaderDialog #leaderDialogText > p.leader-bio-closing { font-weight:800; color:#51295d; margin:25px 0 5px; }
 @media (max-width:700px) { #leaderDialog { padding:36px 20px 23px; } #leaderDialog .leader-dialog-layout { grid-template-columns:1fr; gap:18px; } #leaderDialog .leader-dialog-layout > img {position:static; height:225px; max-width:225px; } #leaderDialog #leaderDialogText > p {font-size:14px;} }
+
+
+/* Media sliders: flyer carousel and district photography gallery */
+.events-media-suite{margin-top:56px;border-top:1px solid #e9dccc;padding-top:40px;display:grid;gap:54px}
+.media-strip{min-width:0}.media-heading-row{display:flex;justify-content:space-between;align-items:end;gap:22px;margin-bottom:21px}
+.media-heading-row .eyebrow{margin-bottom:9px;font-size:10px;color:#8e693f}
+.media-heading-row h3{font:500 clamp(29px,3vw,43px)/1.13 'Playfair Display',Georgia,serif;color:#32103e;margin:0 0 10px;letter-spacing:-.035em}
+.media-heading-row h3 em{color:#986b32}.media-deck{font-size:14px;line-height:1.6;color:#70677a;margin:0;max-width:590px}
+.media-nav{display:flex;gap:10px;flex-shrink:0;padding-bottom:5px}.media-arrow{width:42px;height:42px;border:1px solid #d9c3a6;border-radius:50%;background:#fff;color:#401a47;font-size:21px;transition:background .2s,color .2s,transform .2s}
+.media-arrow:hover:not(:disabled){background:#33113e;color:#f4d48b;transform:translateY(-2px)}.media-arrow:disabled{opacity:.3;cursor:default}
+.media-track{display:grid;grid-auto-flow:column;grid-auto-columns:max-content;column-gap:19px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:#b89a67 #f3eade;padding-bottom:12px;border-radius:16px;scroll-behavior:smooth}
+.media-track>*{scroll-snap-align:start}.media-track:focus-visible{outline:3px solid #d6ad64;outline-offset:3px}.media-tip{font-size:12px;color:#8a7d85;line-height:1.6;margin:10px 0 0}
+.flyer-track{max-width:830px;grid-auto-columns:455px}.flyer-slide{height:500px;position:relative;overflow:hidden;border-radius:20px;box-shadow:0 18px 44px rgba(39,16,47,.14)}
+.flyer-poster{padding:25px 28px 24px;color:#fff;isolation:isolate}
+.poster-top{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:9px;letter-spacing:.14em;font-weight:800;color:#f6dc9c}
+.poster-eyebrow{font-size:10px;letter-spacing:.23em;font-weight:800;margin:23px 0 8px;color:#f1cc7a}
+.flyer-poster h4{font:500 46px/1.03 'Playfair Display',Georgia,serif;letter-spacing:-.05em;margin:0 0 13px}
+.flyer-poster h4 em{color:#f4ca78}
+.speaker-poster{background:radial-gradient(circle at 100% 0%,#73427c 0%,#350d43 48%,#22082f 100%)}
+.poster-date{font-size:11px;letter-spacing:.12em;font-weight:700;margin-bottom:0;color:#fff5e2}
+.poster-photo{position:absolute;z-index:-1;inset:42% -7% -8% 38%;opacity:.92;overflow:hidden;mask-image:linear-gradient(to bottom,transparent 0%,black 15%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 15%)}
+.poster-photo img{height:100%;width:100%;object-fit:cover;object-position:center 13%}
+.poster-bottom{position:absolute;bottom:25px;left:28px;max-width:270px;display:flex;flex-direction:column;gap:4px;text-shadow:0 2px 12px #100018}
+.poster-bottom:before{content:'';display:block;height:2px;width:40px;background:#f3d087;margin-bottom:8px}
+.poster-bottom span{font-size:9px;letter-spacing:.2em;font-weight:800;color:#f8d88d}
+.poster-bottom strong{font:600 19px/1.2 'Playfair Display',Georgia,serif;color:#fff}
+.poster-bottom small{font-size:10px;line-height:1.5;color:#f3e6f4}
+.agenda-poster{background:linear-gradient(145deg,#391449,#1f0a2e 74%);border:1px solid rgba(238,201,119,.28)}
+.agenda-poster::after{content:'✦';font:200 260px/1 Georgia,serif;color:rgba(228,191,111,.065);position:absolute;right:-60px;top:88px;pointer-events:none}
+.agenda-poster h4{font-size:44px;line-height:1.0;margin:16px 0 17px}.poster-agenda{border-top:1px solid rgba(240,213,148,.30);padding-top:11px;position:relative;z-index:1}
+.poster-agenda div{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid rgba(240,213,148,.17);font-size:12px}
+.poster-agenda b{color:#efd083;font-size:11px;letter-spacing:.045em}.poster-agenda span{color:#fff8f2;text-align:right}
+.poster-venue{display:flex;flex-direction:column;gap:6px;position:absolute;left:28px;right:26px;bottom:25px}
+.poster-venue b{font-size:10px;letter-spacing:.1em;color:#f3d385}.poster-venue span{font-size:11px;color:#f8edf8}
+.flyer-image-card{background:#291039;display:flex;flex-direction:column}.flyer-image-card img{width:100%;height:100%;object-fit:contain}.flyer-image-label{position:absolute;left:10px;right:10px;bottom:10px;border-radius:8px;padding:8px 12px;background:rgba(27,6,41,.8);color:#fff;font-size:12px}
+.gallery-track{grid-auto-columns:minmax(290px,410px)}.gallery-photo{width:410px;height:315px;position:relative;display:block;overflow:hidden;border:0;padding:0;border-radius:19px;text-align:left;cursor:zoom-in;background:#281032;box-shadow:0 14px 33px rgba(30,10,40,.13)}
+.gallery-photo img{width:100%;height:100%;object-fit:cover;object-position:center 32%;transition:transform .45s}
+.gallery-photo:hover img,.gallery-photo:focus-visible img{transform:scale(1.05)}
+.gallery-photo:after{content:'';position:absolute;inset:36% 0 0;background:linear-gradient(transparent,rgba(17,4,28,.94));pointer-events:none}
+.gallery-photo-caption{position:absolute;z-index:1;left:22px;right:52px;bottom:24px;display:flex;flex-direction:column;gap:6px}
+.gallery-photo-caption strong{font:500 24px/1.18 'Playfair Display',Georgia,serif;color:#fff}
+.gallery-photo-caption small{font-size:12px;line-height:1.4;color:#eee3ee}
+.gallery-enlarge{z-index:2;position:absolute;right:17px;bottom:25px;width:31px;height:31px;border:1px solid #f0c57d;color:#f4d58b;border-radius:50%;display:grid;place-items:center;font-size:16px}
+.gallery-lightbox{width:min(980px,calc(100% - 25px));max-width:min(980px,calc(100% - 25px));padding:16px;background:#1c072a;color:#fff}
+.gallery-lightbox figure{margin:0}.gallery-lightbox img{display:block;width:100%;height:auto;max-height:72vh;object-fit:contain;border-radius:10px}
+.gallery-lightbox figcaption{padding:16px 12px 3px}.gallery-lightbox h2{font-size:24px;margin:0 0 6px;color:#fff}.gallery-lightbox p{color:#d9cbde;font-size:13px;margin:0}
+.gallery-lightbox .dialog-close{z-index:4;top:21px;right:21px;background:#fff;color:#2b0c39}
+.church-service{border-top:1px solid #e1d6e0;padding-top:12px;margin-top:7px}.church-service p{line-height:1.5;margin:6px 0;font-size:12px}
+@media(max-width:800px){.events-media-suite{margin-top:44px;gap:38px}.flyer-track{grid-auto-columns:min(79vw,435px)}.gallery-track{grid-auto-columns:min(75vw,385px)}.gallery-photo{width:min(75vw,385px);height:290px}}
+@media(max-width:570px){.media-heading-row{align-items:end;gap:8px}.media-heading-row h3{font-size:33px}.media-deck{font-size:12px}.media-nav{gap:6px}.media-arrow{width:36px;height:36px;font-size:17px}.flyer-track{grid-auto-columns:min(86vw,370px)}.flyer-slide{height:470px}.flyer-poster{padding:22px}.flyer-poster h4{font-size:40px}.poster-photo{inset:43% -6% -8% 34%}.poster-bottom{left:22px;bottom:22px}.poster-venue{left:22px;right:20px}.gallery-track{grid-auto-columns:84vw}.gallery-photo{width:84vw;height:260px}.gallery-photo-caption strong{font-size:21px}.gallery-lightbox{padding:10px}.gallery-lightbox img{max-height:68vh}}

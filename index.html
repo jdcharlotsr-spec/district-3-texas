@@ -60,6 +60,38 @@
 <div class="section-top events-top"><div><p class="eyebrow gold"><span class="line"></span> WHAT'S HAPPENING</p><h2 id="eventsHeading">Upcoming <em>Events.</em></h2><p class="section-lead">Join us for worship, encouragement, and fellowship. We would love to see you there.</p></div><span class="calendar-tag"><span aria-hidden="true">▦</span> DISTRICT CALENDAR</span></div>
 <div aria-live="polite" class="events-grid" id="eventsContainer"></div>
 <div class="events-foot"><p id="eventDisclosure">Saturday, November 7, 2026 · Greater New Genesis Christian Center · 110 Hanna St., San Antonio, TX 78210.</p><a class="text-arrow" href="#connect">Ask about upcoming gatherings <span aria-hidden="true">↗</span></a></div>
+<div class="events-media-suite" aria-label="District event flyers and photographs">
+  <div class="media-strip flyers-strip">
+    <div class="media-heading-row">
+      <div>
+        <p class="eyebrow"><span class="line"></span> FROM THE DISTRICT OFFICE</p>
+        <h3>Event <em>Flyers.</em></h3>
+        <p class="media-deck">Announcements and details from the District Three fellowship.</p>
+      </div>
+      <div class="media-nav" aria-label="Browse event flyers">
+        <button type="button" id="flyerPrev" aria-label="Previous flyer" class="media-arrow">←</button>
+        <button type="button" id="flyerNext" aria-label="Next flyer" class="media-arrow">→</button>
+      </div>
+    </div>
+    <div id="flyerTrack" class="media-track flyer-track" role="region" aria-roledescription="carousel" aria-label="Event flyers" tabindex="0"></div>
+    <p class="media-tip">Additional district flyers may be added to the gallery as they are announced.</p>
+  </div>
+  <div class="media-strip gallery-strip">
+    <div class="media-heading-row">
+      <div>
+        <p class="eyebrow"><span class="line"></span> LIFE IN FELLOWSHIP</p>
+        <h3>Moments of <em>Fellowship.</em></h3>
+        <p class="media-deck">Photographs of worship, ministry, and meaningful connections.</p>
+      </div>
+      <div class="media-nav" aria-label="Browse photo gallery">
+        <button type="button" id="galleryPrev" aria-label="Previous photo" class="media-arrow">←</button>
+        <button type="button" id="galleryNext" aria-label="Next photo" class="media-arrow">→</button>
+      </div>
+    </div>
+    <div id="galleryTrack" class="media-track gallery-track" role="region" aria-roledescription="carousel" aria-label="District photo gallery" tabindex="0"></div>
+    <p class="media-tip">Select a photo to view it larger.</p>
+  </div>
+</div>
 </div>
 </section>
 <div aria-hidden="true" class="moving-ribbon"><div class="ribbon-track"><span>DEEPER IN GOD</span><i>✦</i><span>WARM FELLOWSHIP</span><i>✦</i><span>WIDER FOR THE KINGDOM</span><i>✦</i><span>GROW IN LOVE</span><i>✦</i><span>DEEPER IN GOD</span><i>✦</i><span>WARM FELLOWSHIP</span><i>✦</i><span>WIDER FOR THE KINGDOM</span><i>✦</i><span>GROW IN LOVE</span><i>✦</i></div></div>
@@ -83,6 +115,10 @@
 
 <dialog aria-labelledby="leaderDialogTitle" class="dialog" id="leaderDialog"><button aria-label="Close leadership profile" class="dialog-close" data-close="leaderDialog" type="button">×</button><div class="leader-dialog-layout"><img alt="" id="leaderDialogImage" src="assets/louise-braziel.webp"/><div><p class="eyebrow">LEADERSHIP PROFILE</p><p class="modal-role" id="leaderDialogRole"></p><h2 id="leaderDialogTitle"></h2><div id="leaderDialogText"></div></div></div></dialog>
 <dialog aria-labelledby="missionDialogTitle" class="dialog mission-dialog" id="missionDialog"><button aria-label="Close mission statement" class="dialog-close" data-close="missionDialog" type="button">×</button><h2 id="missionDialogTitle">District Three · Mission &amp; Vision</h2><img alt="District Three mission, vision and core commitments infographic" src="assets/mission-statement.webp"/></dialog>
+<dialog class="dialog gallery-lightbox" id="galleryDialog" aria-labelledby="galleryDialogTitle">
+  <button type="button" class="dialog-close" data-close="galleryDialog" aria-label="Close photo gallery">×</button>
+  <figure><img id="galleryDialogImage" src="assets/worship-close.webp" alt=""/><figcaption><h2 id="galleryDialogTitle"></h2><p id="galleryDialogCaption"></p></figcaption></figure>
+</dialog>
 <dialog aria-labelledby="inquiryDialogTitle" class="dialog inquiry-dialog" id="inquiryDialog"><button aria-label="Close prepared inquiry" class="dialog-close" data-close="inquiryDialog" type="button">×</button><p class="eyebrow">DISTRICT THREE CONNECTION</p><h2 id="inquiryDialogTitle">Your message is ready.</h2><p id="inquiryDialogInstructions">Your message has not been sent. Copy or download it to share with approved district leadership.</p><textarea aria-label="Prepared pastoral inquiry" id="preparedInquiry" readonly="" rows="11"></textarea><div class="modal-actions"><button class="button button-purple" id="copyInquiry" type="button">Copy Message</button><button class="button button-outline" id="downloadInquiry" type="button">Download Text</button><a class="button button-outline" hidden="" href="#" id="emailInquiry">Email District ↗</a></div></dialog>
 </body>
 </html>
