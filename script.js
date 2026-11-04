@@ -28,9 +28,10 @@ const UPCOMING_EVENTS = [{
   address:'110 Hanna St., San Antonio, TX 78210',
   host:'District Elder Louise Braziel',
   hostRole:'Host Pastor & Director',
-  speaker:'Elder Ladarian McGee',
+  speaker:'Elder LaDarius McGee',
+  image:'assets/elder-mcgee.webp',
   speakerChurch:'Praise City Church · Longview, TX',
-  description:'A day of Apostolic fellowship, equipping and worship.',
+  description:'Come worship, grow, and enjoy warm District fellowship in an Apostolic Pentecostal setting.',
   schedule:[
     {time:'9:00 AM',name:'Breakfast'},
     {time:'10:00 AM',name:'Breakout Sessions'},
@@ -39,10 +40,16 @@ const UPCOMING_EVENTS = [{
   ]
 }];
 
-/* Verified affiliated church listings only. Example:
- {name:'Church Name',pastor:'Pastor Name',city:'Houston',address:'Street address, Houston, TX',website:'https://example.com'}
-*/
-const CHURCHES = [];
+/* District Three church directory, based on the roster supplied for this website.
+   A street address or website is not shown unless the district has provided one.
+   Additional churches may be added using the same {name, city, pastor} format. */
+const CHURCHES = [
+  {name:'Rhema Word Apostolic Church', city:'Hempstead, TX', pastor:'Bishop Stephen L. Hamilton, ThD'},
+  {name:'Amazing Grace Bible Church', city:'Houston, TX', pastor:'Bishop Emma Okereke'},
+  {name:'Pentecostal Powerhouse', city:'San Antonio, TX', pastor:'Pastor Mark Ming'},
+  {name:'Praise City Church', city:'Longview, TX', pastor:'Elder LaDarius McGee'},
+  {name:'Elim Tabernacle Apostolic Church', city:'Houston, TX', pastor:'Bishop J. D. Charlot, Sr.', pastorRole:'Pastor'}
+];
 
 const LEADERS = {
   braziel: {
@@ -62,9 +69,9 @@ const LEADERS = {
 };
 
 const HERO_SLIDES = [
-  { kicker:'ONE FAITH. ONE FELLOWSHIP.', title:'Stronger <em>together.</em><br>Further in <em>faith.</em>', description:'A welcoming fellowship for Apostolic pastors and churches, committed to biblical truth, spiritual excellence, and Kingdom advancement.', button:'Explore Pastoral Fellowship', href:'#connect' },
-  { kicker:'A PLACE FOR PASTORS TO CONNECT', title:'Your calling.<br><em>Our community.</em>', description:'Find meaningful connection, shared encouragement, and the strength that comes through fellowship with other laborers in the Gospel.', button:'Meet Our Leadership', href:'#leadership' },
-  { kicker:'ROOTED IN THE APOSTOLIC FAITH', title:'United in spirit.<br><em>Built for purpose.</em>', description:'Strengthening local churches, supporting dedicated ministers, and advancing the Kingdom of God across Texas.', button:'Discover Our Mission', href:'#mission' }
+  { kicker:'WELCOME TO DISTRICT THREE', title:'Rooted in <em>Apostolic faith.</em><br>Warm in <em>fellowship.</em>', description:'District Three is Apostolic Pentecostal in faith, with a welcoming spirit for those who desire worship, fellowship, and connection.', button:'Connect With Us', href:'#connect' },
+  { kicker:'YOU ARE WELCOME HERE', title:'Come worship.<br><em>Come connect.</em>', description:'Pastors, church families, ministry leaders, and guests are welcome to share in worship, fellowship, and encouragement with District Three.', button:'Meet Our Leadership', href:'#leadership' },
+  { kicker:'HONORING OUR ROOTS. SHARING OUR WELCOME.', title:'Firm in doctrine.<br><em>Gracious in spirit.</em>', description:'District Three proudly belongs to PCAFI. We remain true to the Apostolic Pentecostal faith while offering a sincere and gracious welcome.', button:'Discover Our Mission', href:'#mission' }
 ];
 
 const $ = (s,root=document)=>root.querySelector(s);
@@ -134,14 +141,16 @@ function renderEvents(){
     const host=ev.host?`<div class="event-person"><span class="event-person-label">HOST PASTOR & DIRECTOR</span><strong>${escapeHTML(ev.host)}</strong>${ev.hostRole&&ev.hostRole!=='Host Pastor & Director'?`<small>${escapeHTML(ev.hostRole)}</small>`:''}</div>`:'';
     const speaker=ev.speaker?`<div class="event-person"><span class="event-person-label">GUEST SPEAKER</span><strong>${escapeHTML(ev.speaker)}</strong>${ev.speakerChurch?`<small>${escapeHTML(ev.speakerChurch)}</small>`:''}</div>`:'';
     const link=ev.link&&/^https?:\/\//.test(ev.link)?`<a class="event-card-link" href="${escapeHTML(ev.link)}" target="_blank" rel="noopener noreferrer">Event Details ↗</a>`:'';
-    return `<article class="event-card visual-worship featured-event"><div class="event-card-content"><span class="event-date-corner">${escapeHTML(stamp)}</span><span class="event-type">${escapeHTML(ev.category||'District event')}</span><h3>${escapeHTML(ev.title)}</h3><p class="event-intro">${escapeHTML(ev.description||'')}</p><div class="event-details-layout"><div class="event-schedule-holder"><p class="event-group-heading">ORDER OF THE DAY</p>${schedule}</div><div class="event-location-block"><p class="event-group-heading">LOCATION & LEADERSHIP</p><strong class="event-venue">${venue}</strong>${location}<div class="event-people">${host}${speaker}</div></div></div>${link}</div><figure class="event-image-panel"><img src="assets/worship-moment.webp" alt="Illustrative worship gathering" loading="lazy"></figure></article>`;
+    const photo=ev.image || 'assets/worship-moment.webp';
+    const caption=ev.speaker?`<figcaption class="event-speaker-caption"><span>GUEST SPEAKER</span><strong>${escapeHTML(ev.speaker)}</strong><small>${escapeHTML(ev.speakerChurch||'')}</small></figcaption>`:'';
+    return `<article class="event-card visual-worship featured-event"><div class="event-card-content"><span class="event-date-corner">${escapeHTML(stamp)}</span><span class="event-type">${escapeHTML(ev.category||'District event')}</span><h3>${escapeHTML(ev.title)}</h3><p class="event-intro">${escapeHTML(ev.description||'')}</p><div class="event-details-layout"><div class="event-schedule-holder"><p class="event-group-heading">ORDER OF THE DAY</p>${schedule}</div><div class="event-location-block"><p class="event-group-heading">LOCATION & LEADERSHIP</p><strong class="event-venue">${venue}</strong>${location}<div class="event-people">${host}${speaker}</div></div></div>${link}</div><figure class="event-image-panel"><img src="${photo}" alt="Portrait supplied for guest speaker ${escapeHTML(ev.speaker||'')}" loading="lazy">${caption}</figure></article>`;
   }).join('');
 }
 renderEvents();
 
 /* Directory updates with approved listings only. */
 const churchSearch=$('#churchSearch');
-function renderChurches(){const query=churchSearch.value.trim().toLowerCase();const visible=CHURCHES.filter(ch=>[ch.name,ch.pastor,ch.city,ch.address].join(' ').toLowerCase().includes(query));const target=$('#churchResults');if(!CHURCHES.length){target.innerHTML=`<div class="church-empty"><img class="church-empty-seal" src="assets/district-three-crest.webp" alt="District Three crest"><div><h3>The directory is taking shape.</h3><p>Verified district churches and pastors will be featured here after their listings are approved. Interested in fellowship? We welcome an introduction from your ministry.</p><a href="#connect" class="text-arrow">Introduce your church ↗</a></div></div>`;return}if(!visible.length){target.innerHTML='<div class="church-empty"><div><h3>No churches match your search.</h3><p>Try another church name, pastor, or city.</p></div></div>';return}target.innerHTML=`<div class="church-grid">${visible.map(ch=>`<article class="church-card"><h3>${escapeHTML(ch.name)}</h3><p>${escapeHTML(ch.pastor||'Pastoral leadership to be confirmed')}</p><p>${escapeHTML(ch.address||ch.city||'')}</p>${ch.website&&/^https?:\/\//.test(ch.website)?`<a href="${escapeHTML(ch.website)}" target="_blank" rel="noopener noreferrer">Visit Church ↗</a>`:''}</article>`).join('')}</div>`}
+function renderChurches(){const query=churchSearch.value.trim().toLowerCase();const visible=CHURCHES.filter(ch=>[ch.name,ch.pastor,ch.city,ch.address].join(' ').toLowerCase().includes(query));const target=$('#churchResults');if(!CHURCHES.length){target.innerHTML=`<div class="church-empty"><img class="church-empty-seal" src="assets/district-three-crest.webp" alt="District Three crest"><div><h3>The directory is taking shape.</h3><p>Verified district churches and pastors will be featured here after their listings are approved. Interested in connecting? We welcome your interest and would be glad to help you learn more about District Three.</p><a href="#connect" class="text-arrow">Connect with our district ↗</a></div></div>`;return}if(!visible.length){target.innerHTML='<div class="church-empty"><div><h3>No churches match your search.</h3><p>Try another church name, pastor, or city.</p></div></div>';return}target.innerHTML=`<div class="church-results-meta"><span>${visible.length} ${visible.length===1?'Church':'Churches'} ${query?'found':'in District Three directory'}</span><span>TEXAS STATE COUNCIL · DISTRICT THREE</span></div><div class="church-grid">${visible.map(ch=>`<article class="church-card"><div class="church-card-heading"><span class="church-city">${escapeHTML(ch.city||'Texas')}</span><span class="church-decor" aria-hidden="true">✦</span></div><h3>${escapeHTML(ch.name)}</h3><div class="church-card-footer"><span class="church-pastor-label">PASTORAL LEADERSHIP</span><p>${escapeHTML(ch.pastor||'Pastoral leadership to be confirmed')}${ch.pastorRole?` <span class="church-role">· ${escapeHTML(ch.pastorRole)}</span>`:''}</p></div>${ch.website&&/^https?:\/\//.test(ch.website)?`<a href="${escapeHTML(ch.website)}" target="_blank" rel="noopener noreferrer">Visit Church ↗</a>`:''}</article>`).join('')}</div>`}
 churchSearch.addEventListener('input',renderChurches);renderChurches();
 
 /* Leadership profiles and mission graphic */
@@ -152,9 +161,9 @@ $$('dialog').forEach(dialog=>dialog.addEventListener('click',e=>{if(e.target===d
 
 /* A useful form even before a district inbox is authorized. */
 const form=$('#inquiryForm');
-form.addEventListener('submit',async e=>{e.preventDefault();if(!form.reportValidity())return;const data=new FormData(form);const v=k=>String(data.get(k)||'').trim();const subject=`District Three Pastoral Inquiry — ${v('fullName')}`;const body=[
-  'District Three · Texas State Council · PCAFI','Attention: District Elder Louise Braziel, Director','','Praise the Lord,','','I would like to learn more about fellowship with District Three.','',`Name: ${v('fullName')}`,`Email: ${v('email')}`,`Church / Ministry: ${v('church')||'Not provided'}`,`City / Location: ${v('city')}`,`Inquiry: ${v('interest')}`,'','About My Ministry:',v('message')||'I would welcome a conversation about fellowship and partnership.','','I understand this inquiry is not an application approval or automatic affiliation.'].join('\n');
-  if(SITE_CONFIG.formEndpoint){const button=$('.form-submit',form);button.disabled=true;button.textContent='Sending…';try{const response=await fetch(SITE_CONFIG.formEndpoint,{method:'POST',body:data,headers:{Accept:'application/json'}});if(response.ok){toast('Your inquiry was submitted successfully.');form.reset();return}toast('Unable to send. Your inquiry will be prepared to copy.')}catch{toast('Online delivery unavailable. Your inquiry will be prepared to copy.')}finally{button.disabled=false;button.innerHTML='Prepare My Inquiry <span aria-hidden="true">↗</span>'}}
+form.addEventListener('submit',async e=>{e.preventDefault();if(!form.reportValidity())return;const data=new FormData(form);const v=k=>String(data.get(k)||'').trim();const subject=`District Three Connection — ${v('fullName')}`;const body=[
+  'District Three · Texas State Council · PCAFI','Attention: District Elder Louise Braziel, Director','','Praise the Lord,','','I would like to connect with District Three.','',`Name: ${v('fullName')}`,`Email: ${v('email')}`,`Church / Ministry: ${v('church')||'Not provided'}`,`City / Location: ${v('city')}`,`Inquiry: ${v('interest')}`,'','My Message:',v('message')||'I would welcome a conversation about worship, fellowship, and District Three.','','I understand this inquiry is not an application approval or automatic affiliation.'].join('\n');
+  if(SITE_CONFIG.formEndpoint){const button=$('.form-submit',form);button.disabled=true;button.textContent='Sending…';try{const response=await fetch(SITE_CONFIG.formEndpoint,{method:'POST',body:data,headers:{Accept:'application/json'}});if(response.ok){toast('Your inquiry was submitted successfully.');form.reset();return}toast('Unable to send. Your inquiry will be prepared to copy.')}catch{toast('Online delivery unavailable. Your inquiry will be prepared to copy.')}finally{button.disabled=false;button.innerHTML='Prepare My Message <span aria-hidden="true">↗</span>'}}
   $('#preparedInquiry').value='Subject: '+subject+'\n\n'+body;const hasEmail=Boolean(SITE_CONFIG.contactEmail);$('#emailInquiry').hidden=!hasEmail;if(hasEmail){$('#emailInquiry').href='mailto:'+encodeURIComponent(SITE_CONFIG.contactEmail)+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);$('#inquiryDialogInstructions').textContent='Your message has not yet been sent. Select “Email District” to open your email application, or copy/download it.'}else{$('#inquiryDialogInstructions').textContent='Your message has been prepared but not sent. Copy or download it to share with approved district leadership.'}openDialog($('#inquiryDialog'))});
 $('#copyInquiry').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#preparedInquiry').value);toast('Inquiry copied to clipboard.')}catch{$('#preparedInquiry').focus();$('#preparedInquiry').select();try{document.execCommand('copy');toast('Inquiry selected and copied.')}catch{toast('Select and copy the message using your device.')}}});
-$('#downloadInquiry').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([$('#preparedInquiry').value],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='district-three-pastoral-inquiry.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);toast('Inquiry downloaded.')});
+$('#downloadInquiry').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([$('#preparedInquiry').value],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='district-three-connection.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);toast('Inquiry downloaded.')});

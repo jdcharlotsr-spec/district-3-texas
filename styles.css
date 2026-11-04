@@ -210,3 +210,185 @@
   #eventsContainer .featured-event .event-schedule span{min-width:0;flex:1 1 calc(50% - 8px);}
   #eventsContainer .event-image-panel{height:250px;min-height:250px;}
 }
+
+
+/* === 2026 Kingdom Connection editorial refresh / improved legibility === */
+:root { --reading-size: 17px; }
+body { font-size: var(--reading-size); }
+.announcement-inner { height: 37px; font-size: 11px; letter-spacing: .11em; }
+.brand-words small { font-size: 11px; }
+.main-nav>a:not(.nav-join) { font-size: 14px; }
+.nav-join, .button { font-size: 14px; }
+.nav-join { padding: 15px 18px; }
+.main-nav { gap: clamp(11px,1.2vw,21px); }
+.hero-intro { font-size: 11px; letter-spacing: .16em; }
+.hero-kicker { font-size: 13px; }
+.hero h1 { font-size: clamp(57px,6vw,89px); }
+.hero-description { font-size: 19px; line-height: 1.65; max-width: 640px; }
+.eyebrow { font-size: 12px; }
+.section-lead { font-size: 18px; line-height: 1.7; max-width: 730px; }
+.leader-card { min-height: 400px; }
+.leader-card-body { padding: 43px 25px 29px; }
+.leader-role { font-size: 11px; letter-spacing: .11em; }
+.leader-card h3 { font-size: 29px; }
+.leader-card-body>p:not(.leader-role) { font-size: 15px; line-height: 1.65; }
+.leader-link { font-size: 13px; }
+.leader-side-note { font-size: 11px; }
+.event-card .event-type { font-size: 12px; }
+.event-card h3 { font-size: clamp(32px,3vw,43px); }
+.event-card p, .event-intro { font-size: 16px; line-height: 1.6; }
+.event-group-heading { font-size: 12px !important; }
+.event-date-corner { font-size: 12px; letter-spacing: .07em; }
+.event-schedule span { font-size: 15px; line-height: 1.35; min-width: 0; }
+.event-schedule b { font-size: 13px; }
+.event-venue { font-size: 21px !important; }
+.event-address { font-size: 15px; }
+.event-person-label { font-size: 11px; }
+.event-person strong { font-size: 16px; }
+.event-person small { font-size: 13px; }
+.events-foot { font-size: 14px; line-height: 1.6; }
+.text-arrow { font-size: 14px; }
+.about-copy p:not(.eyebrow) { font-size: 17px; line-height: 1.75; }
+.about-copy .lead-strong { font-size: 19px !important; }
+.parallax-inner>p:not(.eyebrow) { font-size: 18px; line-height: 1.6; }
+.church-empty p, .church-card p { font-size: 16px; line-height: 1.7; }
+.directory-search input { font-size: 15px; }
+.join-body>p:not(.eyebrow) { font-size: 17px; line-height: 1.75; max-width: 660px; }
+.field label { font-size: 13px; }
+.field input, .field select, .field textarea { font-size: 15px; line-height: 1.5; padding: 14px 15px; }
+.form-note { font-size: 13px !important; line-height: 1.6; }
+.footer-brand small { font-size: 10px; }
+.footer-brand span, .footer-links a { font-size: 13px; }
+.footer-bottom { font-size: 12px; }
+.dialog p { font-size: 16px; }
+.inquiry-dialog p { font-size: 15px; }
+/* The roomier event text is accommodated by the flexible right-image card. */
+.featured-event .event-card-content { justify-content: center; }
+.event-person { overflow-wrap: anywhere; }
+@media(max-width:1100px) and (min-width:801px){
+  .nav-inner { gap: 14px; }
+  .brand { min-width: 220px; }
+  .brand-words strong { font-size: 22px; }
+  .brand-seal { width: 70px; height: 70px; }
+  .main-nav { gap: 10px; }
+  .main-nav>a:not(.nav-join) { font-size: 12px; }
+  .nav-join { font-size: 12px; padding: 13px 14px; }
+  .leader-card { grid-template-columns: 43% 57%; }
+  .leader-card-body { padding: 30px 19px 24px; }
+  .leader-card h3 { font-size: 25px; }
+  .leader-card-body>p:not(.leader-role) { font-size: 14px; }
+  .event-details-layout { gap: 15px; }
+}
+@media(max-width:800px){
+  .announcement-inner { height: 34px; font-size: 10px; }
+  .brand-words small { font-size: 10px; }
+  .main-nav>a:not(.nav-join) { font-size: 16px; }
+  .nav-join { font-size: 15px; }
+  .hero-intro { font-size: 11px; }
+  .hero-description { font-size: 17px; max-width: 560px; }
+  .hero-kicker { font-size: 12px; }
+  .section-lead { font-size: 17px; }
+  .leader-card { min-height: 0; }
+  .leader-card-body { min-height: 0; }
+  .leader-card h3 { font-size: 26px; }
+  .leader-card-body>p:not(.leader-role) { font-size: 15px; }
+  .event-card p { font-size: 15px; }
+  .event-person strong { font-size: 15px; }
+  .about-copy p:not(.eyebrow) { font-size: 17px; }
+  .join-body>p:not(.eyebrow) { font-size: 17px; }
+  .footer-links a { font-size: 14px; }
+}
+@media(max-width:570px){
+  .hero { min-height: 780px; height: auto; }
+  .hero-content { padding-top: 96px; padding-bottom: 148px; }
+  .hero h1 { font-size: clamp(46px,10.2vw,63px); }
+  .hero-intro { font-size: 10px; }
+  .hero-description { font-size: 17px; line-height: 1.65; }
+  .hero-actions .button { font-size: 14px; }
+  .hero-controls { margin-top: 32px; }
+  .section-top h2,.about-copy h2 { font-size: clamp(38px,9vw,49px); }
+  .eyebrow { font-size: 11px; }
+  .section-lead { font-size: 16px; }
+  .leader-card { grid-template-columns: 43% 57%; min-height: 290px; }
+  .leader-photo { min-height: 290px; }
+  .leader-card-body { padding: 23px 15px 20px; min-height: 290px; }
+  .leader-role { font-size: 10px; }
+  .leader-card h3 { font-size: clamp(21px,5.1vw,26px); }
+  .leader-card-body>p:not(.leader-role) { font-size: 13px; line-height: 1.5; }
+  .leader-link { font-size: 12px; gap: 7px; }
+  .event-card h3 { font-size: 33px; }
+  .event-date-corner { font-size: 11px; max-width: calc(100% - 30px); }
+  .event-card .event-type { font-size: 11px; }
+  .event-schedule span { font-size: 14px; padding: 12px; }
+  .event-schedule b { font-size: 12px; }
+  .event-person-label { font-size: 10px; }
+  .event-person strong { font-size: 14px; }
+  .event-person small { font-size: 12px; }
+  .event-venue { font-size: 20px !important; }
+  .event-address { font-size: 14px; }
+  .about-copy p:not(.eyebrow) { font-size: 16px; }
+  .about-copy .lead-strong { font-size: 18px !important; }
+  .parallax-inner h2 { font-size: 41px; }
+  .parallax-inner>p:not(.eyebrow) { font-size: 16px; }
+  .join-body h2 { font-size: clamp(39px,10vw,49px); }
+  .join-body>p:not(.eyebrow) { font-size: 16px; }
+  .field label { font-size: 13px; }
+  .field input,.field select,.field textarea { font-size: 16px; }
+  .footer-bottom { font-size: 12px; }
+}
+@media(max-width:380px){
+  .brand-words strong { font-size: 19px; }
+  .brand-words small { font-size: 9px; }
+  .hero h1 { font-size: 42px; }
+  .leader-card { grid-template-columns: 40% 60%; }
+  .leader-card-body { padding-inline: 12px; }
+  .leader-card h3 { font-size: 20px; }
+  .leader-card-body>p:not(.leader-role) { font-size: 12.5px; }
+}
+/* Ensure the event introduction and venue override the older feature-card rules. */
+#eventsContainer .featured-event .event-card-content > p.event-intro { font-size: 16px; line-height: 1.65; }
+#eventsContainer .featured-event .event-venue { font-size: 21px !important; }
+@media(max-width:570px){
+  #eventsContainer .featured-event .event-card-content > p.event-intro { font-size: 15px; }
+  #eventsContainer .featured-event .event-venue { font-size: 20px !important; }
+}
+
+
+/* === District Three directory & guest speaker portrait === */
+.church-results{min-height:0}
+.church-results-meta{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:4px 0 20px;color:#735879;font-size:12px;font-weight:800;letter-spacing:.055em}
+.church-results-meta span:last-child{font-size:10px;color:#9b7a55;letter-spacing:.12em}
+.church-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.church-card{min-width:0;display:flex;flex-direction:column;min-height:250px;background:linear-gradient(158deg,#fffdfb 0%,#f8f2f8 100%);border:1px solid #e8dbe6;border-top:3px solid #d8aa58;padding:28px 27px 26px;border-radius:18px;box-shadow:0 8px 30px rgba(44,20,49,.055);transition:transform .2s ease,box-shadow .2s ease}
+.church-card:hover{transform:translateY(-4px);box-shadow:0 15px 40px rgba(44,20,49,.09)}
+.church-card-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:22px}
+.church-city{display:inline-flex;background:#efe5f1;color:#592a68;border-radius:100px;padding:8px 13px;font-size:11px;line-height:1.3;font-weight:800;letter-spacing:.02em}
+.church-decor{color:#c29345;font-size:16px}
+.church-card h3{font-family:'Playfair Display',Georgia,serif;font-size:clamp(21px,2.1vw,28px);line-height:1.24;color:#351241;font-weight:600;letter-spacing:-.03em;margin:0 0 25px;overflow-wrap:break-word}
+.church-card-footer{border-top:1px solid #e8dce7;padding-top:18px;margin-top:auto}
+.church-pastor-label{display:block;color:#956d34;font-size:10px;font-weight:800;letter-spacing:.13em;margin-bottom:8px}
+.church-card .church-card-footer p{font-size:16px;color:#46334c;font-weight:600;margin:0;line-height:1.45}
+.church-role{font-weight:500;color:#745f79}
+.church-card a{margin-top:14px;align-self:flex-start}
+#eventsContainer .event-image-panel{background:#1e132b}
+#eventsContainer .event-image-panel img{object-fit:cover;object-position:center 33%}
+#eventsContainer .event-image-panel::after{background:linear-gradient(0deg,rgba(17,5,27,.9),rgba(29,7,41,.12) 35%,transparent 65%)}
+#eventsContainer .event-speaker-caption{position:absolute;bottom:0;left:0;right:0;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:5px;padding:33px 24px 23px;color:white;text-align:left}
+#eventsContainer .event-speaker-caption>span{color:#f3ce79;letter-spacing:.16em;font-size:10px;font-weight:800}
+#eventsContainer .event-speaker-caption>strong{font-family:'Playfair Display',Georgia,serif;font-size:24px;line-height:1.25;font-weight:600}
+#eventsContainer .event-speaker-caption>small{font-size:12px;color:#ece0ee;line-height:1.45}
+@media(max-width:1050px){
+  .church-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #eventsContainer .event-image-panel{height:400px;min-height:400px}
+  #eventsContainer .event-image-panel img{object-position:center 27%}
+}
+@media(max-width:570px){
+  .church-grid{grid-template-columns:1fr;gap:14px}
+  .church-card{min-height:0;padding:22px 24px 23px}
+  .church-card h3{font-size:25px;margin-bottom:22px}
+  .church-results-meta{flex-wrap:wrap;gap:4px}
+  .church-results-meta span:last-child{display:none}
+  #eventsContainer .event-image-panel{height:345px;min-height:345px}
+  #eventsContainer .event-image-panel img{object-position:center 26%}
+  #eventsContainer .event-speaker-caption{padding:35px 23px 19px}
+}
