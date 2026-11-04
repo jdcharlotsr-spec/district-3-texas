@@ -48,7 +48,7 @@ const CHURCHES = [
   {name:'Amazing Grace Bible Church', city:'Houston, TX', pastor:'Bishop Emma Okereke'},
   {name:'Pentecostal Powerhouse', city:'San Antonio, TX', pastor:'Pastor Mark Ming'},
   {name:'Praise City Church', city:'Longview, TX', pastor:'Elder LaDarius McGee'},
-  {name:'Elim Tabernacle Apostolic Church', city:'Houston, TX', pastor:'Bishop J. D. Charlot, Sr.', pastorRole:'Pastor'},
+  {name:'Elim Tabernacle Apostolic Church', city:'Houston, TX', pastor:'Bishop J. D. Charlot, Sr.', pastorRole:'Pastor', firstLady:'Elder Latosha Charlot', serviceLocation:'Houston service location: To Be Announced', serviceTimes:'Sunday Worship · 4:00 PM | Tuesday Virtual Gathering · 7:30 PM', website:'https://www.elimtab.org'},
   {name:'Greater New Genesis Christian Center', city:'San Antonio, TX', pastor:'District Elder Louise Braziel Benson', pastorRole:'Pastor', assistants:'Elders Ronald & Precious Taylor', address:'110 Hanna Street, San Antonio, TX 78210', phoneDisplay:'(210) 338-5338', phone:'2103385338', email:'newgenesiscc@aol.com'},
   {name:'Kingdom Life Family Worship Center', city:'Fort Worth, TX', pastor:'Bishop Vernal E. Simms, Sr.', address:'5508 Brentwood Stair Road, Fort Worth, TX 76112', phoneDisplay:'(214) 256-8179', phone:'2142568179'}
 ];
@@ -162,11 +162,78 @@ function renderEvents(){
 }
 renderEvents();
 
+/*
+ FLYERS: Add an approved flyer by uploading an image to assets/ and adding
+ {kind:'image',src:'assets/your-flyer.webp',title:'Event name',alt:'Description'}
+ below. The two starter posters use verified District 3 Fellowship details.
+ No additional event dates or prices are assumed.
+*/
+const EVENT_FLYERS = [
+  {kind:'speaker',title:'District 3 Fellowship',subtitle:'Saturday, November 7, 2026',image:'assets/elder-mcgee.webp'},
+  {kind:'agenda',title:'District 3 Fellowship — Order of the Day',subtitle:'November 7, 2026'}
+];
+
+/* Replace or add approved photographs by editing the array below. */
+const DISTRICT_PHOTOS = [
+  {src:'assets/worship-close.webp',title:'Together in Fellowship',caption:'A gathering of leaders and friends.'},
+  {src:'assets/worship-moment.webp',title:'Worship & the Word',caption:'A moment of preaching and encouragement.'},
+  {src:'assets/mission-worship.webp',title:'Prayer & Praise',caption:'A moment of heartfelt worship.'}
+];
+
+function renderFlyers(){
+  const track=$('#flyerTrack');
+  track.innerHTML=EVENT_FLYERS.map((flyer,i)=>{
+    if(flyer.kind==='image' && typeof flyer.src==='string' && flyer.src.startsWith('assets/')){
+      return `<article class="flyer-slide flyer-image-card" aria-label="Flyer ${i+1}: ${escapeHTML(flyer.title||'District announcement')}"><img src="${escapeHTML(flyer.src)}" alt="${escapeHTML(flyer.alt||flyer.title||'District event flyer')}" loading="lazy"><span class="flyer-image-label">${escapeHTML(flyer.title||'District announcement')}</span></article>`;
+    }
+    if(flyer.kind==='speaker'){
+      return `<article class="flyer-slide flyer-poster speaker-poster" aria-label="District 3 Fellowship speaker flyer"><div class="poster-top"><span>DISTRICT THREE</span><span>TEXAS STATE COUNCIL</span></div><p class="poster-eyebrow">YOU'RE INVITED</p><h4>District 3<br><em>Fellowship</em></h4><p class="poster-date">SATURDAY · NOVEMBER 7, 2026</p><div class="poster-photo"><img src="${escapeHTML(flyer.image)}" alt="Guest speaker Elder LaDarius McGee" loading="lazy"></div><div class="poster-bottom"><span>GUEST SPEAKER</span><strong>Elder LaDarius McGee</strong><small>Praise City Church · Longview, TX</small></div></article>`;
+    }
+    return `<article class="flyer-slide flyer-poster agenda-poster" aria-label="District 3 Fellowship schedule flyer"><div class="poster-top"><span>DISTRICT THREE</span><span>NOVEMBER 7, 2026</span></div><p class="poster-eyebrow">A DAY OF FELLOWSHIP</p><h4>Gather.<br><em>Grow.</em><br>Worship.</h4><div class="poster-agenda"><div><b>9:00 AM</b><span>Breakfast</span></div><div><b>10:00 AM</b><span>Breakout Sessions</span></div><div><b>12 NOON</b><span>Worship Service</span></div><div><b>AFTER WORSHIP</b><span>Dinner Fellowship</span></div></div><div class="poster-venue"><b>GREATER NEW GENESIS CHRISTIAN CENTER</b><span>110 Hanna Street · San Antonio, Texas</span></div></article>`;
+  }).join('');
+}
+function renderPhotos(){
+  const track=$('#galleryTrack');
+  track.innerHTML=DISTRICT_PHOTOS.map((photo,i)=>`<button type="button" class="gallery-photo" data-gallery-index="${i}" aria-label="Enlarge ${escapeHTML(photo.title)}"><img src="${escapeHTML(photo.src)}" alt="${escapeHTML(photo.caption)}" loading="lazy"><span class="gallery-photo-caption"><strong>${escapeHTML(photo.title)}</strong><small>${escapeHTML(photo.caption)}</small></span><span class="gallery-enlarge" aria-hidden="true">↗</span></button>`).join('');
+}
+renderFlyers(); renderPhotos();
+
+function setupMediaRail(trackSelector,prevSelector,nextSelector){
+  const track=$(trackSelector),prev=$(prevSelector),next=$(nextSelector);
+  function state(){const max=track.scrollWidth-track.clientWidth;prev.disabled=track.scrollLeft<=5;next.disabled=track.scrollLeft>=max-5 || max<=5;}
+  function move(direction){const card=track.firstElementChild;const gap=Number.parseFloat(getComputedStyle(track).columnGap)||18;const width=(card?card.getBoundingClientRect().width:track.clientWidth)+gap;track.scrollBy({left:direction*width,behavior:reducedMotion.matches?'auto':'smooth'});}
+  prev.addEventListener('click',()=>move(-1)); next.addEventListener('click',()=>move(1));
+  track.addEventListener('scroll',state,{passive:true});
+  track.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();move(e.key==='ArrowRight'?1:-1)}});
+  addEventListener('resize',state,{passive:true});
+  requestAnimationFrame(state);
+  return state;
+}
+const refreshFlyerNav = setupMediaRail('#flyerTrack','#flyerPrev','#flyerNext');
+$('#openFlyers').addEventListener('click',()=>{
+  const dialog=$('#flyerDialog');
+  openDialog(dialog);
+  requestAnimationFrame(()=>{
+    $('#flyerTrack').scrollTo({left:0,behavior:'instant'});
+    refreshFlyerNav();
+  });
+});
+setupMediaRail('#galleryTrack','#galleryPrev','#galleryNext');
+$('#galleryTrack').addEventListener('click',e=>{
+  const trigger=e.target.closest('[data-gallery-index]');if(!trigger)return;
+  const photo=DISTRICT_PHOTOS[Number(trigger.dataset.galleryIndex)];if(!photo)return;
+  $('#galleryDialogImage').src=photo.src;
+  $('#galleryDialogImage').alt=photo.caption;
+  $('#galleryDialogTitle').textContent=photo.title;
+  $('#galleryDialogCaption').textContent=photo.caption;
+  openDialog($('#galleryDialog'));
+});
+
 /* Directory updates with approved listings only. */
 const churchSearch=$('#churchSearch');
 function renderChurches(){
   const query=churchSearch.value.trim().toLowerCase();
-  const visible=CHURCHES.filter(ch=>[ch.name,ch.pastor,ch.city,ch.address,ch.assistants,ch.phoneDisplay,ch.email].join(' ').toLowerCase().includes(query));
+  const visible=CHURCHES.filter(ch=>[ch.name,ch.pastor,ch.city,ch.address,ch.assistants,ch.firstLady,ch.serviceLocation,ch.serviceTimes,ch.phoneDisplay,ch.email].join(' ').toLowerCase().includes(query));
   const target=$('#churchResults');
   if(!CHURCHES.length){
     target.innerHTML=`<div class="church-empty"><img class="church-empty-seal" src="assets/district-three-crest.webp" alt="District Three crest"><div><h3>The directory is taking shape.</h3><p>District churches and pastors will be featured here.</p><a href="#connect" class="text-arrow">Connect with our district ↗</a></div></div>`;
@@ -178,12 +245,14 @@ function renderChurches(){
   }
   target.innerHTML=`<div class="church-results-meta"><span>${visible.length} ${visible.length===1?'Church':'Churches'} ${query?'found':'in District Three directory'}</span><span>TEXAS STATE COUNCIL · DISTRICT THREE</span></div><div class="church-grid">${visible.map(ch=>{
     const assistantInfo=ch.assistants?`<div class="church-assistant"><span class="church-pastor-label">ASSISTANT PASTORS</span><p>${escapeHTML(ch.assistants)}</p></div>`:'';
+    const firstLadyInfo=ch.firstLady?`<div class="church-assistant"><span class="church-pastor-label">FIRST LADY</span><p>${escapeHTML(ch.firstLady)}</p></div>`:'';
+    const locationInfo=ch.serviceLocation?`<div class="church-service"><span class="church-pastor-label">SERVICE LOCATION & TIMES</span><p>${escapeHTML(ch.serviceLocation)}</p>${ch.serviceTimes?`<p>${escapeHTML(ch.serviceTimes)}</p>`:''}</div>`:'';
     const contact=[
       ch.address?`<div class="church-detail"><span class="church-detail-icon" aria-hidden="true">⌖</span><span>${escapeHTML(ch.address)}</span></div>`:'',
       ch.phone&&/^\d{10}$/.test(ch.phone)?`<a class="church-detail" href="tel:+1${ch.phone}"><span class="church-detail-icon" aria-hidden="true">☎</span><span>${escapeHTML(ch.phoneDisplay||ch.phone)}</span></a>`:'',
       ch.email&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ch.email)?`<a class="church-detail" href="mailto:${escapeHTML(ch.email)}"><span class="church-detail-icon" aria-hidden="true">✉</span><span>${escapeHTML(ch.email)}</span></a>`:''
     ].filter(Boolean).join('');
-    return `<article class="church-card"><div class="church-card-heading"><span class="church-city">${escapeHTML(ch.city||'Texas')}</span><span class="church-decor" aria-hidden="true">✦</span></div><h3>${escapeHTML(ch.name)}</h3><div class="church-card-footer"><span class="church-pastor-label">PASTORAL LEADERSHIP</span><p>${escapeHTML(ch.pastor||'Pastoral leadership to be confirmed')}${ch.pastorRole?` <span class="church-role">· ${escapeHTML(ch.pastorRole)}</span>`:''}</p>${assistantInfo}${contact?`<div class="church-contact">${contact}</div>`:''}</div>${ch.website&&/^https?:\/\//.test(ch.website)?`<a href="${escapeHTML(ch.website)}" target="_blank" rel="noopener noreferrer">Visit Church ↗</a>`:''}</article>`;
+    return `<article class="church-card"><div class="church-card-heading"><span class="church-city">${escapeHTML(ch.city||'Texas')}</span><span class="church-decor" aria-hidden="true">✦</span></div><h3>${escapeHTML(ch.name)}</h3><div class="church-card-footer"><span class="church-pastor-label">PASTORAL LEADERSHIP</span><p>${escapeHTML(ch.pastor||'Pastoral leadership to be confirmed')}${ch.pastorRole?` <span class="church-role">· ${escapeHTML(ch.pastorRole)}</span>`:''}</p>${assistantInfo}${firstLadyInfo}${locationInfo}${contact?`<div class="church-contact">${contact}</div>`:''}</div>${ch.website&&/^https?:\/\//.test(ch.website)?`<a href="${escapeHTML(ch.website)}" target="_blank" rel="noopener noreferrer">Visit Church ↗</a>`:''}</article>`;
   }).join('')}</div>`;
 }
 churchSearch.addEventListener('input',renderChurches);renderChurches();

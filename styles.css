@@ -603,3 +603,60 @@ body { font-size: var(--reading-size); }
 .church-service{border-top:1px solid #e1d6e0;padding-top:12px;margin-top:7px}.church-service p{line-height:1.5;margin:6px 0;font-size:12px}
 @media(max-width:800px){.events-media-suite{margin-top:44px;gap:38px}.flyer-track{grid-auto-columns:min(79vw,435px)}.gallery-track{grid-auto-columns:min(75vw,385px)}.gallery-photo{width:min(75vw,385px);height:290px}}
 @media(max-width:570px){.media-heading-row{align-items:end;gap:8px}.media-heading-row h3{font-size:33px}.media-deck{font-size:12px}.media-nav{gap:6px}.media-arrow{width:36px;height:36px;font-size:17px}.flyer-track{grid-auto-columns:min(86vw,370px)}.flyer-slide{height:470px}.flyer-poster{padding:22px}.flyer-poster h4{font-size:40px}.poster-photo{inset:43% -6% -8% 34%}.poster-bottom{left:22px;bottom:22px}.poster-venue{left:22px;right:20px}.gallery-track{grid-auto-columns:84vw}.gallery-photo{width:84vw;height:260px}.gallery-photo-caption strong{font-size:21px}.gallery-lightbox{padding:10px}.gallery-lightbox img{max-height:68vh}}
+
+
+/* 2026 District Three update: event flyers in a modal, photos within Our Shared Mission */
+.flyer-trigger-row{margin-top:28px;padding:22px 26px;background:#f2eaf2;border:1px solid #e4d5e4;border-radius:20px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.flyer-trigger-copy{min-width:0}
+.flyer-trigger-label{display:block;color:#714477;font-size:11px;letter-spacing:.17em;font-weight:800;margin-bottom:6px}
+.flyer-trigger-copy p{margin:0;font-size:15px;color:#5e4d65;line-height:1.5}
+.flyer-trigger-button{flex-shrink:0;white-space:nowrap;font-size:14px;min-height:52px}
+.flyer-dialog{width:min(980px,calc(100vw - 32px));max-width:min(980px,calc(100vw - 32px));padding:32px 34px 24px;max-height:92vh;overflow:auto;background:#fffcf9}
+.flyer-dialog::backdrop{background:rgba(15,4,24,.84)}
+.flyer-dialog .flyer-dialog-heading{padding-right:40px;align-items:end}
+.flyer-dialog .eyebrow{color:#997042;margin-bottom:10px}
+.flyer-dialog h2{font:500 clamp(30px,3vw,43px)/1.12 'Playfair Display',Georgia,serif;color:#31123c;margin:0 0 9px}
+.flyer-dialog h2 em{color:#966b36}
+.flyer-dialog .media-deck{font-size:14px}
+.flyer-dialog .flyer-track{max-width:100%;grid-auto-columns:min(420px,calc(100% - 6px));padding:3px 3px 15px;scroll-padding-left:3px}
+.flyer-dialog .media-tip{margin-top:9px}
+.flyer-dialog .dialog-close{z-index:5;right:15px;top:15px}
+#mission.parallax-statement{height:auto;min-height:0;padding:95px 0 100px;align-items:stretch}
+#mission .parallax-inner{width:min(1180px,calc(100% - 72px));margin-inline:auto;justify-content:center;align-items:center}
+#mission .mission-gallery{position:relative;z-index:3;width:100%;min-width:0;text-align:left;margin-top:59px;padding:31px 32px 25px;border:1px solid rgba(243,209,147,.32);border-radius:26px;background:rgba(21,6,32,.76);box-shadow:0 25px 65px rgba(14,3,25,.24);backdrop-filter:blur(9px)}
+#mission .mission-gallery .media-heading-row{margin-bottom:24px}
+#mission .mission-gallery .eyebrow{color:#e8c57f;font-size:10px;letter-spacing:.17em}
+#mission .mission-gallery h3{color:#fff;font-size:clamp(30px,3.2vw,43px)}
+#mission .mission-gallery h3 em{color:#efc67d}
+#mission .mission-gallery .media-deck{color:#e8dbe9;max-width:580px}
+#mission .mission-gallery .media-tip{color:#d7c6d9}
+#mission .mission-gallery .media-arrow{background:rgba(255,255,255,.10);border-color:rgba(242,209,151,.5);color:#f7d98e}
+#mission .mission-gallery .media-arrow:hover:not(:disabled){background:#edc678;color:#281031}
+#mission .mission-gallery .gallery-track{width:100%;max-width:100%;grid-auto-columns:minmax(290px,390px);scrollbar-color:#cca467 #352043}
+#mission .mission-gallery .gallery-photo{width:390px;height:285px}
+@media(max-width:800px){
+  #mission.parallax-statement{height:auto;min-height:0;padding:75px 0 78px}
+  #mission .parallax-inner{width:calc(100% - 38px)}
+  #mission .mission-gallery{margin-top:45px;padding:24px}
+  #mission .mission-gallery .gallery-track{grid-auto-columns:min(72vw,365px)}
+  #mission .mission-gallery .gallery-photo{width:min(72vw,365px);height:270px}
+}
+@media(max-width:600px){
+  .flyer-trigger-row{padding:20px;flex-direction:column;align-items:stretch;gap:15px}
+  .flyer-trigger-copy p{font-size:14px}
+  .flyer-trigger-button{width:100%;white-space:normal}
+  .flyer-dialog{width:calc(100vw - 18px);max-width:calc(100vw - 18px);padding:35px 14px 20px;max-height:94vh}
+  .flyer-dialog .flyer-dialog-heading{padding-right:18px;gap:9px}
+  .flyer-dialog h2{font-size:31px}
+  .flyer-dialog .media-deck{font-size:12px}
+  .flyer-dialog .flyer-track{grid-auto-columns:min(100%,355px)}
+  .flyer-dialog .flyer-slide{height:460px}
+  #mission.parallax-statement{padding:65px 0 70px;height:auto;min-height:0}
+  #mission .parallax-inner{width:calc(100% - 34px)}
+  #mission .mission-gallery{margin-top:39px;padding:19px 15px 18px;border-radius:19px}
+  #mission .mission-gallery .media-heading-row{align-items:end;gap:9px}
+  #mission .mission-gallery h3{font-size:30px}
+  #mission .mission-gallery .media-deck{font-size:12px}
+  #mission .mission-gallery .gallery-track{grid-auto-columns:min(73vw,320px)}
+  #mission .mission-gallery .gallery-photo{width:min(73vw,320px);height:245px}
+}
