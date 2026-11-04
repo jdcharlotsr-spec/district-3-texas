@@ -24,9 +24,9 @@ const UPCOMING_EVENTS = [{
   title:'District 3 Fellowship',
   category:'Worship · Fellowship · Leadership',
   date:'2026-11-07',
-  venue:'Greater New Genisis Christian Center',
+  venue:'Greater New Genesis Christian Center',
   address:'110 Hanna St., San Antonio, TX 78210',
-  host:'District Elder Louise Braziel',
+  host:'District Elder Louise Braziel Benson',
   hostRole:'Host Pastor & Director',
   speaker:'Elder LaDarius McGee',
   image:'assets/elder-mcgee.webp',
@@ -48,16 +48,30 @@ const CHURCHES = [
   {name:'Amazing Grace Bible Church', city:'Houston, TX', pastor:'Bishop Emma Okereke'},
   {name:'Pentecostal Powerhouse', city:'San Antonio, TX', pastor:'Pastor Mark Ming'},
   {name:'Praise City Church', city:'Longview, TX', pastor:'Elder LaDarius McGee'},
-  {name:'Elim Tabernacle Apostolic Church', city:'Houston, TX', pastor:'Bishop J. D. Charlot, Sr.', pastorRole:'Pastor'}
+  {name:'Elim Tabernacle Apostolic Church', city:'Houston, TX', pastor:'Bishop J. D. Charlot, Sr.', pastorRole:'Pastor'},
+  {name:'Greater New Genesis Christian Center', city:'San Antonio, TX', pastor:'District Elder Louise Braziel Benson', pastorRole:'Pastor', assistants:'Elders Ronald & Precious Taylor', address:'110 Hanna Street, San Antonio, TX 78210', phoneDisplay:'(210) 338-5338', phone:'2103385338', email:'newgenesiscc@aol.com'},
+  {name:'Kingdom Life Family Worship Center', city:'Fort Worth, TX', pastor:'Bishop Vernal E. Simms, Sr.', address:'5508 Brentwood Stair Road, Fort Worth, TX 76112', phoneDisplay:'(214) 256-8179', phone:'2142568179'}
 ];
 
 const LEADERS = {
   braziel: {
-    name:'District Elder Louise Braziel', role:'Director, District Three', image:'assets/louise-braziel.webp',
+    name:'District Elder Louise Braziel Benson', role:'District Director · Texas State Council, PCAFI', image:'assets/louise-braziel.webp',
+    subtitle:'Apostle / Pastor Louise Braziel Benson',
+    quote:'God does not call the qualified; He qualifies the called.',
     bio:[
-      'District Elder Louise Braziel serves as Director of District Three within the Texas State Council of the Pentecostal Churches of the Apostolic Faith International, Inc.',
-      'An expanded official biography, including her ministry background and leadership experience, may be added when approved by the district office.'
-    ]
+      'Apostle/Pastor Louise Braziel Benson is a devoted servant of God, visionary leader, educator, mentor, and an anointed preacher of the Gospel of Jesus Christ. With more than 30 years of faithful ministry, she has dedicated her life to winning souls, equipping believers, developing leaders, and advancing the Kingdom of God. Her ministry is marked by a passion for spiritual transformation, Christian education, and empowering individuals to fulfill their God-given purpose.',
+      "A native of the ministry field and a seasoned educator, Apostle Benson possesses an extensive academic background, including an Associate Degree in Criminal Justice, a Bachelor of Arts in Social Services, a Master of Arts in Special Education, a second Master's Degree in Education Administration, and a Doctoral Degree in Psychology and Behavioral Science.",
+      'Her professional career spans more than three decades in education, during which she has served as an administrator, district coordinator in special education, and adjunct professor with the Alamo Community College District. She currently serves as a Special Education Advocate in Texas and Superintendent of Safe Haven Christian Academy, a Christian homeschool academy committed to academic excellence and Christian values. Additionally, she honorably served eight years in the United States Air Force Reserve.',
+      "Following several years of evangelistic ministry, Apostle Benson answered the call to pastoral leadership and, in May 2003, founded Greater New Genesis Christian Center in San Antonio, Texas. Established upon the foundation of God's Word and the mandate of Luke 4:18, the ministry continues its mission of proclaiming the Gospel, restoring lives, developing disciples, and fostering an atmosphere of powerful praise and worship.",
+      "Throughout her distinguished ministry, Apostle Benson has served in several leadership capacities within the Pentecostal Assemblies of the World (PAW), including Chairwoman of the Bay District Council and President of the Women's Ministry, a position she held for eight years.",
+      'She presently serves within the Pentecostal Churches of the Apostolic Faith International, Inc. (PCAFI) as District Elder and District Director of District Three, as well as Auxiliary Director of Missions and Evangelism for the Texas State Council.',
+      'Additionally, she is the visionary founder and overseer of Divine Destiny Ministries, a fellowship of churches extending from Florida to California. Through this fellowship, she provides spiritual oversight, pastoral mentorship, leadership development, and encouragement to ministries across the nation.',
+      "Her commitment to cultivating the gifts and talents of others has inspired the establishment of several ministries, including Men of Valor Mime Ministry (MOV), A Perfect Praise Dance Ministry (APP), Women of Worth (WOW), and God's Men Ministry (G-Men). Each reflects her conviction that every believer has a meaningful assignment in the Kingdom of God.",
+      'Beyond her ecclesiastical and professional responsibilities, Apostle Benson is a devoted mother and family woman. She is the widow of the late Deacon Lonnie Benson and the proud mother of five children, four sons and one daughter. She lovingly honors the memory of her beloved son who has transitioned from labor to reward.',
+      'Apostle/Pastor Louise Braziel Benson continues to travel throughout the United States, proclaiming the Gospel, strengthening churches, mentoring leaders, and encouraging believers to pursue a deeper relationship with Jesus Christ.',
+      "Her life exemplifies steadfast faith, perseverance, servant leadership, and an unwavering commitment to fulfilling the Great Commission. Whether serving in the pulpit, classroom, community, or broader body of Christ, she remains committed to making a lasting difference in the lives of God's people."
+    ],
+    closing:'Her passion is winning souls. Her assignment is equipping people. Her mandate is advancing the Kingdom of God—one soul at a time.'
   },
   gates: {
     name:'Bishop Lambert W. Gates, Sr.',role:'Diocesan & Presiding Bishop',image:'assets/lambert-gates.webp',
@@ -132,7 +146,7 @@ function renderEvents(){
     list.innerHTML=`<article class="event-card visual-worship"><div class="event-card-content"><span class="event-date-corner">DATES TO BE ANNOUNCED</span><span class="event-type">District fellowship</span><h3>Stay connected with District Three</h3><p>Future district gatherings will be announced here.</p></div></article>`;
     return;
   }
-  $('#eventDisclosure').textContent='District 3 Fellowship · Saturday, November 7, 2026 · Greater New Genisis Christian Center, San Antonio, TX.';
+  $('#eventDisclosure').textContent='District 3 Fellowship · Saturday, November 7, 2026 · Greater New Genesis Christian Center, San Antonio, TX.';
   list.innerHTML=items.map(ev=>{
     const stamp=ev.date?new Date(ev.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}):'Date to be announced';
     const schedule=Array.isArray(ev.schedule)?`<div class="event-schedule" aria-label="Event schedule">${ev.schedule.map(slot=>`<span><b>${escapeHTML(slot.time)}</b>${escapeHTML(slot.name)}</span>`).join('')}</div>`:'';
@@ -150,11 +164,32 @@ renderEvents();
 
 /* Directory updates with approved listings only. */
 const churchSearch=$('#churchSearch');
-function renderChurches(){const query=churchSearch.value.trim().toLowerCase();const visible=CHURCHES.filter(ch=>[ch.name,ch.pastor,ch.city,ch.address].join(' ').toLowerCase().includes(query));const target=$('#churchResults');if(!CHURCHES.length){target.innerHTML=`<div class="church-empty"><img class="church-empty-seal" src="assets/district-three-crest.webp" alt="District Three crest"><div><h3>The directory is taking shape.</h3><p>Verified district churches and pastors will be featured here after their listings are approved. Interested in connecting? We welcome your interest and would be glad to help you learn more about District Three.</p><a href="#connect" class="text-arrow">Connect with our district ↗</a></div></div>`;return}if(!visible.length){target.innerHTML='<div class="church-empty"><div><h3>No churches match your search.</h3><p>Try another church name, pastor, or city.</p></div></div>';return}target.innerHTML=`<div class="church-results-meta"><span>${visible.length} ${visible.length===1?'Church':'Churches'} ${query?'found':'in District Three directory'}</span><span>TEXAS STATE COUNCIL · DISTRICT THREE</span></div><div class="church-grid">${visible.map(ch=>`<article class="church-card"><div class="church-card-heading"><span class="church-city">${escapeHTML(ch.city||'Texas')}</span><span class="church-decor" aria-hidden="true">✦</span></div><h3>${escapeHTML(ch.name)}</h3><div class="church-card-footer"><span class="church-pastor-label">PASTORAL LEADERSHIP</span><p>${escapeHTML(ch.pastor||'Pastoral leadership to be confirmed')}${ch.pastorRole?` <span class="church-role">· ${escapeHTML(ch.pastorRole)}</span>`:''}</p></div>${ch.website&&/^https?:\/\//.test(ch.website)?`<a href="${escapeHTML(ch.website)}" target="_blank" rel="noopener noreferrer">Visit Church ↗</a>`:''}</article>`).join('')}</div>`}
+function renderChurches(){
+  const query=churchSearch.value.trim().toLowerCase();
+  const visible=CHURCHES.filter(ch=>[ch.name,ch.pastor,ch.city,ch.address,ch.assistants,ch.phoneDisplay,ch.email].join(' ').toLowerCase().includes(query));
+  const target=$('#churchResults');
+  if(!CHURCHES.length){
+    target.innerHTML=`<div class="church-empty"><img class="church-empty-seal" src="assets/district-three-crest.webp" alt="District Three crest"><div><h3>The directory is taking shape.</h3><p>District churches and pastors will be featured here.</p><a href="#connect" class="text-arrow">Connect with our district ↗</a></div></div>`;
+    return;
+  }
+  if(!visible.length){
+    target.innerHTML='<div class="church-empty"><div><h3>No churches match your search.</h3><p>Try another church name, pastor, city, or contact detail.</p></div></div>';
+    return;
+  }
+  target.innerHTML=`<div class="church-results-meta"><span>${visible.length} ${visible.length===1?'Church':'Churches'} ${query?'found':'in District Three directory'}</span><span>TEXAS STATE COUNCIL · DISTRICT THREE</span></div><div class="church-grid">${visible.map(ch=>{
+    const assistantInfo=ch.assistants?`<div class="church-assistant"><span class="church-pastor-label">ASSISTANT PASTORS</span><p>${escapeHTML(ch.assistants)}</p></div>`:'';
+    const contact=[
+      ch.address?`<div class="church-detail"><span class="church-detail-icon" aria-hidden="true">⌖</span><span>${escapeHTML(ch.address)}</span></div>`:'',
+      ch.phone&&/^\d{10}$/.test(ch.phone)?`<a class="church-detail" href="tel:+1${ch.phone}"><span class="church-detail-icon" aria-hidden="true">☎</span><span>${escapeHTML(ch.phoneDisplay||ch.phone)}</span></a>`:'',
+      ch.email&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ch.email)?`<a class="church-detail" href="mailto:${escapeHTML(ch.email)}"><span class="church-detail-icon" aria-hidden="true">✉</span><span>${escapeHTML(ch.email)}</span></a>`:''
+    ].filter(Boolean).join('');
+    return `<article class="church-card"><div class="church-card-heading"><span class="church-city">${escapeHTML(ch.city||'Texas')}</span><span class="church-decor" aria-hidden="true">✦</span></div><h3>${escapeHTML(ch.name)}</h3><div class="church-card-footer"><span class="church-pastor-label">PASTORAL LEADERSHIP</span><p>${escapeHTML(ch.pastor||'Pastoral leadership to be confirmed')}${ch.pastorRole?` <span class="church-role">· ${escapeHTML(ch.pastorRole)}</span>`:''}</p>${assistantInfo}${contact?`<div class="church-contact">${contact}</div>`:''}</div>${ch.website&&/^https?:\/\//.test(ch.website)?`<a href="${escapeHTML(ch.website)}" target="_blank" rel="noopener noreferrer">Visit Church ↗</a>`:''}</article>`;
+  }).join('')}</div>`;
+}
 churchSearch.addEventListener('input',renderChurches);renderChurches();
 
 /* Leadership profiles and mission graphic */
-$$('[data-leader]').forEach(button=>button.addEventListener('click',()=>{const person=LEADERS[button.dataset.leader];if(!person)return;$('#leaderDialogImage').src=person.image;$('#leaderDialogImage').alt='Portrait of '+person.name;$('#leaderDialogRole').textContent=person.role;$('#leaderDialogTitle').textContent=person.name;$('#leaderDialogText').innerHTML=person.bio.map(p=>`<p>${escapeHTML(p)}</p>`).join('');openDialog($('#leaderDialog'))}));
+$$('[data-leader]').forEach(button=>button.addEventListener('click',()=>{const person=LEADERS[button.dataset.leader];if(!person)return;$('#leaderDialogImage').src=person.image;$('#leaderDialogImage').alt='Portrait of '+person.name;$('#leaderDialogRole').textContent=person.role;$('#leaderDialogTitle').textContent=person.name;$('#leaderDialogText').innerHTML=(person.subtitle?`<p class="leader-bio-subtitle">${escapeHTML(person.subtitle)}</p>`:'')+(person.quote?`<blockquote class="leader-bio-quote">“${escapeHTML(person.quote)}”</blockquote>`:'')+person.bio.map(p=>`<p>${escapeHTML(p)}</p>`).join('')+(person.closing?`<p class="leader-bio-closing">${escapeHTML(person.closing)}</p>`:'');openDialog($('#leaderDialog'))}));
 $('#openMission').addEventListener('click',()=>openDialog($('#missionDialog')));
 $$('[data-close]').forEach(button=>button.addEventListener('click',()=>closeDialog(document.getElementById(button.dataset.close))));
 $$('dialog').forEach(dialog=>dialog.addEventListener('click',e=>{if(e.target===dialog)closeDialog(dialog)}));
@@ -162,7 +197,7 @@ $$('dialog').forEach(dialog=>dialog.addEventListener('click',e=>{if(e.target===d
 /* A useful form even before a district inbox is authorized. */
 const form=$('#inquiryForm');
 form.addEventListener('submit',async e=>{e.preventDefault();if(!form.reportValidity())return;const data=new FormData(form);const v=k=>String(data.get(k)||'').trim();const subject=`District Three Connection — ${v('fullName')}`;const body=[
-  'District Three · Texas State Council · PCAFI','Attention: District Elder Louise Braziel, Director','','Praise the Lord,','','I would like to connect with District Three.','',`Name: ${v('fullName')}`,`Email: ${v('email')}`,`Church / Ministry: ${v('church')||'Not provided'}`,`City / Location: ${v('city')}`,`Inquiry: ${v('interest')}`,'','My Message:',v('message')||'I would welcome a conversation about worship, fellowship, and District Three.','','I understand this inquiry is not an application approval or automatic affiliation.'].join('\n');
+  'District Three · Texas State Council · PCAFI','Attention: District Elder Louise Braziel Benson, Director','','Praise the Lord,','','I would like to connect with District Three.','',`Name: ${v('fullName')}`,`Email: ${v('email')}`,`Church / Ministry: ${v('church')||'Not provided'}`,`City / Location: ${v('city')}`,`Inquiry: ${v('interest')}`,'','My Message:',v('message')||'I would welcome a conversation about worship, fellowship, and District Three.','','I understand this inquiry is not an application approval or automatic affiliation.'].join('\n');
   if(SITE_CONFIG.formEndpoint){const button=$('.form-submit',form);button.disabled=true;button.textContent='Sending…';try{const response=await fetch(SITE_CONFIG.formEndpoint,{method:'POST',body:data,headers:{Accept:'application/json'}});if(response.ok){toast('Your inquiry was submitted successfully.');form.reset();return}toast('Unable to send. Your inquiry will be prepared to copy.')}catch{toast('Online delivery unavailable. Your inquiry will be prepared to copy.')}finally{button.disabled=false;button.innerHTML='Prepare My Message <span aria-hidden="true">↗</span>'}}
   $('#preparedInquiry').value='Subject: '+subject+'\n\n'+body;const hasEmail=Boolean(SITE_CONFIG.contactEmail);$('#emailInquiry').hidden=!hasEmail;if(hasEmail){$('#emailInquiry').href='mailto:'+encodeURIComponent(SITE_CONFIG.contactEmail)+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);$('#inquiryDialogInstructions').textContent='Your message has not yet been sent. Select “Email District” to open your email application, or copy/download it.'}else{$('#inquiryDialogInstructions').textContent='Your message has been prepared but not sent. Copy or download it to share with approved district leadership.'}openDialog($('#inquiryDialog'))});
 $('#copyInquiry').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#preparedInquiry').value);toast('Inquiry copied to clipboard.')}catch{$('#preparedInquiry').focus();$('#preparedInquiry').select();try{document.execCommand('copy');toast('Inquiry selected and copied.')}catch{toast('Select and copy the message using your device.')}}});

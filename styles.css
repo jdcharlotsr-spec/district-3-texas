@@ -534,3 +534,22 @@ body { font-size: var(--reading-size); }
   .hero-mobile-photo {display: block;}
   .join-visual img {object-position: 50% 35%;}
 }
+
+/* 2026 district directory expansion and full leadership biography */
+.leader-card h3 em { overflow-wrap: anywhere; }
+.church-assistant { margin-top: 18px; }
+.church-assistant .church-pastor-label { margin-bottom: 5px; }
+.church-card .church-assistant p { font-size: 15px; line-height: 1.48; font-weight: 500; color: #5a4660; }
+.church-contact { margin-top: 21px; padding-top: 18px; border-top: 1px solid #eadfe8; display:flex; flex-direction:column; gap:10px; }
+.church-contact .church-detail { display:flex; align-items:flex-start; gap:10px; margin:0; color:#58465e; font-size:14px; line-height:1.5; font-weight:500; text-decoration:none; overflow-wrap:anywhere; }
+.church-contact a.church-detail { color:#51235d; }
+.church-contact a.church-detail:hover { color:#8c5e23; text-decoration:underline; }
+.church-detail-icon { color:#b28642; font-size:17px; line-height:1.25; flex:0 0 18px; }
+#leaderDialog { max-width:min(1100px, calc(100% - 30px)); width:950px; padding:40px; overflow-y:auto; }
+#leaderDialog .leader-dialog-layout { grid-template-columns:minmax(190px, 31%) minmax(0, 1fr); align-items:start; gap:35px; }
+#leaderDialog .leader-dialog-layout > img { position:sticky; top:0; height:365px; object-fit:contain; }
+#leaderDialog #leaderDialogText > p {font-size:15px; line-height:1.78; color:#564d59; margin:0 0 17px;}
+#leaderDialog #leaderDialogText > p.leader-bio-subtitle { color:#6a3472; font-size:15px; font-weight:800; margin-top:2px; }
+#leaderDialog #leaderDialogText > .leader-bio-quote { border-left:3px solid #d9a94c; padding:10px 0 10px 16px; margin:12px 0 21px; color:#582860; font:italic 19px/1.55 'Playfair Display',Georgia,serif; }
+#leaderDialog #leaderDialogText > p.leader-bio-closing { font-weight:800; color:#51295d; margin:25px 0 5px; }
+@media (max-width:700px) { #leaderDialog { padding:36px 20px 23px; } #leaderDialog .leader-dialog-layout { grid-template-columns:1fr; gap:18px; } #leaderDialog .leader-dialog-layout > img {position:static; height:225px; max-width:225px; } #leaderDialog #leaderDialogText > p {font-size:14px;} }
