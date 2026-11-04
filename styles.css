@@ -392,3 +392,145 @@ body { font-size: var(--reading-size); }
   #eventsContainer .event-image-panel img{object-position:center 26%}
   #eventsContainer .event-speaker-caption{padding:35px 23px 19px}
 }
+
+/* THE PURSUIT OF PROGRESSIVE HOLINESS — NOVEMBER 2026 REFRESH */
+.hero{background:#250b37}
+.hero-backdrop{inset:0;background:#e9e5ee url('assets/director-hero.webp') right 7% top 24%/auto 132% no-repeat;will-change:transform}
+.hero-shade{background:linear-gradient(90deg,#20062d 0%,#230a35 23%,rgba(35,10,53,.97) 42%,rgba(34,10,51,.86) 53%,rgba(32,9,48,.28) 73%,rgba(24,5,35,.10) 100%),linear-gradient(0deg,rgba(23,5,34,.43),transparent 38%)}
+.hero-content{padding-top:clamp(82px,9.6vw,125px)}
+.hero h1{font-size:clamp(47px,5.25vw,77px);max-width:735px;line-height:1.11;letter-spacing:-.045em}
+.hero-description{max-width:550px;line-height:1.72}
+.hero-intro{max-width:730px}
+.hero-scripture{display:flex;align-items:center;gap:12px;margin-top:18px;color:#f6da99;font-size:12px;letter-spacing:.22em;font-weight:800}
+.hero-scripture-line{display:inline-block;width:26px;height:1px;background:#e9bd65}
+.hero-controls{margin-top:38px}
+.hero-corner-crest{right:max(3vw,24px);bottom:55px;width:158px;height:158px;border-width:3px}
+.hero-photo-note{right:14px;bottom:10px;color:#f0eaf0;font-size:10px;text-shadow:0 1px 8px #18061c;letter-spacing:.02em}
+.leader-card h3 em{font-size:.94em}
+.national-affiliation{border-top:1px solid rgba(224,181,119,.18);padding:22px 0 26px}
+.national-affiliation-link{display:inline-flex;gap:19px;align-items:center;color:#fff;max-width:530px}
+.national-affiliation-link>img{flex:0 0 76px;width:76px;height:76px;object-fit:contain}
+.national-affiliation-copy{display:flex;flex-direction:column;gap:4px}
+.national-affiliation-copy small{font-size:10px;color:#ecc67e;letter-spacing:.13em;font-weight:800}
+.national-affiliation-copy strong{font-size:15px;font-weight:700;line-height:1.4}
+.national-affiliation-copy>span{font-size:12px;color:#cdbccd;line-height:1.45}
+.national-affiliation-copy b{color:#efce86}
+.national-affiliation-link:hover .national-affiliation-copy strong{color:#f5d28d}
+@media(max-width:1100px){
+  .hero-backdrop{background-position:right -32px top 24%;background-size:auto 119%}
+  .hero-shade{background:linear-gradient(90deg,#20062d 0%,rgba(35,10,53,.98) 46%,rgba(34,10,51,.65) 72%,rgba(24,5,35,.16) 100%)}
+  .hero h1{font-size:clamp(48px,5.8vw,68px);max-width:690px}
+  .hero-corner-crest{width:125px;height:125px}
+}
+@media(max-width:800px){
+  .hero-backdrop{background-position:right -80px top 10%;background-size:auto 116%}
+  .hero-shade{background:linear-gradient(90deg,rgba(29,6,43,.97) 0%,rgba(29,6,43,.91) 40%,rgba(29,6,43,.73) 76%,rgba(29,6,43,.42) 100%)}
+  .hero h1{font-size:clamp(46px,7.2vw,65px);max-width:650px}
+  .hero-corner-crest{width:118px;height:118px;bottom:75px}
+  .hero-photo-note{display:none}
+}
+@media(max-width:570px){
+  .hero{min-height:710px;height:755px}
+  .hero-backdrop{background-position:right -110px top 3%;background-size:auto 92%}
+  .hero-shade{background:linear-gradient(90deg,rgba(29,6,43,.93) 0%,rgba(29,6,43,.88) 55%,rgba(29,6,43,.64) 100%),linear-gradient(0deg,rgba(20,4,30,.75),transparent 57%)}
+  .hero-content{padding-top:80px}
+  .hero-intro{font-size:9px;letter-spacing:.1em}
+  .hero h1{font-size:clamp(43px,10vw,56px);max-width:100%;line-height:1.1}
+  .hero-description{font-size:14px;line-height:1.62;max-width:95%}
+  .hero-scripture{font-size:11px}
+  .hero-controls{margin-top:25px}
+  .hero-corner-crest{width:88px;height:88px;right:15px;bottom:20px;padding:3px}
+  .national-affiliation-link>img{flex-basis:58px;width:58px;height:58px}
+  .national-affiliation-copy strong{font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){.hero-backdrop{will-change:auto}}
+
+/* Refined composition: portrait-forward desktop hero, readable mobile hero. */
+.hero{isolation:isolate}
+.hero-backdrop{background-color:#d8d2dd;background-position:right 7% top 22%;background-size:auto 127%}
+.hero-mobile-photo{display:none}
+.hero-shade{background:linear-gradient(90deg,#21072f 0%,#250a36 20%,rgba(38,11,53,.99) 41%,rgba(35,10,50,.89) 52%,rgba(31,9,46,.19) 78%,rgba(31,9,46,.05) 100%),linear-gradient(0deg,rgba(28,6,40,.28),transparent 42%)}
+.hero h1{max-width:720px;font-size:clamp(54px,5.25vw,78px);line-height:1.11}
+.hero-description{font-size:17px;line-height:1.74;max-width:570px}
+.hero-scripture{margin-top:20px;font-size:12px}
+.hero-photo-note{background:rgba(34,11,49,.83);border:1px solid rgba(236,201,135,.4);padding:9px 13px;border-radius:50px;bottom:24px;right:26px;font-size:10px;letter-spacing:.08em;color:#fff}
+.hero-photo-note span{color:#efd38b;margin-inline:4px}
+.leader-card h3 em{font-size:.94em}
+@media (min-width:801px) and (max-width:1170px){
+  .hero-backdrop{background-position:right -90px top 18%;background-size:auto 119%}
+  .hero-shade{background:linear-gradient(90deg,#21072f 0%,#250a36 23%,rgba(38,11,53,.97) 52%,rgba(31,9,46,.30) 100%)}
+  .hero h1{font-size:clamp(50px,5.7vw,68px);max-width:660px}
+}
+@media(max-width:800px){
+  .hero-backdrop{background-position:right -90px top 15%;background-size:auto 120%}
+  .hero-photo-note{display:none}
+  .hero-description{font-size:16px}
+}
+@media(max-width:570px){
+  .hero{height:900px;min-height:900px;background:#21072f}
+  .hero-backdrop{display:none}
+  .hero-mobile-photo{display:block;position:absolute;z-index:0;right:0;left:0;bottom:0;height:350px;overflow:hidden;background:#d6d1dd}
+  .hero-mobile-photo img{width:100%;height:100%;object-fit:cover;object-position:center 19%;opacity:.95}
+  .hero-mobile-photo::before{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(180deg,#21072f 0%,rgba(33,7,47,.88) 5%,rgba(33,7,47,.17) 42%,rgba(33,7,47,.1) 80%,rgba(33,7,47,.54) 100%)}
+  .hero-shade{display:none}
+  .hero-content{padding-top:64px;z-index:2}
+  .hero-intro{font-size:9px;letter-spacing:.115em;line-height:1.5}
+  .hero h1{font-size:clamp(42px,10.25vw,57px);max-width:100%;line-height:1.105;margin-bottom:20px}
+  .hero-description{font-size:14px;line-height:1.65;max-width:100%}
+  .hero-scripture{margin-top:19px;font-size:10px}
+  .hero-actions{margin-top:24px;gap:10px;max-width:100%}
+  .hero-actions .button{min-height:46px;padding:13px 17px}
+  .hero-controls{margin-top:24px;gap:9px}
+  .hero-scroll-label{bottom:17px;color:#fff;text-shadow:0 1px 5px #21072f}
+  .hero-photo-note{display:none}
+}
+@media(max-width:390px){.hero{height:930px;min-height:930px}.hero-content{padding-top:62px}.hero h1{font-size:42px}.hero-mobile-photo{height:340px}}
+
+/* NOVEMBER 2026 — PHOTO AND FULL-WIDTH HERO REFINEMENTS */
+.hero {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  background: #21072f;
+}
+.hero-backdrop {
+  inset: 0;
+  background-image: url('assets/worship-hero.webp');
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #21072f;
+}
+/* Preserve centered text legibility and the existing desktop purple gradient. */
+.hero-shade {
+  background: linear-gradient(90deg,
+    rgba(28,5,42,.97) 0%,
+    rgba(33,7,48,.91) 32%,
+    rgba(33,8,48,.64) 55%,
+    rgba(33,8,48,.10) 81%,
+    rgba(33,8,48,.04) 100%);
+}
+.parallax-backdrop {
+  background-image: url('assets/mission-worship.webp');
+  background-position: center 32%;
+  background-size: cover;
+}
+.parallax-overlay {
+  background: linear-gradient(180deg,
+    rgba(22,5,35,.80),
+    rgba(22,5,35,.65) 48%,
+    rgba(22,5,35,.82));
+}
+.join-visual img {
+  object-fit: cover;
+  object-position: 50% 36%;
+}
+@media (max-width: 800px) and (min-width: 571px) {
+  .hero-backdrop {background-position: 60% top; background-size: cover;}
+  .join-visual img {object-position: 50% 29%;}
+}
+@media (max-width: 570px) {
+  .hero-backdrop {display: none;}
+  .hero-mobile-photo {display: block;}
+  .join-visual img {object-position: 50% 35%;}
+}

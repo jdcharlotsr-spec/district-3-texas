@@ -31,7 +31,7 @@ const UPCOMING_EVENTS = [{
   speaker:'Elder LaDarius McGee',
   image:'assets/elder-mcgee.webp',
   speakerChurch:'Praise City Church · Longview, TX',
-  description:'Come worship, grow, and enjoy warm District fellowship in an Apostolic Pentecostal setting.',
+  description:'Join us for a day of worship, encouragement, and fellowship as we grow deeper in God and wider for the Kingdom.',
   schedule:[
     {time:'9:00 AM',name:'Breakfast'},
     {time:'10:00 AM',name:'Breakout Sessions'},
@@ -62,16 +62,16 @@ const LEADERS = {
   gates: {
     name:'Bishop Lambert W. Gates, Sr.',role:'Diocesan & Presiding Bishop',image:'assets/lambert-gates.webp',
     bio:[
-      'Bishop Lambert W. Gates, Sr. serves as Presiding Bishop of the Pentecostal Churches of the Apostolic Faith International, Inc. and provides episcopal leadership for the Texas State Council.',
-      'Additional approved biographical information and national leadership resources may be added here. For official organizational resources, visit pcafintl.org.'
+      'Bishop Lambert W. Gates, Sr. serves as senior pastor of Kingdom Apostolic Ministries, a multicampus ministry with campuses in Atlanta, Detroit, and Indianapolis, and a Global Campus. He also serves as presiding bishop of the Pentecostal Churches of the Apostolic Faith International.',
+      'An exceptional teacher and internationally sought-after speaker, Bishop Gates has devoted his life to sharing the gospel and advancing the Kingdom of God around the world.'
     ]
   }
 };
 
 const HERO_SLIDES = [
-  { kicker:'WELCOME TO DISTRICT THREE', title:'Rooted in <em>Apostolic faith.</em><br>Warm in <em>fellowship.</em>', description:'District Three is Apostolic Pentecostal in faith, with a welcoming spirit for those who desire worship, fellowship, and connection.', button:'Connect With Us', href:'#connect' },
-  { kicker:'YOU ARE WELCOME HERE', title:'Come worship.<br><em>Come connect.</em>', description:'Pastors, church families, ministry leaders, and guests are welcome to share in worship, fellowship, and encouragement with District Three.', button:'Meet Our Leadership', href:'#leadership' },
-  { kicker:'HONORING OUR ROOTS. SHARING OUR WELCOME.', title:'Firm in doctrine.<br><em>Gracious in spirit.</em>', description:'District Three proudly belongs to PCAFI. We remain true to the Apostolic Pentecostal faith while offering a sincere and gracious welcome.', button:'Discover Our Mission', href:'#mission' }
+  { kicker:'DISTRICT THREE · TEXAS STATE COUNCIL', title:'Deeper in <em>God.</em><br>Wider for the <em>Kingdom.</em>', description:'A place to worship, grow in faith, and find encouragement. Come experience meaningful fellowship as we pursue a deeper walk with God and a wider impact for His Kingdom.', button:'Connect With Us', href:'#connect' },
+  { kicker:'COME WORSHIP WITH US', title:'Growing in <em>grace.</em><br>Connected in <em>fellowship.</em>', description:'Come share in heartfelt worship, loving fellowship, and the joy of growing in faith together.', button:'Discover Our District', href:'#about' },
+  { kicker:'FAITH · FELLOWSHIP · PURPOSE', title:'A welcoming <em>family.</em><br>A shared <em>purpose.</em>', description:'We welcome you to a fellowship that values worship, relationships, and serving our communities with purpose.', button:'Meet Our Leadership', href:'#leadership' }
 ];
 
 const $ = (s,root=document)=>root.querySelector(s);
