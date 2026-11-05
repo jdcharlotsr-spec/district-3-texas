@@ -660,3 +660,15 @@ body { font-size: var(--reading-size); }
   #mission .mission-gallery .gallery-track{grid-auto-columns:min(73vw,320px)}
   #mission .mission-gallery .gallery-photo{width:min(73vw,320px);height:245px}
 }
+
+
+/* Event scrolling and flyer-style artwork updates */
+.events-grid.multi-event{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(min(92vw,1040px),1fr);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;gap:22px;padding-bottom:10px;scrollbar-width:thin}
+.events-grid.multi-event::-webkit-scrollbar{height:10px}
+.events-grid.multi-event::-webkit-scrollbar-thumb{background:rgba(109,56,122,.35);border-radius:999px}
+.events-grid.multi-event .event-card{scroll-snap-align:start}
+.event-mini-note{font-size:14px;color:#efe2f3;margin:8px 0 0}
+#eventsContainer .event-image-panel.fit-contain{background:#120919}
+#eventsContainer .event-image-panel.fit-contain img{object-fit:contain;object-position:center center;padding:16px;background:#120919}
+#eventsContainer .event-image-panel.fit-contain::after{background:linear-gradient(0deg,rgba(17,5,27,.28),rgba(17,5,27,.04) 38%,transparent 68%)}
+@media(max-width:800px){.events-grid.multi-event{grid-auto-columns:minmax(88vw,1fr)}}

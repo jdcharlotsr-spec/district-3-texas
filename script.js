@@ -28,8 +28,11 @@ const UPCOMING_EVENTS = [{
   address:'110 Hanna St., San Antonio, TX 78210',
   host:'District Elder Louise Braziel Benson',
   hostRole:'Host Pastor & Director',
-  speaker:'Elder LaDarius McGee',
-  image:'assets/elder-mcgee.webp',
+  speaker:'Elder LaDarian McGee',
+  image:'assets/district3-fellowship-flyer.png',
+  imageAlt:'District 3 Fellowship flyer',
+  imageFit:'contain',
+  showCaption:false,
   speakerChurch:'Praise City Church · Longview, TX',
   description:'Join us for a day of worship, encouragement, and fellowship as we grow deeper in God and wider for the Kingdom.',
   schedule:[
@@ -38,6 +41,16 @@ const UPCOMING_EVENTS = [{
     {time:'12:00 Noon',name:'Worship Service'},
     {time:'After Service',name:'Dinner Fellowship'}
   ]
+},{
+  title:'IEEE Conference',
+  category:'Conference',
+  venue:'Indianapolis, IN',
+  address:'Flyer and additional details coming soon.',
+  description:'Additional conference information will be added soon. Check back for the official flyer and schedule.',
+  image:'assets/district-three-crest.webp',
+  imageAlt:'District Three crest placeholder for upcoming IEEE Conference',
+  imageFit:'contain',
+  showCaption:false
 }];
 
 /* District Three church directory, based on the roster supplied for this website.
@@ -138,26 +151,39 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)clearInterv
 /* Upcoming events: empty state is deliberately clear to avoid fabricated dates. */
 function renderEvents(){
   const today = new Date(); today.setHours(0,0,0,0);
-  const items=UPCOMING_EVENTS.filter(ev=>!ev.date||new Date(ev.date+'T23:59:59')>=today).sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+  const items=UPCOMING_EVENTS
+    .map((ev,index)=>({...ev,_index:index}))
+    .filter(ev=>!ev.date||new Date(ev.date+'T23:59:59')>=today)
+    .sort((a,b)=>{
+      if(a.date && b.date) return a.date.localeCompare(b.date);
+      if(a.date && !b.date) return -1;
+      if(!a.date && b.date) return 1;
+      return a._index-b._index;
+    });
   const list=$('#eventsContainer');
   list.classList.toggle('single-event',items.length===1);
+  list.classList.toggle('multi-event',items.length>1);
   if(!items.length){
     $('#eventDisclosure').textContent='Check back for forthcoming District Three gatherings and announcements.';
     list.innerHTML=`<article class="event-card visual-worship"><div class="event-card-content"><span class="event-date-corner">DATES TO BE ANNOUNCED</span><span class="event-type">District fellowship</span><h3>Stay connected with District Three</h3><p>Future district gatherings will be announced here.</p></div></article>`;
     return;
   }
-  $('#eventDisclosure').textContent='District 3 Fellowship · Saturday, November 7, 2026 · Greater New Genesis Christian Center, San Antonio, TX.';
+  $('#eventDisclosure').textContent = items.length===1
+    ? `${items[0].title} · ${items[0].date ? new Date(items[0].date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}) : 'Date to be announced'} · ${items[0].venue||'Venue to be announced'}.`
+    : `${items.length} approved upcoming events are listed below. Scroll horizontally to view each gathering.`;
   list.innerHTML=items.map(ev=>{
     const stamp=ev.date?new Date(ev.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}):'Date to be announced';
-    const schedule=Array.isArray(ev.schedule)?`<div class="event-schedule" aria-label="Event schedule">${ev.schedule.map(slot=>`<span><b>${escapeHTML(slot.time)}</b>${escapeHTML(slot.name)}</span>`).join('')}</div>`:'';
+    const schedule=Array.isArray(ev.schedule)&&ev.schedule.length?`<div class="event-schedule" aria-label="Event schedule">${ev.schedule.map(slot=>`<span><b>${escapeHTML(slot.time)}</b>${escapeHTML(slot.name)}</span>`).join('')}</div>`:'<p class="event-mini-note">Schedule will be shared soon.</p>';
     const venue=ev.venue?escapeHTML(ev.venue):'Venue to be announced';
     const location=ev.address?`<span class="event-address">${escapeHTML(ev.address)}</span>`:'';
     const host=ev.host?`<div class="event-person"><span class="event-person-label">HOST PASTOR & DIRECTOR</span><strong>${escapeHTML(ev.host)}</strong>${ev.hostRole&&ev.hostRole!=='Host Pastor & Director'?`<small>${escapeHTML(ev.hostRole)}</small>`:''}</div>`:'';
     const speaker=ev.speaker?`<div class="event-person"><span class="event-person-label">GUEST SPEAKER</span><strong>${escapeHTML(ev.speaker)}</strong>${ev.speakerChurch?`<small>${escapeHTML(ev.speakerChurch)}</small>`:''}</div>`:'';
     const link=ev.link&&/^https?:\/\//.test(ev.link)?`<a class="event-card-link" href="${escapeHTML(ev.link)}" target="_blank" rel="noopener noreferrer">Event Details ↗</a>`:'';
     const photo=ev.image || 'assets/worship-moment.webp';
-    const caption=ev.speaker?`<figcaption class="event-speaker-caption"><span>GUEST SPEAKER</span><strong>${escapeHTML(ev.speaker)}</strong><small>${escapeHTML(ev.speakerChurch||'')}</small></figcaption>`:'';
-    return `<article class="event-card visual-worship featured-event"><div class="event-card-content"><span class="event-date-corner">${escapeHTML(stamp)}</span><span class="event-type">${escapeHTML(ev.category||'District event')}</span><h3>${escapeHTML(ev.title)}</h3><p class="event-intro">${escapeHTML(ev.description||'')}</p><div class="event-details-layout"><div class="event-schedule-holder"><p class="event-group-heading">ORDER OF THE DAY</p>${schedule}</div><div class="event-location-block"><p class="event-group-heading">LOCATION & LEADERSHIP</p><strong class="event-venue">${venue}</strong>${location}<div class="event-people">${host}${speaker}</div></div></div>${link}</div><figure class="event-image-panel"><img src="${photo}" alt="Portrait supplied for guest speaker ${escapeHTML(ev.speaker||'')}" loading="lazy">${caption}</figure></article>`;
+    const alt=ev.imageAlt || (ev.speaker ? `Portrait supplied for guest speaker ${ev.speaker}` : `${ev.title} image`);
+    const caption=ev.showCaption===false ? '' : (ev.speaker?`<figcaption class="event-speaker-caption"><span>GUEST SPEAKER</span><strong>${escapeHTML(ev.speaker)}</strong><small>${escapeHTML(ev.speakerChurch||'')}</small></figcaption>`:'');
+    const fitClass=ev.imageFit==='contain' ? ' fit-contain' : '';
+    return `<article class="event-card visual-worship featured-event"><div class="event-card-content"><span class="event-date-corner">${escapeHTML(stamp)}</span><span class="event-type">${escapeHTML(ev.category||'District event')}</span><h3>${escapeHTML(ev.title)}</h3><p class="event-intro">${escapeHTML(ev.description||'')}</p><div class="event-details-layout"><div class="event-schedule-holder"><p class="event-group-heading">ORDER OF THE DAY</p>${schedule}</div><div class="event-location-block"><p class="event-group-heading">LOCATION & LEADERSHIP</p><strong class="event-venue">${venue}</strong>${location}<div class="event-people">${host}${speaker}</div></div></div>${link}</div><figure class="event-image-panel${fitClass}"><img src="${photo}" alt="${escapeHTML(alt)}" loading="lazy">${caption}</figure></article>`;
   }).join('');
 }
 renderEvents();
@@ -209,15 +235,19 @@ function setupMediaRail(trackSelector,prevSelector,nextSelector){
   requestAnimationFrame(state);
   return state;
 }
-const refreshFlyerNav = setupMediaRail('#flyerTrack','#flyerPrev','#flyerNext');
-$('#openFlyers').addEventListener('click',()=>{
-  const dialog=$('#flyerDialog');
-  openDialog(dialog);
-  requestAnimationFrame(()=>{
-    $('#flyerTrack').scrollTo({left:0,behavior:'instant'});
-    refreshFlyerNav();
+const refreshFlyerNav = $('#flyerTrack') ? setupMediaRail('#flyerTrack','#flyerPrev','#flyerNext') : ()=>{};
+const openFlyersButton = $('#openFlyers');
+if(openFlyersButton){
+  openFlyersButton.addEventListener('click',()=>{
+    const dialog=$('#flyerDialog');
+    if(!dialog) return;
+    openDialog(dialog);
+    requestAnimationFrame(()=>{
+      $('#flyerTrack').scrollTo({left:0,behavior:'instant'});
+      refreshFlyerNav();
+    });
   });
-});
+}
 setupMediaRail('#galleryTrack','#galleryPrev','#galleryNext');
 $('#galleryTrack').addEventListener('click',e=>{
   const trigger=e.target.closest('[data-gallery-index]');if(!trigger)return;
