@@ -53,13 +53,18 @@ const UPCOMING_EVENTS = [{
   image:'assets/ieee-conference-flyer.png',
   imageAlt:'IEEE UNITED 26 conference flyer',
   imageFit:'contain',
-  showCaption:false,
-  schedule:[
-    {time:'Nov 19',name:'Conference Opens'},
-    {time:'Nov 20',name:'Auxiliaries & Sessions'},
-    {time:'Nov 21',name:'Conference Finale'}
-  ]
+  showCaption:false
 }];
+
+const CHURCHES = [
+  {name:'Rhema Word Apostolic Church', city:'Hempstead, TX', pastor:'Bishop Stephen L. Hamilton, ThD'},
+  {name:'Amazing Grace Bible Church', city:'Houston, TX', pastor:'Bishop Emma Okereke'},
+  {name:'Pentecostal Powerhouse', city:'San Antonio, TX', pastor:'Pastor Mark Ming'},
+  {name:'Praise City Church', city:'Longview, TX', pastor:'Elder LaDarius McGee'},
+  {name:'Elim Tabernacle Apostolic Church', city:'Houston, TX', pastor:'Bishop J. D. Charlot, Sr.', pastorRole:'Pastor', firstLady:'Elder Latosha Charlot', serviceLocation:'Houston service location: To Be Announced', serviceTimes:'Sunday Worship · 4:00 PM | Tuesday Virtual Gathering · 7:30 PM', website:'https://www.elimtab.org'},
+  {name:'Greater New Genesis Christian Center', city:'San Antonio, TX', pastor:'District Elder Louise Braziel Benson', pastorRole:'Pastor', assistants:'Elders Ronald & Precious Taylor', address:'110 Hanna Street, San Antonio, TX 78210', phoneDisplay:'(210) 338-5338', phone:'2103385338', email:'newgenesiscc@aol.com'},
+  {name:'Kingdom Life Family Worship Center', city:'Fort Worth, TX', pastor:'Bishop Vernal E. Simms, Sr.', address:'5508 Brentwood Stair Road, Fort Worth, TX 76112', phoneDisplay:'(214) 256-8179', phone:'2142568179'}
+];
 
 const LEADERS = {
   braziel: {
@@ -182,6 +187,48 @@ function renderEvents(){
   }).join('');
 }
 renderEvents();
+
+/* Navigate the full-width event cards without shrinking them into columns. */
+(function initEventCarousel(){
+  const track = document.getElementById('eventsContainer');
+  const nav = document.getElementById('eventsCarouselNav');
+  const prev = document.getElementById('eventsPrev');
+  const next = document.getElementById('eventsNext');
+  const counter = document.getElementById('eventsCount');
+  if (!track || !nav || !prev || !next || !counter) return;
+  const cards = Array.from(track.querySelectorAll('.event-card'));
+  nav.hidden = cards.length < 2;
+  if (cards.length < 2) return;
+  let active = 0;
+  function cardX(card){
+    return track.scrollLeft + card.getBoundingClientRect().left - track.getBoundingClientRect().left;
+  }
+  function update(){
+    const scrollLeft = track.scrollLeft;
+    let closest=0, distance=Infinity;
+    cards.forEach((card,i)=>{
+      const gap=Math.abs(cardX(card)-scrollLeft);
+      if (gap<distance){ distance=gap; closest=i; }
+    });
+    active=closest;
+    counter.textContent=`${String(active+1).padStart(2,'0')} / ${String(cards.length).padStart(2,'0')}`;
+    prev.disabled=active===0;
+    next.disabled=active===cards.length-1;
+  }
+  function goTo(index){
+    const newIndex=Math.max(0,Math.min(cards.length-1,index));
+    track.scrollTo({left:cardX(cards[newIndex]),behavior:reducedMotion.matches?'instant':'smooth'});
+    active=newIndex;
+    counter.textContent=`${String(active+1).padStart(2,'0')} / ${String(cards.length).padStart(2,'0')}`;
+    prev.disabled=active===0;
+    next.disabled=active===cards.length-1;
+  }
+  prev.addEventListener('click',()=>goTo(active-1));
+  next.addEventListener('click',()=>goTo(active+1));
+  track.addEventListener('scroll',()=>requestAnimationFrame(update),{passive:true});
+  window.addEventListener('resize',()=>requestAnimationFrame(update),{passive:true});
+  update();
+})();
 
 /*
  FLYERS: Add an approved flyer by uploading an image to assets/ and adding
