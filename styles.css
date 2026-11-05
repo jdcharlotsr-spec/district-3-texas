@@ -804,3 +804,11 @@ body { font-size: var(--reading-size); }
 @media(prefers-reduced-motion: reduce){
   #eventsContainer.events-grid.multi-event{scroll-behavior:auto}
 }
+
+/* Keep the photo rail cards at their intended size across desktop and mobile. */
+#mission .mission-gallery .gallery-track{display:flex;gap:16px;grid-auto-columns:unset;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity}
+#mission .mission-gallery .gallery-photo{flex:0 0 min(76vw,390px);width:min(76vw,390px);min-width:0;height:285px;scroll-snap-align:start}
+@media(max-width:570px){
+  #mission .mission-gallery .gallery-track{gap:12px}
+  #mission .mission-gallery .gallery-photo{flex:0 0 min(73vw,320px);width:min(73vw,320px);height:245px}
+}

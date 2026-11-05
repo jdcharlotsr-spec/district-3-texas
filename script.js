@@ -68,23 +68,14 @@ const CHURCHES = [
 
 const LEADERS = {
   braziel: {
-    name:'District Elder Louise Braziel Benson', role:'District Director · Texas State Council, PCAFI', image:'assets/louise-braziel.webp',
-    subtitle:'Apostle / Pastor Louise Braziel Benson',
-    quote:'God does not call the qualified; He qualifies the called.',
+    name:'District Elder Louise Braziel Benson',
+    role:'District Director · Texas State Council, PCAFI',
+    image:'assets/louise-braziel.webp',
     bio:[
-      'Apostle/Pastor Louise Braziel Benson is a devoted servant of God, visionary leader, educator, mentor, and an anointed preacher of the Gospel of Jesus Christ. With more than 30 years of faithful ministry, she has dedicated her life to winning souls, equipping believers, developing leaders, and advancing the Kingdom of God. Her ministry is marked by a passion for spiritual transformation, Christian education, and empowering individuals to fulfill their God-given purpose.',
-      "A native of the ministry field and a seasoned educator, Apostle Benson possesses an extensive academic background, including an Associate Degree in Criminal Justice, a Bachelor of Arts in Social Services, a Master of Arts in Special Education, a second Master's Degree in Education Administration, and a Doctoral Degree in Psychology and Behavioral Science.",
-      'Her professional career spans more than three decades in education, during which she has served as an administrator, district coordinator in special education, and adjunct professor with the Alamo Community College District. She currently serves as a Special Education Advocate in Texas and Superintendent of Safe Haven Christian Academy, a Christian homeschool academy committed to academic excellence and Christian values. Additionally, she honorably served eight years in the United States Air Force Reserve.',
-      "Following several years of evangelistic ministry, Apostle Benson answered the call to pastoral leadership and, in May 2003, founded Greater New Genesis Christian Center in San Antonio, Texas. Established upon the foundation of God's Word and the mandate of Luke 4:18, the ministry continues its mission of proclaiming the Gospel, restoring lives, developing disciples, and fostering an atmosphere of powerful praise and worship.",
-      "Throughout her distinguished ministry, Apostle Benson has served in several leadership capacities within the Pentecostal Assemblies of the World (PAW), including Chairwoman of the Bay District Council and President of the Women's Ministry, a position she held for eight years.",
-      'She presently serves within the Pentecostal Churches of the Apostolic Faith International, Inc. (PCAFI) as District Elder and District Director of District Three, as well as Auxiliary Director of Missions and Evangelism for the Texas State Council.',
-      'Additionally, she is the visionary founder and overseer of Divine Destiny Ministries, a fellowship of churches extending from Florida to California. Through this fellowship, she provides spiritual oversight, pastoral mentorship, leadership development, and encouragement to ministries across the nation.',
-      "Her commitment to cultivating the gifts and talents of others has inspired the establishment of several ministries, including Men of Valor Mime Ministry (MOV), A Perfect Praise Dance Ministry (APP), Women of Worth (WOW), and God's Men Ministry (G-Men). Each reflects her conviction that every believer has a meaningful assignment in the Kingdom of God.",
-      'Beyond her ecclesiastical and professional responsibilities, Apostle Benson is a devoted mother and family woman. She is the widow of the late Deacon Lonnie Benson and the proud mother of five children, four sons and one daughter. She lovingly honors the memory of her beloved son who has transitioned from labor to reward.',
-      'Apostle/Pastor Louise Braziel Benson continues to travel throughout the United States, proclaiming the Gospel, strengthening churches, mentoring leaders, and encouraging believers to pursue a deeper relationship with Jesus Christ.',
-      "Her life exemplifies steadfast faith, perseverance, servant leadership, and an unwavering commitment to fulfilling the Great Commission. Whether serving in the pulpit, classroom, community, or broader body of Christ, she remains committed to making a lasting difference in the lives of God's people."
-    ],
-    closing:'Her passion is winning souls. Her assignment is equipping people. Her mandate is advancing the Kingdom of God—one soul at a time.'
+      "District Elder Louise Braziel Benson is a distinguished spiritual leader, educator, and passionate preacher of the Gospel with more than 30 years of ministry experience. She is the Founder and Senior Pastor of Greater New Genesis Christian Center in San Antonio, Texas, established in May 2003, and the visionary overseer of Divine Destiny Ministries, a fellowship of churches spanning from Florida to California.",
+      "An accomplished educator with over 30 years of professional experience, District Elder Benson holds degrees in Criminal Justice, Social Services, Special Education, Education Administration, and a Doctoral Degree in Psychology and Behavioral Science. She currently serves as a Special Education Advocate and Superintendent of Safe Haven Christian Academy. She is also a veteran of the United States Air Force Reserve.",
+      "District Elder Benson presently serves as District Director of District Three and Auxiliary Director of Missions and Evangelism for the Texas State Council of the Pentecostal Churches of the Apostolic Faith International (PCAFI). A devoted mother and widow of the late Deacon Lonnie Benson, she remains steadfast in her mission of winning souls, developing leaders, and advancing the Kingdom of God."
+    ]
   },
   gates: {
     name:'Bishop Lambert W. Gates, Sr.',role:'Diocesan & Presiding Bishop',image:'assets/lambert-gates.webp',
@@ -243,9 +234,29 @@ const EVENT_FLYERS = [
 
 /* Replace or add approved photographs by editing the array below. */
 const DISTRICT_PHOTOS = [
-  {src:'assets/worship-close.webp',title:'Together in Fellowship',caption:'A gathering of leaders and friends.'},
-  {src:'assets/worship-moment.webp',title:'Worship & the Word',caption:'A moment of preaching and encouragement.'},
-  {src:'assets/mission-worship.webp',title:'Prayer & Praise',caption:'A moment of heartfelt worship.'}
+  {src:"assets/fellowship-01.webp",title:"Fellowship Together",caption:"Church leaders and friends gathered together at a fellowship meal"},
+  {src:"assets/fellowship-02.webp",title:"Proclaiming the Word",caption:"A minister speaking during a worship service"},
+  {src:"assets/fellowship-03.webp",title:"Serving in Ministry",caption:"Ministers together at the church pulpit"},
+  {src:"assets/fellowship-04.webp",title:"A Voice in Worship",caption:"A worship leader sharing a message on stage"},
+  {src:"assets/fellowship-05.webp",title:"Women of Faith",caption:"Two women celebrating fellowship together"},
+  {src:"assets/fellowship-06.webp",title:"Ready to Serve",caption:"A church leader dressed for a formal occasion"},
+  {src:"assets/fellowship-07.webp",title:"A Warm Welcome",caption:"Two church members gathered near a welcome display"},
+  {src:"assets/fellowship-08.webp",title:"Celebrating Connection",caption:"Two leaders together during a conference gathering"},
+  {src:"assets/fellowship-09.webp",title:"Preaching with Purpose",caption:"A minister preaching from a microphone"},
+  {src:"assets/fellowship-10.webp",title:"Friends in Fellowship",caption:"Three friends sharing a moment together"},
+  {src:"assets/fellowship-11.webp",title:"Sharing the Word",caption:"A woman speaking into a microphone during ministry"},
+  {src:"assets/fellowship-12.webp",title:"A Moment of Praise",caption:"A preacher addressing a conference congregation"},
+  {src:"assets/fellowship-13.webp",title:"Together in Joy",caption:"Friends smiling together at a church gathering"},
+  {src:"assets/fellowship-14.webp",title:"Prayer & Encouragement",caption:"A congregant receiving prayer during worship"},
+  {src:"assets/fellowship-15.webp",title:"Gathered in Fellowship",caption:"Three leaders celebrating fellowship at a conference"},
+  {src:"assets/fellowship-16.webp",title:"Friends & Ministry",caption:"Three women gathered during a faith event"},
+  {src:"assets/fellowship-17.webp",title:"Next Generation",caption:"Two young attendees at a church conference"},
+  {src:"assets/fellowship-18.webp",title:"Growing Together",caption:"Two young women attending a gathering together"},
+  {src:"assets/fellowship-19.webp",title:"Families in Fellowship",caption:"Two young children at a church gathering"},
+  {src:"assets/fellowship-20.webp",title:"Sharing the Joy",caption:"Two women celebrating a moment at a church gathering"},
+  {src:"assets/worship-close.webp",title:"Fellowship at District Three",caption:"Church leaders and friends together"},
+  {src:"assets/worship-moment.webp",title:"Worship & the Word",caption:"A moment of preaching and encouragement"},
+  {src:"assets/mission-worship.webp",title:"Prayer & Praise",caption:"Worship and prayer in the district family"}
 ];
 
 function renderFlyers(){
