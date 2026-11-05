@@ -24,6 +24,7 @@ const UPCOMING_EVENTS = [{
   title:'District 3 Fellowship',
   category:'Worship · Fellowship · Leadership',
   date:'2026-11-07',
+  dateLabel:'Saturday, November 7, 2026',
   venue:'Greater New Genesis Christian Center',
   address:'110 Hanna St., San Antonio, TX 78210',
   host:'District Elder Louise Braziel Benson',
@@ -43,28 +44,22 @@ const UPCOMING_EVENTS = [{
   ]
 },{
   title:'IEEE Conference',
-  category:'Conference',
-  venue:'Indianapolis, IN',
-  address:'Flyer and additional details coming soon.',
-  description:'Additional conference information will be added soon. Check back for the official flyer and schedule.',
-  image:'assets/district-three-crest.webp',
-  imageAlt:'District Three crest placeholder for upcoming IEEE Conference',
+  category:'National Conference',
+  date:'2026-11-19',
+  dateLabel:'November 19–21, 2026',
+  venue:'Kingdom Apostolic Ministries',
+  address:'4900 E 38th St, Indianapolis, IN 46218',
+  description:'Join the IEEE UNITED ’26 gathering in Indianapolis. Host hotel: Embassy Suites by Hilton Indianapolis North, 3912 Vincennes Road, Indianapolis, IN 46268. Hotel rate: $141 per night. Register at www.pcafintl.org.',
+  image:'assets/ieee-conference-flyer.png',
+  imageAlt:'IEEE UNITED 26 conference flyer',
   imageFit:'contain',
-  showCaption:false
+  showCaption:false,
+  schedule:[
+    {time:'Nov 19',name:'Conference Opens'},
+    {time:'Nov 20',name:'Auxiliaries & Sessions'},
+    {time:'Nov 21',name:'Conference Finale'}
+  ]
 }];
-
-/* District Three church directory, based on the roster supplied for this website.
-   A street address or website is not shown unless the district has provided one.
-   Additional churches may be added using the same {name, city, pastor} format. */
-const CHURCHES = [
-  {name:'Rhema Word Apostolic Church', city:'Hempstead, TX', pastor:'Bishop Stephen L. Hamilton, ThD'},
-  {name:'Amazing Grace Bible Church', city:'Houston, TX', pastor:'Bishop Emma Okereke'},
-  {name:'Pentecostal Powerhouse', city:'San Antonio, TX', pastor:'Pastor Mark Ming'},
-  {name:'Praise City Church', city:'Longview, TX', pastor:'Elder LaDarius McGee'},
-  {name:'Elim Tabernacle Apostolic Church', city:'Houston, TX', pastor:'Bishop J. D. Charlot, Sr.', pastorRole:'Pastor', firstLady:'Elder Latosha Charlot', serviceLocation:'Houston service location: To Be Announced', serviceTimes:'Sunday Worship · 4:00 PM | Tuesday Virtual Gathering · 7:30 PM', website:'https://www.elimtab.org'},
-  {name:'Greater New Genesis Christian Center', city:'San Antonio, TX', pastor:'District Elder Louise Braziel Benson', pastorRole:'Pastor', assistants:'Elders Ronald & Precious Taylor', address:'110 Hanna Street, San Antonio, TX 78210', phoneDisplay:'(210) 338-5338', phone:'2103385338', email:'newgenesiscc@aol.com'},
-  {name:'Kingdom Life Family Worship Center', city:'Fort Worth, TX', pastor:'Bishop Vernal E. Simms, Sr.', address:'5508 Brentwood Stair Road, Fort Worth, TX 76112', phoneDisplay:'(214) 256-8179', phone:'2142568179'}
-];
 
 const LEADERS = {
   braziel: {
@@ -169,10 +164,10 @@ function renderEvents(){
     return;
   }
   $('#eventDisclosure').textContent = items.length===1
-    ? `${items[0].title} · ${items[0].date ? new Date(items[0].date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}) : 'Date to be announced'} · ${items[0].venue||'Venue to be announced'}.`
-    : `${items.length} approved upcoming events are listed below. Scroll horizontally to view each gathering.`;
+    ? `${items[0].title} · ${(items[0].dateLabel || (items[0].date ? new Date(items[0].date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}) : 'Date to be announced'))} · ${items[0].venue||'Venue to be announced'}.`
+    : `${items.length} upcoming events are listed below. Scroll horizontally to view each gathering.`;
   list.innerHTML=items.map(ev=>{
-    const stamp=ev.date?new Date(ev.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}):'Date to be announced';
+    const stamp=ev.dateLabel || (ev.date?new Date(ev.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}):'Date to be announced');
     const schedule=Array.isArray(ev.schedule)&&ev.schedule.length?`<div class="event-schedule" aria-label="Event schedule">${ev.schedule.map(slot=>`<span><b>${escapeHTML(slot.time)}</b>${escapeHTML(slot.name)}</span>`).join('')}</div>`:'<p class="event-mini-note">Schedule will be shared soon.</p>';
     const venue=ev.venue?escapeHTML(ev.venue):'Venue to be announced';
     const location=ev.address?`<span class="event-address">${escapeHTML(ev.address)}</span>`:'';
